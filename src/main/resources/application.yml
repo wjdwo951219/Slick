@@ -1,0 +1,60 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  application:
+    name: Slick
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: headers
+  task:
+    scheduling:
+      pool:
+        size: 4
+
+logging:
+  level:
+    toy.slick.feign: debug
+    org.jooq.tools.LoggerListener: debug
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: '*'
+    web:
+      exposure:
+        include: info, health
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  contact:
+    email: wjdwo951219@gmail.com
+  github: https://github.com/key824999/Slick
+
+telegram:
+  bot:
+    slick:
+      token: ${BOT_SLICK_TOKEN}
+  chat:
+    slick:
+      id: ${CHAT_SLICK_ID}

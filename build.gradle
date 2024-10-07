@@ -1,0 +1,102 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id "nu.studer.jooq" version "9.0"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java", "src/generated"]
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+String jooqVersion = "3.19.11"
+
+dependencies {
+    /* JOOQ */
+    implementation "org.jooq:jooq-codegen:${jooqVersion}"
+    implementation "org.jooq:jooq:${jooqVersion}"
+    jooqGenerator project
+
+    /* implementation */
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.2'
+    implementation 'com.mysql:mysql-connector-j:9.0.0'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'org.jsoup:jsoup:1.17.2'
+
+    /* compileOnly */
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+
+    /* annotationProcessor */
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    /* testImplementation */
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    /* testRuntimeOnly */
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jooq {
+    version = "${jooqVersion}"
+    configurations {
+        slick {
+            generationTool {
+                jdbc {
+                    driver = "com.mysql.cj.jdbc.Driver"
+                    url = System.getenv("JDBC_URL")
+                    user = System.getenv("JDBC_USER")
+                    password = System.getenv("JDBC_PASSWORD")
+                }
+                generator {
+                    database {
+                        name = "org.jooq.meta.mysql.MySQLDatabase"
+                        schemata {
+                            schema {
+                                inputSchema = System.getenv("DB_INPUT_SCHEMA")
+                            }
+                        }
+                    }
+                    generate {
+                        pojos = true
+                        records = true
+                        javaTimeTypes = true
+                        validationAnnotations = true
+                    }
+                    target {
+                        directory = "src/generated"
+                    }
+                    strategy.name = 'toy.slick.jooq.JooqGeneratorStrategy'
+                }
+            }
+        }
+    }
+}
