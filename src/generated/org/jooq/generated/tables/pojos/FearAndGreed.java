@@ -54,7 +54,7 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.RATING</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -63,14 +63,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.RATING</code>.
      */
     public void setRating(String rating) {
         this.rating = rating;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.SCORE</code>.
      */
     @NotNull
     public Double getScore() {
@@ -78,14 +78,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.SCORE</code>.
      */
     public void setScore(Double score) {
         this.score = score;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -93,14 +93,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -109,14 +109,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -124,14 +124,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -140,7 +140,7 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;
