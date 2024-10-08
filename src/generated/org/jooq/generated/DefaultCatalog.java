@@ -26,9 +26,9 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>freedb_ MySQL 8.0</code>.
+     * The schema <code>slick_prod</code>.
      */
-    public final JFreedb_Mysql_8_0 FREEDB__MYSQL_8_0 = JFreedb_Mysql_8_0.FREEDB__MYSQL_8_0;
+    public final JSlickProd SLICK_PROD = JSlickProd.SLICK_PROD;
 
     /**
      * No further instances allowed
@@ -40,7 +40,7 @@ public class DefaultCatalog extends CatalogImpl {
     @Override
     public final List<Schema> getSchemas() {
         return Arrays.asList(
-            JFreedb_Mysql_8_0.FREEDB__MYSQL_8_0
+            JSlickProd.SLICK_PROD
         );
     }
 
