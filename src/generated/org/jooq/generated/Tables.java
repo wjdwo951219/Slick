@@ -10,23 +10,23 @@ import org.jooq.generated.tables.JFearAndGreed;
 
 
 /**
- * Convenience access to all tables in slick_dev.
+ * Convenience access to all tables in slick_prod.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>slick_dev.ECONOMIC_EVENT</code>.
+     * The table <code>slick_prod.ECONOMIC_EVENT</code>.
      */
     public static final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_dev.ECONOMIC_INDEX</code>.
+     * The table <code>slick_prod.ECONOMIC_INDEX</code>.
      */
     public static final JEconomicIndex ECONOMIC_INDEX = JEconomicIndex.ECONOMIC_INDEX;
 
     /**
-     * The table <code>slick_dev.FEAR_AND_GREED</code>.
+     * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 }
