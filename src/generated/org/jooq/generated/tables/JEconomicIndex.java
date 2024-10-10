@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.JSlickDev;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.EconomicIndexRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.ECONOMIC_INDEX</code>
+     * The reference instance of <code>slick_dev.ECONOMIC_INDEX</code>
      */
     public static final JEconomicIndex ECONOMIC_INDEX = new JEconomicIndex();
 
@@ -50,52 +50,52 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
     }
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.CODE</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.CODE</code>.
      */
     public final TableField<EconomicIndexRecord, String> CODE = createField(DSL.name("CODE"), SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.PRICE</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
      */
     public final TableField<EconomicIndexRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.PRICE_CHANGE</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE</code>.
      */
     public final TableField<EconomicIndexRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<EconomicIndexRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.REG_DATETIME</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
      */
     public final TableField<EconomicIndexRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.REG_ID</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.REG_ID</code>.
      */
     public final TableField<EconomicIndexRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.UPT_DATETIME</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.UPT_DATETIME</code>.
      */
     public final TableField<EconomicIndexRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.UPT_ID</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
      */
     public final TableField<EconomicIndexRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.URL</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.URL</code>.
      */
     public final TableField<EconomicIndexRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.ECONOMIC_INDEX.TITLE</code>.
+     * The column <code>slick_dev.ECONOMIC_INDEX.TITLE</code>.
      */
     public final TableField<EconomicIndexRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
@@ -108,21 +108,21 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.ECONOMIC_INDEX</code> table reference
+     * Create an aliased <code>slick_dev.ECONOMIC_INDEX</code> table reference
      */
     public JEconomicIndex(String alias) {
         this(DSL.name(alias), ECONOMIC_INDEX);
     }
 
     /**
-     * Create an aliased <code>slick_prod.ECONOMIC_INDEX</code> table reference
+     * Create an aliased <code>slick_dev.ECONOMIC_INDEX</code> table reference
      */
     public JEconomicIndex(Name alias) {
         this(alias, ECONOMIC_INDEX);
     }
 
     /**
-     * Create a <code>slick_prod.ECONOMIC_INDEX</code> table reference
+     * Create a <code>slick_dev.ECONOMIC_INDEX</code> table reference
      */
     public JEconomicIndex() {
         this(DSL.name("ECONOMIC_INDEX"), null);
@@ -130,7 +130,7 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : JSlickDev.SLICK_DEV;
     }
 
     @Override
