@@ -1,6 +1,7 @@
 package toy.slick.config.log;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.classic.spi.ThrowableProxyUtil;
 import ch.qos.logback.core.AppenderBase;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -24,8 +25,14 @@ public class MongoDBAppender extends AppenderBase<ILoggingEvent> implements Appl
         String method = stackTraceElement.getMethodName();
         int lineNumber = stackTraceElement.getLineNumber();
 
+        String log = String.format("[%s] %s %s.%s.%s:%d - %s\n", threadName, level, logger, className, method, lineNumber, msg);
+
+        if (eventObject.getThrowableProxy() != null) {
+            log += ThrowableProxyUtil.asString(eventObject.getThrowableProxy());
+        }
+
         logRepository.save(LogRepository.Log.builder()
-                .log(String.format("[%s] %s %s.%s.%s:%d - %s", threadName, level, logger, className, method, lineNumber, msg))
+                .log(log)
                 .build()
                 .toMongoData(String.valueOf(System.currentTimeMillis())));
     }

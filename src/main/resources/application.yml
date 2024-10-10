@@ -31,6 +31,7 @@ logging:
   level:
     toy.slick.feign: debug
     org.jooq.tools.LoggerListener: debug
+    org.springframework.data.mongodb.core.MongoTemplate: debug
 
 management:
   endpoints:

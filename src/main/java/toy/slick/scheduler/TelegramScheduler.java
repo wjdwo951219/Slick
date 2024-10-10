@@ -13,6 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
+import toy.slick.exception.BlankException;
+import toy.slick.exception.EmptyException;
 import toy.slick.feign.telegram.TelegramFeign;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.EconomicIndexRepository;
@@ -63,8 +65,10 @@ public class TelegramScheduler {
     @Scheduled(cron = "0 0 8 * * 1-5", zone = Const.ZoneId.SEOUL)
     public void sendFearAndGreedForSouthKorea() {
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID,
-                getFearAndGreedTelegramMessage())) {
+                this.getFearAndGreedTelegramMessage())) {
             log.info(response.toString());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -73,8 +77,10 @@ public class TelegramScheduler {
     @Scheduled(cron = "0 30 8 * * 1-5", zone = Const.ZoneId.NEW_YORK)
     public void sendFearAndGreedForUnitedStates() {
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID,
-                getFearAndGreedTelegramMessage())) {
+                this.getFearAndGreedTelegramMessage())) {
             log.info(response.toString());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -82,15 +88,19 @@ public class TelegramScheduler {
     @Async
     @Scheduled(cron = "0 35 2 * * *", zone = Const.ZoneId.UTC)
     public void sendYesterdayEconomicEventList() {
-        ZonedDateTime yesterday = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(1)
-                .withHour(0)
-                .withMinute(0)
-                .withSecond(0);
+        try {
+            ZonedDateTime yesterday = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusDays(1)
+                    .withHour(0)
+                    .withMinute(0)
+                    .withSecond(0);
 
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID,
-                getEconomicEventListTelegramMessage(yesterday))) {
-            log.info(response.toString());
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID,
+                    this.getEconomicEventListTelegramMessage(yesterday))) {
+                log.info(response.toString());
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -98,31 +108,35 @@ public class TelegramScheduler {
     @Async
     @Scheduled(cron = "0 25 8 * * 2-6", zone = Const.ZoneId.SEOUL)
     public void sendIndices() {
-        String telegramMessage = Arrays.stream(Const.EconomicIndex.values())
-                .map(Const.EconomicIndex::getCode)
-                .map(economicIndexRepository::select)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .map(economicIndex -> {
-                    String title = economicIndex.getTitle();
-                    String url = economicIndex.getUrl();
-                    String price = economicIndex.getPrice();
-                    String priceChange = economicIndex.getPriceChange();
-                    String priceChangePercent = economicIndex.getPriceChangePercent();
-                    String titleIcon = priceChange.startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        try {
+            String telegramMessage = Arrays.stream(Const.EconomicIndex.values())
+                    .map(Const.EconomicIndex::getCode)
+                    .map(economicIndexRepository::select)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .map(economicIndex -> {
+                        String title = economicIndex.getTitle();
+                        String url = economicIndex.getUrl();
+                        String price = economicIndex.getPrice();
+                        String priceChange = economicIndex.getPriceChange();
+                        String priceChangePercent = economicIndex.getPriceChangePercent();
+                        String titleIcon = priceChange.startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                    return titleIcon + "<b><a href='" + url + "'>" + title + "</a></b>\n"
-                            + " - price : <b><u>" + price + "</u></b>\n"
-                            + " - change : <b><u>" + priceChange + " (" + priceChangePercent + ")</u></b>\n";
-                })
-                .collect(Collectors.joining());
+                        return titleIcon + "<b><a href='" + url + "'>" + title + "</a></b>\n"
+                                + " - price : <b><u>" + price + "</u></b>\n"
+                                + " - change : <b><u>" + priceChange + " (" + priceChangePercent + ")</u></b>\n";
+                    })
+                    .collect(Collectors.joining());
 
-        if (StringUtils.isBlank(telegramMessage)) {
-            throw new NullPointerException("telegramMessage is blank");
-        }
+            if (StringUtils.isBlank(telegramMessage)) {
+                throw new BlankException();
+            }
 
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID, telegramMessage)) {
-            log.info(response.toString());
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID, telegramMessage)) {
+                log.info(response.toString());
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -130,7 +144,7 @@ public class TelegramScheduler {
         Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOne();
 
         if (fearAndGreed.isEmpty()) {
-            throw new NullPointerException("fearAndGreed is empty");
+            throw new EmptyException();
         }
 
         String rating = fearAndGreed.get().getRating();
