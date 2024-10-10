@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
-import toy.slick.repository.EconomicEventRepository;
-import toy.slick.repository.FearAndGreedRepository;
+import toy.slick.repository.mariadb.EconomicEventRepository;
+import toy.slick.repository.mariadb.FearAndGreedRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
