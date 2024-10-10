@@ -1,4 +1,4 @@
-package toy.slick.jooq;
+package toy.slick.config.jooq;
 
 import org.jooq.codegen.DefaultGeneratorStrategy;
 import org.jooq.meta.Definition;

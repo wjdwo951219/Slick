@@ -1,4 +1,4 @@
-package toy.slick.repository;
+package toy.slick.repository.mariadb;
 
 import org.jooq.DSLContext;
 import org.jooq.generated.tables.JEconomicIndex;

@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
 import toy.slick.feign.telegram.TelegramFeign;
-import toy.slick.repository.EconomicEventRepository;
-import toy.slick.repository.EconomicIndexRepository;
-import toy.slick.repository.FearAndGreedRepository;
+import toy.slick.repository.mariadb.EconomicEventRepository;
+import toy.slick.repository.mariadb.EconomicIndexRepository;
+import toy.slick.repository.mariadb.FearAndGreedRepository;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

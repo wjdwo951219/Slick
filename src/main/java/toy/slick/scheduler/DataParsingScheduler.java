@@ -20,9 +20,9 @@ import toy.slick.feign.economicCalendar.vo.response.EconomicEvent;
 import toy.slick.feign.investing.InvestingFeign;
 import toy.slick.feign.investing.reader.InvestingFeignReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
-import toy.slick.repository.EconomicEventRepository;
-import toy.slick.repository.EconomicIndexRepository;
-import toy.slick.repository.FearAndGreedRepository;
+import toy.slick.repository.mariadb.EconomicEventRepository;
+import toy.slick.repository.mariadb.EconomicIndexRepository;
+import toy.slick.repository.mariadb.FearAndGreedRepository;
 
 import java.io.IOException;
 import java.util.List;
