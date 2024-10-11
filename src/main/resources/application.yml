@@ -23,6 +23,8 @@ spring:
       port: ${REDIS_PORT}
       username: ${REDIS_USERNAME}
       password: ${REDIS_PASSWORD}
+      repositories:
+        enabled: false
   cloud:
     openfeign:
       client:
