@@ -24,14 +24,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.RATING</code>.
      */
     public void setRating(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.RATING</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -40,14 +40,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.SCORE</code>.
      */
     public void setScore(Double value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.SCORE</code>.
      */
     @NotNull
     public Double getScore() {
@@ -55,14 +55,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -70,14 +70,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -86,14 +86,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -101,14 +101,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Setter for <code>slick_dev.FEAR_AND_GREED.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Getter for <code>slick_dev.FEAR_AND_GREED.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
