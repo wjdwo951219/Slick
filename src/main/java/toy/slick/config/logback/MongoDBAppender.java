@@ -1,4 +1,4 @@
-package toy.slick.config.log;
+package toy.slick.config.logback;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.ThrowableProxyUtil;

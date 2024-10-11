@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <appender name="MongoDBAppender" class="toy.slick.config.log.MongoDBAppender">
+    <appender name="MongoDBAppender" class="toy.slick.config.logback.MongoDBAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
