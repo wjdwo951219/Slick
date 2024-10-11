@@ -4,11 +4,11 @@
 
     <appender name="STDOUT" class="ConsoleAppender">
         <encoder class="PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS, UTC} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="MongoDBAppender" class="toy.slick.config.log.MongoDBAppender">
+    <appender name="MongoDBAppender" class="toy.slick.config.logback.MongoDBAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>

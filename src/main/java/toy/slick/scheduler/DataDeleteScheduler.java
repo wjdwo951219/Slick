@@ -34,25 +34,33 @@ public class DataDeleteScheduler {
     @Async
     @Scheduled(cron = "4 4 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteFearAndGreed() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
+        try {
+            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusDays(2)
+                    .toLocalDateTime();
 
-        int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
+            int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+            log.info("deleteCnt : " + deleteCnt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 5 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteEconomicEvent() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(7)
-                .toLocalDateTime();
+        try {
+            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusDays(7)
+                    .toLocalDateTime();
 
-        int deleteCnt = economicEventRepository.delete(untilDateTime);
+            int deleteCnt = economicEventRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+            log.info("deleteCnt : " + deleteCnt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
     }
 }
