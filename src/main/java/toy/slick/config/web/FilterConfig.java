@@ -7,7 +7,6 @@ import toy.slick.filter.RequestLoggingFilter;
 @Configuration
 public class FilterConfig {
     // TODO: exception message -> property
-    // TODO: Bucket4j
 
     @Bean
     public RequestLoggingFilter requestLoggingFilter() {

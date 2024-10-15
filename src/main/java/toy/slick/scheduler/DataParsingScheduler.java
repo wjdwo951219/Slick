@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
 import toy.slick.exception.EmptyException;
+import toy.slick.exception.QueryResultCntException;
 import toy.slick.feign.cnn.CnnFeign;
 import toy.slick.feign.cnn.reader.CnnFeignReader;
 import toy.slick.feign.cnn.vo.response.FearAndGreed;
@@ -76,23 +77,30 @@ public class DataParsingScheduler {
             List<EconomicEvent> economicEventList = economicCalendarFeignReader.getEconomicEventList(response);
 
             if (CollectionUtils.isEmpty(economicEventList)) {
-                throw new EmptyException();
+                throw new EmptyException("economicEventList is Empty");
             }
 
             economicEventList
                     .stream()
                     .parallel()
                     .filter(o -> !StringUtils.equals("Low", o.getImportance()))
-                    .forEach(o -> economicEventRepository.save(o.getId(),
-                            o.getZonedDateTime().toLocalDateTime(),
-                            o.getName(),
-                            o.getCountry(),
-                            o.getImportance(),
-                            o.getActual(),
-                            o.getForecast(),
-                            o.getPrevious(),
-                            Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
-                            Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName()));
+                    .filter(o -> StringUtils.isNotBlank(o.getActual()))
+                    .forEach(o -> {
+                        int saveCnt = economicEventRepository.save(o.getId(),
+                                o.getZonedDateTime().toLocalDateTime(),
+                                o.getName(),
+                                o.getCountry(),
+                                o.getImportance(),
+                                o.getActual(),
+                                o.getForecast(),
+                                o.getPrevious(),
+                                Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
+                                Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+                        if (saveCnt != 1) {
+                            throw new QueryResultCntException("saveCnt != 1");
+                        }
+                    });
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -106,13 +114,17 @@ public class DataParsingScheduler {
             Optional<FearAndGreed> fearAndGreed = cnnFeignReader.getFearAndGreed(response);
 
             if (fearAndGreed.isEmpty()) {
-                throw new EmptyException(); // TODO: Exception message -> property
+                throw new EmptyException("fearAndGreed is Empty"); // TODO: Exception message -> property
             }
 
-            fearAndGreedRepository.insert(fearAndGreed.get().getRating(),
+            int insertCnt = fearAndGreedRepository.insert(fearAndGreed.get().getRating(),
                     fearAndGreed.get().getScore(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (insertCnt != 1) {
+                throw new QueryResultCntException("insertCnt != 1");
+            }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -126,10 +138,10 @@ public class DataParsingScheduler {
             Optional<EconomicIndex> dji = investingFeignReader.getEconomicIndex(response);
 
             if (dji.isEmpty()) {
-                throw new EmptyException();
+                throw new EmptyException("dji is Empty");
             }
 
-            economicIndexRepository.save(Const.EconomicIndex.DJI.getCode(),
+            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.DJI.getCode(),
                     dji.get().getUrl(),
                     dji.get().getTitle(),
                     dji.get().getPrice(),
@@ -137,6 +149,10 @@ public class DataParsingScheduler {
                     dji.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (saveCnt != 1) {
+                throw new QueryResultCntException("saveCnt != 1");
+            }
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -151,10 +167,10 @@ public class DataParsingScheduler {
             Optional<EconomicIndex> spx = investingFeignReader.getEconomicIndex(response);
 
             if (spx.isEmpty()) {
-                throw new EmptyException();
+                throw new EmptyException("spx is Empty");
             }
 
-            economicIndexRepository.save(Const.EconomicIndex.SPX.getCode(),
+            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.SPX.getCode(),
                     spx.get().getUrl(),
                     spx.get().getTitle(),
                     spx.get().getPrice(),
@@ -162,6 +178,11 @@ public class DataParsingScheduler {
                     spx.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (saveCnt != 1) {
+                throw new QueryResultCntException("saveCnt != 1");
+            }
+
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -175,10 +196,10 @@ public class DataParsingScheduler {
             Optional<EconomicIndex> ixic = investingFeignReader.getEconomicIndex(response);
 
             if (ixic.isEmpty()) {
-                throw new EmptyException();
+                throw new EmptyException("ixic is Empty");
             }
 
-            economicIndexRepository.save(Const.EconomicIndex.IXIC.getCode(),
+            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.IXIC.getCode(),
                     ixic.get().getUrl(),
                     ixic.get().getTitle(),
                     ixic.get().getPrice(),
@@ -186,6 +207,10 @@ public class DataParsingScheduler {
                     ixic.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (saveCnt != 1) {
+                throw new QueryResultCntException("saveCnt != 1");
+            }
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);

@@ -17,8 +17,8 @@ public class EconomicIndexRepository {
         this.dslContext = dslContext;
     }
 
-    public void save(String code, String url, String title, String price, String priceChange, String priceChangePercent, String regId, String uptId) {
-        dslContext.insertInto(tEconomicIndex)
+    public int save(String code, String url, String title, String price, String priceChange, String priceChangePercent, String regId, String uptId) {
+        return dslContext.insertInto(tEconomicIndex)
                 .set(tEconomicIndex.CODE, code)
                 .set(tEconomicIndex.URL, url)
                 .set(tEconomicIndex.TITLE, title)

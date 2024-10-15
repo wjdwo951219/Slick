@@ -2,7 +2,6 @@ package toy.slick.feign.economicCalendar.reader;
 
 import feign.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,7 +30,6 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
         return rows.stream()
                 .parallel()
                 .filter(row -> row.hasAttr("event_attr_id"))
-                .filter(row -> StringUtils.isNotBlank(row.getElementsByClass("act").first().text()))
                 .map(row -> {
                     ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(row.attr("event_timestamp"), Const.DateTimeFormat.yyyyMMddHHmmss.getDateTimeFormatter()), ZoneId.of(Const.ZoneId.UTC));
                     String country = row.getElementsByClass("flagCur").first().getElementsByTag("span").first().attr("title");

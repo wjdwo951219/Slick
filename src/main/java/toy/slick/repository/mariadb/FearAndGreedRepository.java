@@ -18,8 +18,8 @@ public class FearAndGreedRepository {
         this.dslContext = dslContext;
     }
 
-    public void insert(String rating, double score, String regId, String uptId) {
-        dslContext.insertInto(tFearAndGreed)
+    public int insert(String rating, double score, String regId, String uptId) {
+        return dslContext.insertInto(tFearAndGreed)
                 .set(tFearAndGreed.RATING, rating)
                 .set(tFearAndGreed.SCORE, score)
                 .set(tFearAndGreed.REG_ID, regId)

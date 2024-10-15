@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteCntRes {
+public class DeleteRes {
     private long deleteCnt;
 }
