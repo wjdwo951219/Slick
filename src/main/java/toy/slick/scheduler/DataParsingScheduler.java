@@ -85,22 +85,16 @@ public class DataParsingScheduler {
                     .parallel()
                     .filter(o -> !StringUtils.equals("Low", o.getImportance()))
                     .filter(o -> StringUtils.isNotBlank(o.getActual()))
-                    .forEach(o -> {
-                        int saveCnt = economicEventRepository.save(o.getId(),
-                                o.getZonedDateTime().toLocalDateTime(),
-                                o.getName(),
-                                o.getCountry(),
-                                o.getImportance(),
-                                o.getActual(),
-                                o.getForecast(),
-                                o.getPrevious(),
-                                Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
-                                Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-                        if (saveCnt != 1) {
-                            throw new QueryResultCntException("saveCnt != 1");
-                        }
-                    });
+                    .forEach(o -> economicEventRepository.save(o.getId(),
+                            o.getZonedDateTime().toLocalDateTime(),
+                            o.getName(),
+                            o.getCountry(),
+                            o.getImportance(),
+                            o.getActual(),
+                            o.getForecast(),
+                            o.getPrevious(),
+                            Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
+                            Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName()));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -141,7 +135,7 @@ public class DataParsingScheduler {
                 throw new EmptyException("dji is Empty");
             }
 
-            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.DJI.getCode(),
+            economicIndexRepository.save(Const.EconomicIndex.DJI.getCode(),
                     dji.get().getUrl(),
                     dji.get().getTitle(),
                     dji.get().getPrice(),
@@ -149,11 +143,6 @@ public class DataParsingScheduler {
                     dji.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            if (saveCnt != 1) {
-                throw new QueryResultCntException("saveCnt != 1");
-            }
-
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -170,7 +159,7 @@ public class DataParsingScheduler {
                 throw new EmptyException("spx is Empty");
             }
 
-            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.SPX.getCode(),
+            economicIndexRepository.save(Const.EconomicIndex.SPX.getCode(),
                     spx.get().getUrl(),
                     spx.get().getTitle(),
                     spx.get().getPrice(),
@@ -178,11 +167,6 @@ public class DataParsingScheduler {
                     spx.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            if (saveCnt != 1) {
-                throw new QueryResultCntException("saveCnt != 1");
-            }
-
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -199,7 +183,7 @@ public class DataParsingScheduler {
                 throw new EmptyException("ixic is Empty");
             }
 
-            int saveCnt = economicIndexRepository.save(Const.EconomicIndex.IXIC.getCode(),
+            economicIndexRepository.save(Const.EconomicIndex.IXIC.getCode(),
                     ixic.get().getUrl(),
                     ixic.get().getTitle(),
                     ixic.get().getPrice(),
@@ -207,11 +191,6 @@ public class DataParsingScheduler {
                     ixic.get().getPriceChangePercent(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            if (saveCnt != 1) {
-                throw new QueryResultCntException("saveCnt != 1");
-            }
-
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

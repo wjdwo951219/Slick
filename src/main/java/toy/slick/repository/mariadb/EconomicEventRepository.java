@@ -18,8 +18,8 @@ public class EconomicEventRepository {
         this.dslContext = dslContext;
     }
 
-    public int save(String id, LocalDateTime dateTime, String name, String country, String importance, String actual, String forecast, String previous, String regId, String uptId) {
-        return dslContext.insertInto(tEconomicEvent)
+    public void save(String id, LocalDateTime dateTime, String name, String country, String importance, String actual, String forecast, String previous, String regId, String uptId) {
+        dslContext.insertInto(tEconomicEvent)
                 .set(tEconomicEvent.ID, id)
                 .set(tEconomicEvent.DATETIME, dateTime)
                 .set(tEconomicEvent.NAME, name)

@@ -18,8 +18,8 @@ public class UserRepository {
         this.dslContext = dslContext;
     }
 
-    public int save(String email, String password, String regId, String uptId) {
-        return dslContext.insertInto(tUser)
+    public void save(String email, String password, String regId, String uptId) {
+        dslContext.insertInto(tUser)
                 .set(tUser.EMAIL, email)
                 .set(tUser.PASSWORD, DigestUtils.sha512Hex(password))
                 .set(tUser.REG_ID, regId)

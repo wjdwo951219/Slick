@@ -38,7 +38,7 @@ public class UserService {
             throw new AlreadyExistsException("Already registered email.");
         }
 
-        int userSaveCnt = userRepository.save(
+        userRepository.save(
                 signUpReq.getEmail(),
                 signUpReq.getPassword(),
                 signUpReq.getEmail(),
@@ -55,8 +55,8 @@ public class UserService {
                 signUpReq.getEmail()
         );
 
-        if (!(userSaveCnt == 1 && apiKeyInsertCnt == 1)) {
-            throw new QueryResultCntException("!(userSaveCnt == 1 && apiKeyInsertCnt == 1)");
+        if (apiKeyInsertCnt != 1) {
+            throw new QueryResultCntException("apiKeyInsertCnt != 1");
         }
     }
 
