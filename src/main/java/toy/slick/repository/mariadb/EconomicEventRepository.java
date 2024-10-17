@@ -31,13 +31,12 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         SelectConditionStep<Record> query = this.querySelect(
                 tEconomicEvent,
                 tEconomicEvent.DATETIME.greaterOrEqual(startDateTime)
-                        .and(tEconomicEvent.DATETIME.lessThan(endDateTime))
-        );
+                        .and(tEconomicEvent.DATETIME.lessThan(endDateTime)));
 
         return query.fetchInto(EconomicEvent.class);
     }
 
-    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize) {
+    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize, @NonNull String regId) {
         int insertCnt = 0;
 
         for (List<EconomicEvent> partition : ListUtils.partition(economicEventList, batchSize)) {
@@ -58,10 +57,9 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
                                         economicEvent.getForecast(),
                                         economicEvent.getPrevious(),
                                         now,
-                                        economicEvent.getRegId(),
+                                        regId,
                                         now,
-                                        economicEvent.getUptId()
-                                );
+                                        regId);
                             })
                             .toList());
 
@@ -74,8 +72,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
     public int delete(@NonNull LocalDateTime untilDateTime) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.DATETIME.lessThan(untilDateTime)
-        );
+                tEconomicEvent.DATETIME.lessThan(untilDateTime));
 
         return query.execute();
     }
@@ -83,8 +80,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
     public int delete(@NonNull Set<String> idSet) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.ID.in(idSet)
-        );
+                tEconomicEvent.ID.in(idSet));
 
         return query.execute();
     }

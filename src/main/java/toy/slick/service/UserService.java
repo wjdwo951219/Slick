@@ -38,22 +38,22 @@ public class UserService {
             throw new AlreadyExistsException("Already registered email.");
         }
 
-        userRepository.insert(User.builder()
-                .email(signUpReq.getEmail())
-                .password(DigestUtils.sha512Hex(signUpReq.getPassword()))
-                .regId(signUpReq.getEmail())
-                .uptId(signUpReq.getEmail())
-                .build());
+        userRepository.insert(
+                User.builder()
+                        .email(signUpReq.getEmail())
+                        .password(DigestUtils.sha512Hex(signUpReq.getPassword()))
+                        .build(),
+                signUpReq.getEmail());
 
-        int apiKeyInsertCnt = apiKeyRepository.insert(ApiKey.builder()
-                .key(this.generateApiKey(signUpReq.getEmail()))
-                .email(signUpReq.getEmail())
-                .useYn("Y")
-                .role(Const.Role.USER.getName())
-                .bucketLevel(Const.BucketLevel.BASIC.getLevelName())
-                .regId(signUpReq.getEmail())
-                .uptId(signUpReq.getEmail())
-                .build());
+        int apiKeyInsertCnt = apiKeyRepository.insert(
+                ApiKey.builder()
+                        .key(this.generateApiKey(signUpReq.getEmail()))
+                        .email(signUpReq.getEmail())
+                        .useYn("Y")
+                        .role(Const.Role.USER.getName())
+                        .bucketLevel(Const.BucketLevel.BASIC.getLevelName())
+                        .build(),
+                signUpReq.getEmail());
 
         if (apiKeyInsertCnt != 1) {
             throw new QueryResultCntException("apiKeyInsertCnt != 1");

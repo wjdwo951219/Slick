@@ -24,7 +24,7 @@ public class UserRepository extends QueryCRUD<UserRecord> {
         super(dslContext);
     }
 
-    public int insert(@NonNull User user) {
+    public int insert(@NonNull User user, @NonNull String regId) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
         InsertSetMoreStep<UserRecord> query = this.queryInsert(
@@ -33,11 +33,9 @@ public class UserRepository extends QueryCRUD<UserRecord> {
                         user.getEmail(),
                         user.getPassword(),
                         now,
-                        user.getRegId(),
+                        regId,
                         now,
-                        user.getUptId()
-                )
-        );
+                        regId));
 
         return query.execute();
     }
@@ -46,8 +44,7 @@ public class UserRepository extends QueryCRUD<UserRecord> {
         SelectConditionStep<Record> query = this.querySelect(
                 tUser,
                 tUser.EMAIL.equal(email)
-                        .and(tUser.PASSWORD.equal(password))
-        );
+                        .and(tUser.PASSWORD.equal(password)));
 
         return Optional.ofNullable(query.fetchOneInto(User.class));
     }
@@ -55,7 +52,6 @@ public class UserRepository extends QueryCRUD<UserRecord> {
     public int selectCnt(@NonNull String email) {
         return this.querySelectCnt(
                 tUser,
-                tUser.EMAIL.equal(email)
-        );
+                tUser.EMAIL.equal(email));
     }
 }

@@ -93,21 +93,22 @@ public class DataSaveScheduler {
                     .map(EconomicEvent::getId)
                     .collect(Collectors.toSet()));
 
-            int insertCnt = economicEventRepository.insertBatch(economicEventList
-                    .stream()
-                    .map(o -> org.jooq.generated.tables.pojos.EconomicEvent.builder()
-                            .id(o.getId())
-                            .name(o.getName())
-                            .datetime(o.getZonedDateTime().toLocalDateTime())
-                            .country(o.getCountry())
-                            .importance(o.getImportance())
-                            .actual(o.getActual())
-                            .forecast(o.getForecast())
-                            .previous(o.getPrevious())
-                            .regId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                            .uptId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                            .build())
-                    .collect(Collectors.toList()), 10);
+            int insertCnt = economicEventRepository.insertBatch(
+                    economicEventList
+                            .stream()
+                            .map(o -> org.jooq.generated.tables.pojos.EconomicEvent.builder()
+                                    .id(o.getId())
+                                    .name(o.getName())
+                                    .datetime(o.getZonedDateTime().toLocalDateTime())
+                                    .country(o.getCountry())
+                                    .importance(o.getImportance())
+                                    .actual(o.getActual())
+                                    .forecast(o.getForecast())
+                                    .previous(o.getPrevious())
+                                    .build())
+                            .collect(Collectors.toList()),
+                    10,
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != economicEventList.size()) {
                 throw new QueryResultCntException("insertCnt != economicEventList.size()");
@@ -127,12 +128,12 @@ public class DataSaveScheduler {
                 throw new EmptyException("fearAndGreed is Empty"); // TODO: Exception message -> property
             }
 
-            int insertCnt = fearAndGreedRepository.insert(org.jooq.generated.tables.pojos.FearAndGreed.builder()
-                    .rating(fearAndGreed.get().getRating())
-                    .score(fearAndGreed.get().getScore())
-                    .regId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .uptId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .build());
+            int insertCnt = fearAndGreedRepository.insert(
+                    org.jooq.generated.tables.pojos.FearAndGreed.builder()
+                            .rating(fearAndGreed.get().getRating())
+                            .score(fearAndGreed.get().getScore())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
                 throw new QueryResultCntException("insertCnt != 1");
@@ -158,16 +159,16 @@ public class DataSaveScheduler {
                 throw new QueryResultCntException("deleteCnt > 1");
             }
 
-            int insertCnt = economicIndexRepository.insert(org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                    .code(Const.EconomicIndex.DJI.getCode())
-                    .url(dji.get().getUrl())
-                    .title(dji.get().getTitle())
-                    .price(dji.get().getPrice())
-                    .priceChange(dji.get().getPriceChange())
-                    .priceChangePercent(dji.get().getPriceChangePercent())
-                    .regId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .uptId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .build());
+            int insertCnt = economicIndexRepository.insert(
+                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
+                            .code(Const.EconomicIndex.DJI.getCode())
+                            .url(dji.get().getUrl())
+                            .title(dji.get().getTitle())
+                            .price(dji.get().getPrice())
+                            .priceChange(dji.get().getPriceChange())
+                            .priceChangePercent(dji.get().getPriceChangePercent())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
                 throw new QueryResultCntException("insertCnt != 1");
@@ -193,16 +194,16 @@ public class DataSaveScheduler {
                 throw new QueryResultCntException("deleteCnt > 1");
             }
 
-            int insertCnt = economicIndexRepository.insert(org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                    .code(Const.EconomicIndex.SPX.getCode())
-                    .url(spx.get().getUrl())
-                    .title(spx.get().getTitle())
-                    .price(spx.get().getPrice())
-                    .priceChange(spx.get().getPriceChange())
-                    .priceChangePercent(spx.get().getPriceChangePercent())
-                    .regId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .uptId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .build());
+            int insertCnt = economicIndexRepository.insert(
+                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
+                            .code(Const.EconomicIndex.SPX.getCode())
+                            .url(spx.get().getUrl())
+                            .title(spx.get().getTitle())
+                            .price(spx.get().getPrice())
+                            .priceChange(spx.get().getPriceChange())
+                            .priceChangePercent(spx.get().getPriceChangePercent())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
                 throw new QueryResultCntException("insertCnt != 1");
@@ -228,16 +229,16 @@ public class DataSaveScheduler {
                 throw new QueryResultCntException("deleteCnt > 1");
             }
 
-            int insertCnt = economicIndexRepository.insert(org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                    .code(Const.EconomicIndex.IXIC.getCode())
-                    .url(ixic.get().getUrl())
-                    .title(ixic.get().getTitle())
-                    .price(ixic.get().getPrice())
-                    .priceChange(ixic.get().getPriceChange())
-                    .priceChangePercent(ixic.get().getPriceChangePercent())
-                    .regId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .uptId(Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName())
-                    .build());
+            int insertCnt = economicIndexRepository.insert(
+                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
+                            .code(Const.EconomicIndex.IXIC.getCode())
+                            .url(ixic.get().getUrl())
+                            .title(ixic.get().getTitle())
+                            .price(ixic.get().getPrice())
+                            .priceChange(ixic.get().getPriceChange())
+                            .priceChangePercent(ixic.get().getPriceChangePercent())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
                 throw new QueryResultCntException("insertCnt != 1");

@@ -25,7 +25,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         super(dslContext);
     }
 
-    public int insert(@NonNull ApiKey apiKey) {
+    public int insert(@NonNull ApiKey apiKey, @NonNull String regId) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
         InsertSetMoreStep<ApiKeyRecord> query = this.queryInsert(
@@ -38,11 +38,9 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
                         apiKey.getRole(),
                         apiKey.getBucketLevel(),
                         now,
-                        apiKey.getRegId(),
+                        regId,
                         now,
-                        apiKey.getUptId()
-                )
-        );
+                        regId));
 
         return query.execute();
     }
@@ -50,8 +48,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
     public Optional<ApiKey> select(@NonNull String email) {
         SelectConditionStep<Record> query = this.querySelect(
                 tApiKey,
-                tApiKey.EMAIL.equal(email)
-        );
+                tApiKey.EMAIL.equal(email));
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
     }
@@ -60,8 +57,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         SelectConditionStep<Record> query = this.querySelect(
                 tApiKey,
                 tApiKey.KEY.equal(requestApiKey)
-                        .and(tApiKey.EMAIL.equal(email))
-        );
+                        .and(tApiKey.EMAIL.equal(email)));
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
     }
@@ -77,8 +73,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         UpdateConditionStep<ApiKeyRecord> query = this.queryUpdate(
                 tApiKey,
                 record,
-                tApiKey.KEY.equal(key)
-        );
+                tApiKey.KEY.equal(key));
 
         return query.execute();
     }
