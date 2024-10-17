@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 import toy.slick.common.Response;
 import toy.slick.exception.AlreadyExistsException;
 import toy.slick.exception.ApiKeyException;
@@ -124,6 +125,16 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
 
         return new Response<>(Response.Status.NULL_ERROR.getCode(), Response.Status.NULL_ERROR.getMessage(), null);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = {
+            NoResourceFoundException.class
+    })
+    public Response<String> handleNoResourceFoundException(NoResourceFoundException e) {
+        log.info(e.getMessage(), e);
+
+        return new Response<>(Response.Status.NOT_FOUND_ERROR.getCode(), Response.Status.NOT_FOUND_ERROR.getMessage(), null);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
