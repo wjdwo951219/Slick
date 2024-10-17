@@ -55,21 +55,12 @@ public class UserService {
                 .uptId(signUpReq.getEmail())
                 .build());
 
-//        int apiKeyInsertCnt = apiKeyRepository.insert(
-//                this.generateApiKey(signUpReq.getEmail()),
-//                signUpReq.getEmail(),
-//                "Y",
-//                Const.Role.USER.getName(),
-//                Const.BucketLevel.BASIC.getLevelName(),
-//                signUpReq.getEmail(),
-//                signUpReq.getEmail()
-//        );
-
         if (apiKeyInsertCnt != 1) {
             throw new QueryResultCntException("apiKeyInsertCnt != 1");
         }
     }
 
+    @Transactional
     public void signIn(HttpSession session, SignInReq signInReq) {
         if (session.getAttribute("email") != null) {
             throw new AlreadyExistsException("Already signed in. retry after sign out");
@@ -85,6 +76,12 @@ public class UserService {
 
         if (apiKey.isEmpty()) {
             throw new EmptyException("apiKey is Empty");
+        }
+
+        int updateCnt = apiKeyRepository.updateExpiredDateTime(apiKey.get().getKey(), user.get().getEmail());
+
+        if (updateCnt != 1) {
+            throw new QueryResultCntException("updateCnt != 1");
         }
 
         session.setAttribute("email", user.get().getEmail());

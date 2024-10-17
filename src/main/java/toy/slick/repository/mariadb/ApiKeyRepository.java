@@ -5,6 +5,7 @@ import org.jooq.DSLContext;
 import org.jooq.InsertSetMoreStep;
 import org.jooq.Record;
 import org.jooq.SelectConditionStep;
+import org.jooq.UpdateConditionStep;
 import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.pojos.ApiKey;
 import org.jooq.generated.tables.records.ApiKeyRecord;
@@ -63,5 +64,22 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         );
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
+    }
+
+    public int updateExpiredDateTime(@NonNull String key, @NonNull String uptId) {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+
+        ApiKeyRecord record = new ApiKeyRecord();
+        record.set(tApiKey.EXPIRED_DATETIME, now.plusYears(1));
+        record.set(tApiKey.UPT_ID, uptId);
+        record.set(tApiKey.UPT_DATETIME, now);
+
+        UpdateConditionStep<ApiKeyRecord> query = this.queryUpdate(
+                tApiKey,
+                record,
+                tApiKey.KEY.equal(key)
+        );
+
+        return query.execute();
     }
 }

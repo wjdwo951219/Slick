@@ -41,28 +41,31 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         int insertCnt = 0;
 
         for (List<EconomicEvent> partition : ListUtils.partition(economicEventList, batchSize)) {
-            List<InsertSetMoreStep<EconomicEventRecord>> queryList = partition
-                    .stream()
-                    .map(economicEvent -> {
-                        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+            InsertSetMoreStep<EconomicEventRecord> query = this.queryInsert(
+                    tEconomicEvent,
+                    partition
+                            .stream()
+                            .map(economicEvent -> {
+                                LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
-                        return this.queryInsert(tEconomicEvent, new EconomicEventRecord(
-                                economicEvent.getId(),
-                                economicEvent.getDatetime(),
-                                economicEvent.getName(),
-                                economicEvent.getCountry(),
-                                economicEvent.getImportance(),
-                                economicEvent.getActual(),
-                                economicEvent.getForecast(),
-                                economicEvent.getPrevious(),
-                                now,
-                                economicEvent.getRegId(),
-                                now,
-                                economicEvent.getUptId()
-                        ));
-                    }).toList();
+                                return new EconomicEventRecord(
+                                        economicEvent.getId(),
+                                        economicEvent.getDatetime(),
+                                        economicEvent.getName(),
+                                        economicEvent.getCountry(),
+                                        economicEvent.getImportance(),
+                                        economicEvent.getActual(),
+                                        economicEvent.getForecast(),
+                                        economicEvent.getPrevious(),
+                                        now,
+                                        economicEvent.getRegId(),
+                                        now,
+                                        economicEvent.getUptId()
+                                );
+                            })
+                            .toList());
 
-            insertCnt += dslContext.begin(queryList).execute();
+            insertCnt += query.execute();
         }
 
         return insertCnt;
