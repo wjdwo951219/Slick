@@ -44,19 +44,6 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         );
 
         return query.execute();
-
-//        return dslContext.insertInto(tApiKey)
-//                .set(tApiKey.KEY, key)
-//                .set(tApiKey.EMAIL, email)
-//                .set(tApiKey.USE_YN, useYn)
-//                .set(tApiKey.EXPIRED_DATETIME, DSL.currentLocalDateTime().plus(365))
-//                .set(tApiKey.ROLE, role)
-//                .set(tApiKey.BUCKET_LEVEL, bucketLevel)
-//                .set(tApiKey.REG_ID, regId)
-//                .set(tApiKey.REG_DATETIME, DSL.currentLocalDateTime())
-//                .set(tApiKey.UPT_ID, uptId)
-//                .set(tApiKey.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .execute();
     }
 
     public Optional<ApiKey> select(@NonNull String email) {
@@ -66,15 +53,6 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         );
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
-
-//        ApiKey apiKey = dslContext.select()
-//                .from(tApiKey)
-//                .where(tApiKey.EMAIL.equal(email))
-//                .fetchOneInto(ApiKey.class);
-//
-//        return apiKey == null
-//                ? Optional.empty()
-//                : Optional.of(apiKey);
     }
 
     public Optional<ApiKey> select(@NonNull String requestApiKey, @NonNull String email) {
@@ -85,14 +63,5 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         );
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
-
-//        ApiKey apiKey = dslContext.select()
-//                .from(tApiKey)
-//                .where(tApiKey.KEY.equal(requestApiKey), tApiKey.EMAIL.equal(email))
-//                .fetchOneInto(ApiKey.class);
-//
-//        return apiKey == null
-//                ? Optional.empty()
-//                : Optional.of(apiKey);
     }
 }

@@ -40,19 +40,6 @@ public class UserRepository extends QueryCRUD<UserRecord> {
         );
 
         return query.execute();
-
-//        dslContext.insertInto(tUser)
-//                .set(tUser.EMAIL, email)
-//                .set(tUser.PASSWORD, DigestUtils.sha512Hex(password))
-//                .set(tUser.REG_ID, regId)
-//                .set(tUser.REG_DATETIME, DSL.currentLocalDateTime())
-//                .set(tUser.UPT_ID, uptId)
-//                .set(tUser.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .onDuplicateKeyUpdate()
-//                .set(tUser.PASSWORD, DigestUtils.sha512Hex(password))
-//                .set(tUser.UPT_ID, uptId)
-//                .set(tUser.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .execute();
     }
 
     public Optional<User> select(@NonNull String email, @NonNull String password) {
@@ -63,16 +50,6 @@ public class UserRepository extends QueryCRUD<UserRecord> {
         );
 
         return Optional.ofNullable(query.fetchOneInto(User.class));
-
-//        User user = dslContext.select()
-//                .from(tUser)
-//                .where(tUser.EMAIL.equal(email),
-//                        tUser.PASSWORD.equal(DigestUtils.sha512Hex(password)))
-//                .fetchOneInto(User.class);
-//
-//        return user == null
-//                ? Optional.empty()
-//                : Optional.of(user);
     }
 
     public int selectCnt(@NonNull String email) {

@@ -35,15 +35,9 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         );
 
         return query.fetchInto(EconomicEvent.class);
-
-//        return dslContext.select()
-//                .from(tEconomicEvent)
-//                .where(tEconomicEvent.DATETIME.greaterOrEqual(startDateTime),
-//                        tEconomicEvent.DATETIME.lessThan(endDateTime))
-//                .fetchInto(EconomicEvent.class);
     }
 
-    public int insertBatch(List<EconomicEvent> economicEventList, int batchSize) {
+    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize) {
         int insertCnt = 0;
 
         for (List<EconomicEvent> partition : ListUtils.partition(economicEventList, batchSize)) {
@@ -81,10 +75,6 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         );
 
         return query.execute();
-
-//        return dslContext.delete(tEconomicEvent)
-//                .where(tEconomicEvent.DATETIME.lessThan(untilDateTime))
-//                .execute();
     }
 
     public int delete(@NonNull Set<String> idSet) {

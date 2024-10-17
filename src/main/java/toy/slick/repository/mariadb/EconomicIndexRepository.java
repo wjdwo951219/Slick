@@ -44,28 +44,6 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
         );
 
         return query.execute();
-
-
-//        dslContext.insertInto(tEconomicIndex)
-//                .set(tEconomicIndex.CODE, code)
-//                .set(tEconomicIndex.URL, url)
-//                .set(tEconomicIndex.TITLE, title)
-//                .set(tEconomicIndex.PRICE, price)
-//                .set(tEconomicIndex.PRICE_CHANGE, priceChange)
-//                .set(tEconomicIndex.PRICE_CHANGE_PERCENT, priceChangePercent)
-//                .set(tEconomicIndex.REG_ID, regId)
-//                .set(tEconomicIndex.REG_DATETIME, DSL.currentLocalDateTime())
-//                .set(tEconomicIndex.UPT_ID, uptId)
-//                .set(tEconomicIndex.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .onDuplicateKeyUpdate()
-//                .set(tEconomicIndex.URL, url)
-//                .set(tEconomicIndex.TITLE, title)
-//                .set(tEconomicIndex.PRICE, price)
-//                .set(tEconomicIndex.PRICE_CHANGE, priceChange)
-//                .set(tEconomicIndex.PRICE_CHANGE_PERCENT, priceChangePercent)
-//                .set(tEconomicIndex.UPT_ID, uptId)
-//                .set(tEconomicIndex.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .execute();
     }
 
     public Optional<EconomicIndex> select(@NonNull String code) {
@@ -75,13 +53,6 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
         );
 
         return Optional.ofNullable(query.fetchOneInto(EconomicIndex.class));
-
-//        EconomicIndex queryResult = dslContext.select()
-//                .from(tEconomicIndex)
-//                .where(tEconomicIndex.CODE.equal(code))
-//                .fetchOneInto(EconomicIndex.class);
-//
-//        return queryResult == null ? Optional.empty() : Optional.of(queryResult);
     }
 
     public int delete(@NonNull String code) {

@@ -42,15 +42,6 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
         );
 
         return query.execute();
-
-//        return dslContext.insertInto(tFearAndGreed)
-//                .set(tFearAndGreed.RATING, rating)
-//                .set(tFearAndGreed.SCORE, score)
-//                .set(tFearAndGreed.REG_ID, regId)
-//                .set(tFearAndGreed.REG_DATETIME, DSL.currentLocalDateTime())
-//                .set(tFearAndGreed.UPT_ID, uptId)
-//                .set(tFearAndGreed.UPT_DATETIME, DSL.currentLocalDateTime())
-//                .execute();
     }
 
     public Optional<FearAndGreed> selectRecentOne() {
@@ -63,14 +54,6 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
                 .orderBy(tFearAndGreed.REG_DATETIME.desc())
                 .limit(1)
                 .fetchOneInto(FearAndGreed.class));
-
-//        FearAndGreed queryResult = dslContext.select()
-//                .from(tFearAndGreed)
-//                .orderBy(tFearAndGreed.REG_DATETIME.desc())
-//                .limit(1)
-//                .fetchOneInto(FearAndGreed.class);
-//
-//        return queryResult == null ? Optional.empty() : Optional.of(queryResult);
     }
 
     public int delete(@NonNull LocalDateTime untilDateTime) {
@@ -80,9 +63,5 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
         );
 
         return query.execute();
-
-//        return dslContext.delete(tFearAndGreed)
-//                .where(tFearAndGreed.REG_DATETIME.lessThan(untilDateTime))
-//                .execute();
     }
 }
