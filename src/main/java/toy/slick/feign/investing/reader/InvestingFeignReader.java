@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
-import toy.slick.feign.interfaces.FeignResponseReader;
+import toy.slick.feign.inheritable.FeignResponseReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
 
 import java.io.IOException;

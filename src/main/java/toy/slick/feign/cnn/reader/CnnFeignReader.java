@@ -6,7 +6,7 @@ import feign.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import toy.slick.feign.cnn.vo.response.FearAndGreed;
-import toy.slick.feign.interfaces.FeignResponseReader;
+import toy.slick.feign.inheritable.FeignResponseReader;
 
 import java.io.IOException;
 import java.util.Optional;

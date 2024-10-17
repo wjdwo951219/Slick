@@ -3,6 +3,7 @@ package toy.slick.config.jooq;
 import org.jooq.codegen.DefaultGeneratorStrategy;
 import org.jooq.meta.Definition;
 
+@SuppressWarnings({"unused"})
 public class JooqGeneratorStrategy extends DefaultGeneratorStrategy {
     @Override
     public String getJavaClassName(Definition definition, Mode mode) {

@@ -55,6 +55,11 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
     public final TableField<EconomicIndexRecord, String> CODE = createField(DSL.name("CODE"), SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
+     * The column <code>slick_dev.ECONOMIC_INDEX.TITLE</code>.
+     */
+    public final TableField<EconomicIndexRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
+
+    /**
      * The column <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
      */
     public final TableField<EconomicIndexRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
@@ -68,6 +73,11 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
      * The column <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<EconomicIndexRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>slick_dev.ECONOMIC_INDEX.URL</code>.
+     */
+    public final TableField<EconomicIndexRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
      * The column <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
@@ -88,16 +98,6 @@ public class JEconomicIndex extends TableImpl<EconomicIndexRecord> {
      * The column <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
      */
     public final TableField<EconomicIndexRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
-
-    /**
-     * The column <code>slick_dev.ECONOMIC_INDEX.URL</code>.
-     */
-    public final TableField<EconomicIndexRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
-
-    /**
-     * The column <code>slick_dev.ECONOMIC_INDEX.TITLE</code>.
-     */
-    public final TableField<EconomicIndexRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     private JEconomicIndex(Name alias, Table<EconomicIndexRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

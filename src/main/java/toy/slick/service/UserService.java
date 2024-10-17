@@ -38,22 +38,32 @@ public class UserService {
             throw new AlreadyExistsException("Already registered email.");
         }
 
-        userRepository.save(
-                signUpReq.getEmail(),
-                signUpReq.getPassword(),
-                signUpReq.getEmail(),
-                signUpReq.getEmail()
-        );
+        userRepository.insert(User.builder()
+                .email(signUpReq.getEmail())
+                .password(DigestUtils.sha512Hex(signUpReq.getPassword()))
+                .regId(signUpReq.getEmail())
+                .uptId(signUpReq.getEmail())
+                .build());
 
-        int apiKeyInsertCnt = apiKeyRepository.insert(
-                this.generateApiKey(signUpReq.getEmail()),
-                signUpReq.getEmail(),
-                "Y",
-                Const.Role.USER.getName(),
-                Const.BucketLevel.BASIC.getLevelName(),
-                signUpReq.getEmail(),
-                signUpReq.getEmail()
-        );
+        int apiKeyInsertCnt = apiKeyRepository.insert(ApiKey.builder()
+                .key(this.generateApiKey(signUpReq.getEmail()))
+                .email(signUpReq.getEmail())
+                .useYn("Y")
+                .role(Const.Role.USER.getName())
+                .bucketLevel(Const.BucketLevel.BASIC.getLevelName())
+                .regId(signUpReq.getEmail())
+                .uptId(signUpReq.getEmail())
+                .build());
+
+//        int apiKeyInsertCnt = apiKeyRepository.insert(
+//                this.generateApiKey(signUpReq.getEmail()),
+//                signUpReq.getEmail(),
+//                "Y",
+//                Const.Role.USER.getName(),
+//                Const.BucketLevel.BASIC.getLevelName(),
+//                signUpReq.getEmail(),
+//                signUpReq.getEmail()
+//        );
 
         if (apiKeyInsertCnt != 1) {
             throw new QueryResultCntException("apiKeyInsertCnt != 1");
@@ -65,7 +75,7 @@ public class UserService {
             throw new AlreadyExistsException("Already signed in. retry after sign out");
         }
 
-        Optional<User> user = userRepository.select(signInReq.getEmail(), signInReq.getPassword());
+        Optional<User> user = userRepository.select(signInReq.getEmail(), DigestUtils.sha512Hex(signInReq.getPassword()));
 
         if (user.isEmpty()) {
             throw new EmptyException("user is Empty");

@@ -85,6 +85,7 @@ jooq {
                     password = System.getenv("JDBC_PASSWORD")
                 }
                 generator {
+                    name = 'toy.slick.config.jooq.JooqGenerator'
                     database {
                         name = "org.jooq.meta.mariadb.MariaDBDatabase"
                         schemata {

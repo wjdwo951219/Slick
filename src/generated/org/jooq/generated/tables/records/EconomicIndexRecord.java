@@ -40,136 +40,10 @@ public class EconomicIndexRecord extends UpdatableRecordImpl<EconomicIndexRecord
     }
 
     /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
-     */
-    public void setPrice(String value) {
-        set(1, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
-     */
-    @NotNull
-    @Size(max = 50)
-    public String getPrice() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE</code>.
-     */
-    public void setPriceChange(String value) {
-        set(2, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE</code>.
-     */
-    @NotNull
-    @Size(max = 50)
-    public String getPriceChange() {
-        return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
-     */
-    public void setPriceChangePercent(String value) {
-        set(3, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
-     */
-    @NotNull
-    @Size(max = 50)
-    public String getPriceChangePercent() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
-     */
-    public void setRegDatetime(LocalDateTime value) {
-        set(4, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
-     */
-    @NotNull
-    public LocalDateTime getRegDatetime() {
-        return (LocalDateTime) get(4);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.REG_ID</code>.
-     */
-    public void setRegId(String value) {
-        set(5, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.REG_ID</code>.
-     */
-    @NotNull
-    @Size(max = 200)
-    public String getRegId() {
-        return (String) get(5);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.UPT_DATETIME</code>.
-     */
-    public void setUptDatetime(LocalDateTime value) {
-        set(6, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.UPT_DATETIME</code>.
-     */
-    @NotNull
-    public LocalDateTime getUptDatetime() {
-        return (LocalDateTime) get(6);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
-     */
-    public void setUptId(String value) {
-        set(7, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
-     */
-    @NotNull
-    @Size(max = 200)
-    public String getUptId() {
-        return (String) get(7);
-    }
-
-    /**
-     * Setter for <code>slick_dev.ECONOMIC_INDEX.URL</code>.
-     */
-    public void setUrl(String value) {
-        set(8, value);
-    }
-
-    /**
-     * Getter for <code>slick_dev.ECONOMIC_INDEX.URL</code>.
-     */
-    @NotNull
-    @Size(max = 500)
-    public String getUrl() {
-        return (String) get(8);
-    }
-
-    /**
      * Setter for <code>slick_dev.ECONOMIC_INDEX.TITLE</code>.
      */
     public void setTitle(String value) {
-        set(9, value);
+        set(1, value);
     }
 
     /**
@@ -178,6 +52,132 @@ public class EconomicIndexRecord extends UpdatableRecordImpl<EconomicIndexRecord
     @NotNull
     @Size(max = 100)
     public String getTitle() {
+        return (String) get(1);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
+     */
+    public void setPrice(String value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE</code>.
+     */
+    @NotNull
+    @Size(max = 50)
+    public String getPrice() {
+        return (String) get(2);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE</code>.
+     */
+    public void setPriceChange(String value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE</code>.
+     */
+    @NotNull
+    @Size(max = 50)
+    public String getPriceChange() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
+     */
+    public void setPriceChangePercent(String value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.PRICE_CHANGE_PERCENT</code>.
+     */
+    @NotNull
+    @Size(max = 50)
+    public String getPriceChangePercent() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.URL</code>.
+     */
+    public void setUrl(String value) {
+        set(5, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.URL</code>.
+     */
+    @NotNull
+    @Size(max = 500)
+    public String getUrl() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
+     */
+    public void setRegDatetime(LocalDateTime value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.REG_DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getRegDatetime() {
+        return (LocalDateTime) get(6);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.REG_ID</code>.
+     */
+    public void setRegId(String value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.REG_ID</code>.
+     */
+    @NotNull
+    @Size(max = 200)
+    public String getRegId() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.UPT_DATETIME</code>.
+     */
+    public void setUptDatetime(LocalDateTime value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.UPT_DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getUptDatetime() {
+        return (LocalDateTime) get(8);
+    }
+
+    /**
+     * Setter for <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
+     */
+    public void setUptId(String value) {
+        set(9, value);
+    }
+
+    /**
+     * Getter for <code>slick_dev.ECONOMIC_INDEX.UPT_ID</code>.
+     */
+    @NotNull
+    @Size(max = 200)
+    public String getUptId() {
         return (String) get(9);
     }
 
@@ -204,19 +204,19 @@ public class EconomicIndexRecord extends UpdatableRecordImpl<EconomicIndexRecord
     /**
      * Create a detached, initialised EconomicIndexRecord
      */
-    public EconomicIndexRecord(String code, String price, String priceChange, String priceChangePercent, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId, String url, String title) {
+    public EconomicIndexRecord(String code, String title, String price, String priceChange, String priceChangePercent, String url, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
         super(JEconomicIndex.ECONOMIC_INDEX);
 
         setCode(code);
+        setTitle(title);
         setPrice(price);
         setPriceChange(priceChange);
         setPriceChangePercent(priceChangePercent);
+        setUrl(url);
         setRegDatetime(regDatetime);
         setRegId(regId);
         setUptDatetime(uptDatetime);
         setUptId(uptId);
-        setUrl(url);
-        setTitle(title);
         resetChangedOnNotNull();
     }
 
@@ -228,15 +228,15 @@ public class EconomicIndexRecord extends UpdatableRecordImpl<EconomicIndexRecord
 
         if (value != null) {
             setCode(value.getCode());
+            setTitle(value.getTitle());
             setPrice(value.getPrice());
             setPriceChange(value.getPriceChange());
             setPriceChangePercent(value.getPriceChangePercent());
+            setUrl(value.getUrl());
             setRegDatetime(value.getRegDatetime());
             setRegId(value.getRegId());
             setUptDatetime(value.getUptDatetime());
             setUptId(value.getUptId());
-            setUrl(value.getUrl());
-            setTitle(value.getTitle());
             resetChangedOnNotNull();
         }
     }

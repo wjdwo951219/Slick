@@ -1,4 +1,4 @@
-package toy.slick.feign.interfaces;
+package toy.slick.feign.inheritable;
 
 import feign.Response;
 import org.apache.commons.io.IOUtils;
