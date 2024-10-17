@@ -1,61 +1,88 @@
 package toy.slick.repository.mariadb;
 
+import lombok.NonNull;
+import org.apache.commons.collections4.ListUtils;
 import org.jooq.DSLContext;
+import org.jooq.DeleteConditionStep;
+import org.jooq.InsertSetMoreStep;
+import org.jooq.Record;
+import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.pojos.EconomicEvent;
-import org.jooq.impl.DSL;
+import org.jooq.generated.tables.records.EconomicEventRecord;
 import org.springframework.stereotype.Repository;
+import toy.slick.common.Const;
+import toy.slick.repository.mariadb.inheritable.QueryCRUD;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Set;
 
 @Repository
-public class EconomicEventRepository {
+public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
     private final JEconomicEvent tEconomicEvent = JEconomicEvent.ECONOMIC_EVENT;
-    private final DSLContext dslContext;
 
     public EconomicEventRepository(DSLContext dslContext) {
-        this.dslContext = dslContext;
+        super(dslContext);
     }
 
-    public void save(String id, LocalDateTime dateTime, String name, String country, String importance, String actual, String forecast, String previous, String regId, String uptId) {
-        dslContext.insertInto(tEconomicEvent)
-                .set(tEconomicEvent.ID, id)
-                .set(tEconomicEvent.DATETIME, dateTime)
-                .set(tEconomicEvent.NAME, name)
-                .set(tEconomicEvent.COUNTRY, country)
-                .set(tEconomicEvent.IMPORTANCE, importance)
-                .set(tEconomicEvent.ACTUAL, actual)
-                .set(tEconomicEvent.FORECAST, forecast)
-                .set(tEconomicEvent.PREVIOUS, previous)
-                .set(tEconomicEvent.REG_ID, regId)
-                .set(tEconomicEvent.REG_DATETIME, DSL.currentLocalDateTime())
-                .set(tEconomicEvent.UPT_ID, uptId)
-                .set(tEconomicEvent.UPT_DATETIME, DSL.currentLocalDateTime())
-                .onDuplicateKeyUpdate()
-                .set(tEconomicEvent.DATETIME, dateTime)
-                .set(tEconomicEvent.NAME, name)
-                .set(tEconomicEvent.COUNTRY, country)
-                .set(tEconomicEvent.IMPORTANCE, importance)
-                .set(tEconomicEvent.ACTUAL, actual)
-                .set(tEconomicEvent.FORECAST, forecast)
-                .set(tEconomicEvent.PREVIOUS, previous)
-                .set(tEconomicEvent.UPT_ID, uptId)
-                .set(tEconomicEvent.UPT_DATETIME, DSL.currentLocalDateTime())
-                .execute();
+    public List<EconomicEvent> select(@NonNull LocalDateTime startDateTime, @NonNull LocalDateTime endDateTime) {
+        SelectConditionStep<Record> query = this.querySelect(
+                tEconomicEvent,
+                tEconomicEvent.DATETIME.greaterOrEqual(startDateTime)
+                        .and(tEconomicEvent.DATETIME.lessThan(endDateTime))
+        );
+
+        return query.fetchInto(EconomicEvent.class);
     }
 
-    public List<EconomicEvent> select(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return dslContext.select()
-                .from(tEconomicEvent)
-                .where(tEconomicEvent.DATETIME.greaterOrEqual(startDateTime),
-                        tEconomicEvent.DATETIME.lessThan(endDateTime))
-                .fetchInto(EconomicEvent.class);
+    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize) {
+        int insertCnt = 0;
+
+        for (List<EconomicEvent> partition : ListUtils.partition(economicEventList, batchSize)) {
+            List<InsertSetMoreStep<EconomicEventRecord>> queryList = partition
+                    .stream()
+                    .map(economicEvent -> {
+                        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+
+                        return this.queryInsert(tEconomicEvent, new EconomicEventRecord(
+                                economicEvent.getId(),
+                                economicEvent.getDatetime(),
+                                economicEvent.getName(),
+                                economicEvent.getCountry(),
+                                economicEvent.getImportance(),
+                                economicEvent.getActual(),
+                                economicEvent.getForecast(),
+                                economicEvent.getPrevious(),
+                                now,
+                                economicEvent.getRegId(),
+                                now,
+                                economicEvent.getUptId()
+                        ));
+                    }).toList();
+
+            insertCnt += dslContext.begin(queryList).execute();
+        }
+
+        return insertCnt;
     }
 
-    public int delete(LocalDateTime untilDateTime) {
-        return dslContext.delete(tEconomicEvent)
-                .where(tEconomicEvent.DATETIME.lessThan(untilDateTime))
-                .execute();
+    public int delete(@NonNull LocalDateTime untilDateTime) {
+        DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
+                tEconomicEvent,
+                tEconomicEvent.DATETIME.lessThan(untilDateTime)
+        );
+
+        return query.execute();
+    }
+
+    public int delete(@NonNull Set<String> idSet) {
+        DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
+                tEconomicEvent,
+                tEconomicEvent.ID.in(idSet)
+        );
+
+        return query.execute();
     }
 }

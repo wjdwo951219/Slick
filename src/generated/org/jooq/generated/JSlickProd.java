@@ -9,9 +9,11 @@ import java.util.List;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
+import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
+import org.jooq.generated.tables.JUser;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -29,6 +31,11 @@ public class JSlickProd extends SchemaImpl {
     public static final JSlickProd SLICK_PROD = new JSlickProd();
 
     /**
+     * The table <code>slick_prod.API_KEY</code>.
+     */
+    public final JApiKey API_KEY = JApiKey.API_KEY;
+
+    /**
      * The table <code>slick_prod.ECONOMIC_EVENT</code>.
      */
     public final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
@@ -42,6 +49,11 @@ public class JSlickProd extends SchemaImpl {
      * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
+
+    /**
+     * The table <code>slick_prod.USER</code>.
+     */
+    public final JUser USER = JUser.USER;
 
     /**
      * No further instances allowed
@@ -59,9 +71,11 @@ public class JSlickProd extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            JApiKey.API_KEY,
             JEconomicEvent.ECONOMIC_EVENT,
             JEconomicIndex.ECONOMIC_INDEX,
-            JFearAndGreed.FEAR_AND_GREED
+            JFearAndGreed.FEAR_AND_GREED,
+            JUser.USER
         );
     }
 }

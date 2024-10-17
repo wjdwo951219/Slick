@@ -16,38 +16,38 @@ import java.time.LocalDateTime;
  */
 @lombok.Builder
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class FearAndGreed implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String rating;
-    private Double score;
+    private String email;
+    private String password;
     private LocalDateTime regDatetime;
     private String regId;
     private LocalDateTime uptDatetime;
     private String uptId;
 
-    public FearAndGreed() {}
+    public User() {}
 
-    public FearAndGreed(FearAndGreed value) {
-        this.rating = value.rating;
-        this.score = value.score;
+    public User(User value) {
+        this.email = value.email;
+        this.password = value.password;
         this.regDatetime = value.regDatetime;
         this.regId = value.regId;
         this.uptDatetime = value.uptDatetime;
         this.uptId = value.uptId;
     }
 
-    public FearAndGreed(
-        String rating,
-        Double score,
+    public User(
+        String email,
+        String password,
         LocalDateTime regDatetime,
         String regId,
         LocalDateTime uptDatetime,
         String uptId
     ) {
-        this.rating = rating;
-        this.score = score;
+        this.email = email;
+        this.password = password;
         this.regDatetime = regDatetime;
         this.regId = regId;
         this.uptDatetime = uptDatetime;
@@ -55,38 +55,39 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Getter for <code>slick_prod.USER.EMAIL</code>.
      */
     @NotNull
-    @Size(max = 20)
-    public String getRating() {
-        return this.rating;
+    @Size(max = 100)
+    public String getEmail() {
+        return this.email;
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.RATING</code>.
+     * Setter for <code>slick_prod.USER.EMAIL</code>.
      */
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Getter for <code>slick_prod.USER.PASSWORD</code>.
      */
     @NotNull
-    public Double getScore() {
-        return this.score;
+    @Size(max = 128)
+    public String getPassword() {
+        return this.password;
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.SCORE</code>.
+     * Setter for <code>slick_prod.USER.PASSWORD</code>.
      */
-    public void setScore(Double score) {
-        this.score = score;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Getter for <code>slick_prod.USER.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -94,14 +95,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_DATETIME</code>.
+     * Setter for <code>slick_prod.USER.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Getter for <code>slick_prod.USER.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -110,14 +111,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.REG_ID</code>.
+     * Setter for <code>slick_prod.USER.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Getter for <code>slick_prod.USER.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -125,14 +126,14 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * Setter for <code>slick_prod.USER.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Getter for <code>slick_prod.USER.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -141,7 +142,7 @@ public class FearAndGreed implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.FEAR_AND_GREED.UPT_ID</code>.
+     * Setter for <code>slick_prod.USER.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;
@@ -155,18 +156,18 @@ public class FearAndGreed implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final FearAndGreed other = (FearAndGreed) obj;
-        if (this.rating == null) {
-            if (other.rating != null)
+        final User other = (User) obj;
+        if (this.email == null) {
+            if (other.email != null)
                 return false;
         }
-        else if (!this.rating.equals(other.rating))
+        else if (!this.email.equals(other.email))
             return false;
-        if (this.score == null) {
-            if (other.score != null)
+        if (this.password == null) {
+            if (other.password != null)
                 return false;
         }
-        else if (!this.score.equals(other.score))
+        else if (!this.password.equals(other.password))
             return false;
         if (this.regDatetime == null) {
             if (other.regDatetime != null)
@@ -199,8 +200,8 @@ public class FearAndGreed implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.rating == null) ? 0 : this.rating.hashCode());
-        result = prime * result + ((this.score == null) ? 0 : this.score.hashCode());
+        result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
+        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
         result = prime * result + ((this.regDatetime == null) ? 0 : this.regDatetime.hashCode());
         result = prime * result + ((this.regId == null) ? 0 : this.regId.hashCode());
         result = prime * result + ((this.uptDatetime == null) ? 0 : this.uptDatetime.hashCode());
@@ -210,10 +211,10 @@ public class FearAndGreed implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("FearAndGreed (");
+        StringBuilder sb = new StringBuilder("User (");
 
-        sb.append(rating);
-        sb.append(", ").append(score);
+        sb.append(email);
+        sb.append(", ").append(password);
         sb.append(", ").append(regDatetime);
         sb.append(", ").append(regId);
         sb.append(", ").append(uptDatetime);

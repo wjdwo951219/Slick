@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface LogRepository extends MongoRepository<LogRepository.Log, String> {
 
@@ -25,4 +26,6 @@ public interface LogRepository extends MongoRepository<LogRepository.Log, String
             return this;
         }
     }
+
+    long deleteAllBy_idIn(List<String> _idList);
 }

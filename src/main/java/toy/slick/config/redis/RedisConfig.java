@@ -1,6 +1,14 @@
 package toy.slick.config.redis;
 
-import org.apache.commons.lang3.ObjectUtils;
+import io.github.bucket4j.distributed.ExpirationAfterWriteStrategy;
+import io.github.bucket4j.distributed.proxy.ClientSideConfig;
+import io.github.bucket4j.redis.lettuce.cas.LettuceBasedProxyManager;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.codec.ByteArrayCodec;
+import io.lettuce.core.codec.RedisCodec;
+import io.lettuce.core.codec.StringCodec;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CachingConfigurer;
@@ -16,7 +24,9 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import toy.slick.common.ObjectMapper;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -66,7 +76,7 @@ public class RedisConfig implements CachingConfigurer {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer(ObjectMapper.getInstance()));
         redisTemplate.setConnectionFactory(redisConnectionFactory());
 
         return redisTemplate;
@@ -76,7 +86,7 @@ public class RedisConfig implements CachingConfigurer {
     public RedisCacheManager redisCacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer(ObjectMapper.getInstance())));
 
         Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>() {{
             put(CacheNames._10sec, redisCacheConfiguration.entryTtl(Duration.ofSeconds(10)));
@@ -103,5 +113,30 @@ public class RedisConfig implements CachingConfigurer {
                 + "("
                 + StringUtils.join(params, ", ")
                 + ")";
+    }
+
+    @Bean
+    public LettuceBasedProxyManager<String> lettuceBasedProxyManager() {
+        StatefulRedisConnection<String, byte[]> statefulRedisConnection = RedisClient.create(RedisURI.builder()
+                        .withHost(this.host)
+                        .withPort(this.port)
+                        .withClientName(this.username)
+                        .withPassword(this.password.toCharArray())
+                        .build())
+                .connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));
+
+        ExpirationAfterWriteStrategy expirationAfterWriteStrategy
+                = ExpirationAfterWriteStrategy.basedOnTimeForRefillingBucketUpToMax(Duration.ofSeconds(30));
+
+        return LettuceBasedProxyManager
+                .builderFor(statefulRedisConnection)
+                .withClientSideConfig(ClientSideConfig.getDefault()
+                        .withExpirationAfterWriteStrategy(expirationAfterWriteStrategy))
+                .build();
+    }
+
+    @Bean
+    public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
+        return new GenericJackson2JsonRedisSerializer(ObjectMapper.getInstance());
     }
 }

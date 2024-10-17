@@ -7,6 +7,7 @@ package org.jooq.generated;
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.generated.tables.JEconomicEvent;
+import org.jooq.generated.tables.JUser;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 
@@ -22,4 +23,5 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index ECONOMIC_EVENT_ECONOMIC_EVENT_DATE_UTC_IDX = Internal.createIndex(DSL.name("ECONOMIC_EVENT_DATE_UTC_IDX"), JEconomicEvent.ECONOMIC_EVENT, new OrderField[] { JEconomicEvent.ECONOMIC_EVENT.DATETIME }, false);
+    public static final Index USER_USER_EMAIL_IDX = Internal.createIndex(DSL.name("USER_EMAIL_IDX"), JUser.USER, new OrderField[] { JUser.USER.EMAIL, JUser.USER.PASSWORD }, false);
 }

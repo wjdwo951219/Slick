@@ -4,9 +4,11 @@
 package org.jooq.generated;
 
 
+import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
+import org.jooq.generated.tables.JUser;
 
 
 /**
@@ -14,6 +16,11 @@ import org.jooq.generated.tables.JFearAndGreed;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>slick_prod.API_KEY</code>.
+     */
+    public static final JApiKey API_KEY = JApiKey.API_KEY;
 
     /**
      * The table <code>slick_prod.ECONOMIC_EVENT</code>.
@@ -29,4 +36,9 @@ public class Tables {
      * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
+
+    /**
+     * The table <code>slick_prod.USER</code>.
+     */
+    public static final JUser USER = JUser.USER;
 }

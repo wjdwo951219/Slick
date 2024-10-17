@@ -129,7 +129,7 @@ public class TelegramScheduler {
                     .collect(Collectors.joining());
 
             if (StringUtils.isBlank(telegramMessage)) {
-                throw new BlankException();
+                throw new BlankException("telegramMessage is Blank");
             }
 
             try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_ID, telegramMessage)) {
@@ -144,7 +144,7 @@ public class TelegramScheduler {
         Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOne();
 
         if (fearAndGreed.isEmpty()) {
-            throw new EmptyException();
+            throw new EmptyException("fearAndGreed is Empty");
         }
 
         String rating = fearAndGreed.get().getRating();

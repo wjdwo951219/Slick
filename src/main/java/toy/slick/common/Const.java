@@ -1,7 +1,10 @@
 package toy.slick.common;
 
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.BucketConfiguration;
 import lombok.Getter;
 
+import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
 public interface Const {
@@ -48,6 +51,54 @@ public interface Const {
 
         EconomicIndex(String code) {
             this.code = code;
+        }
+    }
+
+    @Getter
+    enum Role {
+        ADMIN("ADMIN"),
+        USER("USER");
+
+        private final String name;
+
+        Role(String name) {
+            this.name = name;
+        }
+    }
+
+    @Getter
+    enum BucketLevel {
+        BASIC("BASIC", BucketConfiguration.builder()
+                .addLimit(Bandwidth.builder()
+                        .capacity(10)
+                        .refillIntervally(10, Duration.ofMinutes(30))
+                        .build())
+                .build()),
+        STANDARD("STANDARD", BucketConfiguration.builder()
+                .addLimit(Bandwidth.builder()
+                        .capacity(60)
+                        .refillIntervally(60, Duration.ofMinutes(30))
+                        .build())
+                .build()),
+        PREMIUM("PREMIUM", BucketConfiguration.builder()
+                .addLimit(Bandwidth.builder()
+                        .capacity(60)
+                        .refillIntervally(60, Duration.ofMinutes(10))
+                        .build())
+                .build()),
+        INFINITE("INFINITE", BucketConfiguration.builder()
+                .addLimit(Bandwidth.builder()
+                        .capacity(30)
+                        .refillIntervally(30, Duration.ofSeconds(10))
+                        .build())
+                .build());
+
+        private final String levelName;
+        private final BucketConfiguration bucketConfiguration;
+
+        BucketLevel(String levelName, BucketConfiguration bucketConfiguration) {
+            this.levelName = levelName;
+            this.bucketConfiguration = bucketConfiguration;
         }
     }
 }

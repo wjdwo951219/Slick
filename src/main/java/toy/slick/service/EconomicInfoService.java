@@ -20,7 +20,7 @@ public class EconomicInfoService {
         Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOne();
 
         if (fearAndGreed.isEmpty()) {
-            throw new EmptyException();
+            throw new EmptyException("fearAndGreed is Empty");
         }
 
         return FearAndGreedRes.builder()
