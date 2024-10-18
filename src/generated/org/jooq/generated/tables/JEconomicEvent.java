@@ -24,7 +24,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.generated.Indexes;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.JSlickProd;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.EconomicEventRecord;
 import org.jooq.impl.DSL;
@@ -41,7 +41,7 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.ECONOMIC_EVENT</code>
+     * The reference instance of <code>slick_prod.ECONOMIC_EVENT</code>
      */
     public static final JEconomicEvent ECONOMIC_EVENT = new JEconomicEvent();
 
@@ -54,62 +54,62 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
     }
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.ID</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.ID</code>.
      */
     public final TableField<EconomicEventRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.DATETIME</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.DATETIME</code>.
      */
     public final TableField<EconomicEventRecord, LocalDateTime> DATETIME = createField(DSL.name("DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.NAME</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.NAME</code>.
      */
     public final TableField<EconomicEventRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.COUNTRY</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.COUNTRY</code>.
      */
     public final TableField<EconomicEventRecord, String> COUNTRY = createField(DSL.name("COUNTRY"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.IMPORTANCE</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     public final TableField<EconomicEventRecord, String> IMPORTANCE = createField(DSL.name("IMPORTANCE"), SQLDataType.VARCHAR(10).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.ACTUAL</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.ACTUAL</code>.
      */
     public final TableField<EconomicEventRecord, String> ACTUAL = createField(DSL.name("ACTUAL"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.FORECAST</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.FORECAST</code>.
      */
     public final TableField<EconomicEventRecord, String> FORECAST = createField(DSL.name("FORECAST"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.PREVIOUS</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     public final TableField<EconomicEventRecord, String> PREVIOUS = createField(DSL.name("PREVIOUS"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.REG_DATETIME</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     public final TableField<EconomicEventRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.REG_ID</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.REG_ID</code>.
      */
     public final TableField<EconomicEventRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.UPT_DATETIME</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     public final TableField<EconomicEventRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.ECONOMIC_EVENT.UPT_ID</code>.
+     * The column <code>slick_prod.ECONOMIC_EVENT.UPT_ID</code>.
      */
     public final TableField<EconomicEventRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -122,21 +122,21 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.ECONOMIC_EVENT</code> table reference
+     * Create an aliased <code>slick_prod.ECONOMIC_EVENT</code> table reference
      */
     public JEconomicEvent(String alias) {
         this(DSL.name(alias), ECONOMIC_EVENT);
     }
 
     /**
-     * Create an aliased <code>slick_dev.ECONOMIC_EVENT</code> table reference
+     * Create an aliased <code>slick_prod.ECONOMIC_EVENT</code> table reference
      */
     public JEconomicEvent(Name alias) {
         this(alias, ECONOMIC_EVENT);
     }
 
     /**
-     * Create a <code>slick_dev.ECONOMIC_EVENT</code> table reference
+     * Create a <code>slick_prod.ECONOMIC_EVENT</code> table reference
      */
     public JEconomicEvent() {
         this(DSL.name("ECONOMIC_EVENT"), null);
@@ -144,7 +144,7 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : JSlickProd.SLICK_PROD;
     }
 
     @Override
