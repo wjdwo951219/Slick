@@ -11,7 +11,8 @@ public class Response<T> {
         /* 4000 ~ 4999 : Client Request Error */
         VALIDATION_ERROR("4001", "Validation Error"),
         ALREADY_EXISTS_ERROR("4002", "Already Exists Error"),
-        BUCKET4J_ERROR("4998", "Too Many Request"),
+        NOT_FOUND_ERROR("4040", "Not Found Error"),
+        BUCKET4J_ERROR("4290", "Too Many Request"),
         REQUEST_API_KEY_ERROR("4999", "RequestApiKey Error"),
 
         /* 8000 ~ 8999 : DB Error */

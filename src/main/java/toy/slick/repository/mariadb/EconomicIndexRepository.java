@@ -25,7 +25,7 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
         super(dslContext);
     }
 
-    public int insert(@NonNull EconomicIndex economicIndex) {
+    public int insert(@NonNull EconomicIndex economicIndex, @NonNull String regId) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
         InsertSetMoreStep<EconomicIndexRecord> query = this.queryInsert(
@@ -38,10 +38,9 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
                         economicIndex.getPriceChangePercent(),
                         economicIndex.getUrl(),
                         now,
-                        economicIndex.getRegId(),
+                        regId,
                         now,
-                        economicIndex.getUptId())
-        );
+                        regId));
 
         return query.execute();
     }
@@ -49,8 +48,7 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
     public Optional<EconomicIndex> select(@NonNull String code) {
         SelectConditionStep<Record> query = this.querySelect(
                 tEconomicIndex,
-                tEconomicIndex.CODE.equal(code)
-        );
+                tEconomicIndex.CODE.equal(code));
 
         return Optional.ofNullable(query.fetchOneInto(EconomicIndex.class));
     }
@@ -58,8 +56,7 @@ public class EconomicIndexRepository extends QueryCRUD<EconomicIndexRecord> {
     public int delete(@NonNull String code) {
         DeleteConditionStep<EconomicIndexRecord> query = this.queryDelete(
                 tEconomicIndex,
-                tEconomicIndex.CODE.equal(code)
-        );
+                tEconomicIndex.CODE.equal(code));
 
         return query.execute();
     }

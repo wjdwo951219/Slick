@@ -5,6 +5,7 @@ import org.jooq.DSLContext;
 import org.jooq.InsertSetMoreStep;
 import org.jooq.Record;
 import org.jooq.SelectConditionStep;
+import org.jooq.UpdateConditionStep;
 import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.pojos.ApiKey;
 import org.jooq.generated.tables.records.ApiKeyRecord;
@@ -24,7 +25,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         super(dslContext);
     }
 
-    public int insert(@NonNull ApiKey apiKey) {
+    public int insert(@NonNull ApiKey apiKey, @NonNull String regId) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
         InsertSetMoreStep<ApiKeyRecord> query = this.queryInsert(
@@ -37,11 +38,9 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
                         apiKey.getRole(),
                         apiKey.getBucketLevel(),
                         now,
-                        apiKey.getRegId(),
+                        regId,
                         now,
-                        apiKey.getUptId()
-                )
-        );
+                        regId));
 
         return query.execute();
     }
@@ -49,8 +48,7 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
     public Optional<ApiKey> select(@NonNull String email) {
         SelectConditionStep<Record> query = this.querySelect(
                 tApiKey,
-                tApiKey.EMAIL.equal(email)
-        );
+                tApiKey.EMAIL.equal(email));
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
     }
@@ -59,9 +57,24 @@ public class ApiKeyRepository extends QueryCRUD<ApiKeyRecord> {
         SelectConditionStep<Record> query = this.querySelect(
                 tApiKey,
                 tApiKey.KEY.equal(requestApiKey)
-                        .and(tApiKey.EMAIL.equal(email))
-        );
+                        .and(tApiKey.EMAIL.equal(email)));
 
         return Optional.ofNullable(query.fetchOneInto(ApiKey.class));
+    }
+
+    public int updateExpiredDateTime(@NonNull String key, @NonNull String uptId) {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+
+        ApiKeyRecord record = new ApiKeyRecord();
+        record.set(tApiKey.EXPIRED_DATETIME, now.plusYears(1));
+        record.set(tApiKey.UPT_ID, uptId);
+        record.set(tApiKey.UPT_DATETIME, now);
+
+        UpdateConditionStep<ApiKeyRecord> query = this.queryUpdate(
+                tApiKey,
+                record,
+                tApiKey.KEY.equal(key));
+
+        return query.execute();
     }
 }

@@ -26,7 +26,7 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
         super(dslContext);
     }
 
-    public int insert(@NonNull FearAndGreed fearAndGreed) {
+    public int insert(@NonNull FearAndGreed fearAndGreed, @NonNull String regId) {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
         InsertSetMoreStep<FearAndGreedRecord> query = this.queryInsert(
@@ -35,11 +35,9 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
                         fearAndGreed.getRating(),
                         fearAndGreed.getScore(),
                         now,
-                        fearAndGreed.getRegId(),
+                        regId,
                         now,
-                        fearAndGreed.getUptId()
-                )
-        );
+                        regId));
 
         return query.execute();
     }
@@ -47,8 +45,7 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
     public Optional<FearAndGreed> selectRecentOne() {
         SelectConditionStep<Record> query = this.querySelect(
                 tFearAndGreed,
-                DSL.noCondition()
-        );
+                DSL.noCondition());
 
         return Optional.ofNullable(query
                 .orderBy(tFearAndGreed.REG_DATETIME.desc())
@@ -59,8 +56,7 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
     public int delete(@NonNull LocalDateTime untilDateTime) {
         DeleteConditionStep<FearAndGreedRecord> query = this.queryDelete(
                 tFearAndGreed,
-                tFearAndGreed.REG_DATETIME.lessThan(untilDateTime)
-        );
+                tFearAndGreed.REG_DATETIME.lessThan(untilDateTime));
 
         return query.execute();
     }

@@ -31,38 +31,39 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         SelectConditionStep<Record> query = this.querySelect(
                 tEconomicEvent,
                 tEconomicEvent.DATETIME.greaterOrEqual(startDateTime)
-                        .and(tEconomicEvent.DATETIME.lessThan(endDateTime))
-        );
+                        .and(tEconomicEvent.DATETIME.lessThan(endDateTime)));
 
         return query.fetchInto(EconomicEvent.class);
     }
 
-    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize) {
+    public int insertBatch(@NonNull List<EconomicEvent> economicEventList, int batchSize, @NonNull String regId) {
         int insertCnt = 0;
 
         for (List<EconomicEvent> partition : ListUtils.partition(economicEventList, batchSize)) {
-            List<InsertSetMoreStep<EconomicEventRecord>> queryList = partition
-                    .stream()
-                    .map(economicEvent -> {
-                        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+            InsertSetMoreStep<EconomicEventRecord> query = this.queryInsert(
+                    tEconomicEvent,
+                    partition
+                            .stream()
+                            .map(economicEvent -> {
+                                LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
-                        return this.queryInsert(tEconomicEvent, new EconomicEventRecord(
-                                economicEvent.getId(),
-                                economicEvent.getDatetime(),
-                                economicEvent.getName(),
-                                economicEvent.getCountry(),
-                                economicEvent.getImportance(),
-                                economicEvent.getActual(),
-                                economicEvent.getForecast(),
-                                economicEvent.getPrevious(),
-                                now,
-                                economicEvent.getRegId(),
-                                now,
-                                economicEvent.getUptId()
-                        ));
-                    }).toList();
+                                return new EconomicEventRecord(
+                                        economicEvent.getId(),
+                                        economicEvent.getDatetime(),
+                                        economicEvent.getName(),
+                                        economicEvent.getCountry(),
+                                        economicEvent.getImportance(),
+                                        economicEvent.getActual(),
+                                        economicEvent.getForecast(),
+                                        economicEvent.getPrevious(),
+                                        now,
+                                        regId,
+                                        now,
+                                        regId);
+                            })
+                            .toList());
 
-            insertCnt += dslContext.begin(queryList).execute();
+            insertCnt += query.execute();
         }
 
         return insertCnt;
@@ -71,8 +72,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
     public int delete(@NonNull LocalDateTime untilDateTime) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.DATETIME.lessThan(untilDateTime)
-        );
+                tEconomicEvent.DATETIME.lessThan(untilDateTime));
 
         return query.execute();
     }
@@ -80,8 +80,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
     public int delete(@NonNull Set<String> idSet) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.ID.in(idSet)
-        );
+                tEconomicEvent.ID.in(idSet));
 
         return query.execute();
     }
