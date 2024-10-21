@@ -29,14 +29,14 @@ public class LogController {
     @TimeLogAspect.TimeLog
     @ApiKeyInterceptor.IsAdmin
     @GetMapping("/list")
-    public Response<List<LogRes>> getLogList() {
+    public Response<LogRes> getLogList() {
         return new Response<>(logService.getLogList());
     }
 
     @TimeLogAspect.TimeLog
     @ApiKeyInterceptor.IsAdmin
     @GetMapping("/list/{likeMessage}")
-    public Response<List<LogRes>> getLogList(@PathVariable String likeMessage) {
+    public Response<LogRes> getLogList(@PathVariable String likeMessage) {
         return new Response<>(logService.getLogList(likeMessage));
     }
 
