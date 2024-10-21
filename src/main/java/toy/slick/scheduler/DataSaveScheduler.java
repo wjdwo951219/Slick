@@ -28,7 +28,9 @@ import toy.slick.repository.mariadb.EconomicIndexRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -85,16 +87,28 @@ public class DataSaveScheduler {
                     .collect(Collectors.toList());
 
             if (CollectionUtils.isEmpty(economicEventList)) {
-                throw new EmptyException("economicEventList is Empty");
+                log.info("economicEventList is Empty");
+                return;
             }
 
-            economicEventRepository.delete(economicEventList
-                    .stream()
-                    .map(EconomicEvent::getId)
-                    .collect(Collectors.toSet()));
+            Map<String, EconomicEvent> economicEventMap = new HashMap<>();
+
+            for (EconomicEvent economicEvent : economicEventList) {
+                String id = economicEvent.getId();
+
+                if (economicEventMap.containsKey(id)) {
+                    if (economicEvent.getZonedDateTime().isAfter(economicEventMap.get(id).getZonedDateTime())) {
+                        economicEventMap.replace(id, economicEvent);
+                    }
+                } else {
+                    economicEventMap.put(id, economicEvent);
+                }
+            }
+
+            economicEventRepository.delete(economicEventMap.keySet());
 
             int insertCnt = economicEventRepository.insertBatch(
-                    economicEventList
+                    economicEventMap.values()
                             .stream()
                             .map(o -> org.jooq.generated.tables.pojos.EconomicEvent.builder()
                                     .id(o.getId())
