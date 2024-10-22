@@ -24,14 +24,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.EMAIL</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.EMAIL</code>.
      */
     public void setEmail(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.EMAIL</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.EMAIL</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -40,14 +40,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.PASSWORD</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.PASSWORD</code>.
      */
     public void setPassword(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.PASSWORD</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.PASSWORD</code>.
      */
     @NotNull
     @Size(max = 128)
@@ -56,14 +56,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.AUTH_CODE</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.AUTH_CODE</code>.
      */
     public void setAuthCode(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.AUTH_CODE</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.AUTH_CODE</code>.
      */
     @NotNull
     @Size(max = 128)
@@ -72,14 +72,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -87,14 +87,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.REG_ID</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.REG_ID</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -103,14 +103,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -118,14 +118,14 @@ public class SignUpReqRecord extends UpdatableRecordImpl<SignUpReqRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.SIGN_UP_REQ.UPT_ID</code>.
+     * Setter for <code>slick_dev.SIGN_UP_REQ.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_prod.SIGN_UP_REQ.UPT_ID</code>.
+     * Getter for <code>slick_dev.SIGN_UP_REQ.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
