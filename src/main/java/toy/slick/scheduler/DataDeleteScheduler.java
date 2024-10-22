@@ -10,6 +10,7 @@ import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
+import toy.slick.repository.mariadb.SignUpReqRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -23,11 +24,14 @@ public class DataDeleteScheduler {
     /* Repository */
     private final EconomicEventRepository economicEventRepository;
     private final FearAndGreedRepository fearAndGreedRepository;
+    private final SignUpReqRepository signUpReqRepository;
 
     public DataDeleteScheduler(EconomicEventRepository economicEventRepository,
-                               FearAndGreedRepository fearAndGreedRepository) {
+                               FearAndGreedRepository fearAndGreedRepository,
+                               SignUpReqRepository signUpReqRepository) {
         this.economicEventRepository = economicEventRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
+        this.signUpReqRepository = signUpReqRepository;
     }
 
     @TimeLogAspect.TimeLog
@@ -57,6 +61,23 @@ public class DataDeleteScheduler {
                     .toLocalDateTime();
 
             int deleteCnt = economicEventRepository.delete(untilDateTime);
+
+            log.info("deleteCnt : " + deleteCnt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Scheduled(cron = "*/10 * * * * *", zone = Const.ZoneId.UTC)
+    public void deleteSignUpReq() {
+        try {
+            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusMinutes(5)
+                    .toLocalDateTime();
+
+            int deleteCnt = signUpReqRepository.delete(untilDateTime);
 
             log.info("deleteCnt : " + deleteCnt);
         } catch (Exception e) {
