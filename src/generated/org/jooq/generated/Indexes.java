@@ -14,7 +14,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables in slick_dev.
+ * A class modelling indexes of tables in slick_prod.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Indexes {
@@ -25,5 +25,6 @@ public class Indexes {
 
     public static final Index ECONOMIC_EVENT_ECONOMIC_EVENT_DATE_UTC_IDX = Internal.createIndex(DSL.name("ECONOMIC_EVENT_DATE_UTC_IDX"), JEconomicEvent.ECONOMIC_EVENT, new OrderField[] { JEconomicEvent.ECONOMIC_EVENT.DATETIME }, false);
     public static final Index SIGN_UP_REQ_SIGN_UP_REQ_EMAIL_IDX = Internal.createIndex(DSL.name("SIGN_UP_REQ_EMAIL_IDX"), JSignUpReq.SIGN_UP_REQ, new OrderField[] { JSignUpReq.SIGN_UP_REQ.EMAIL, JSignUpReq.SIGN_UP_REQ.AUTH_CODE }, false);
+    public static final Index SIGN_UP_REQ_SIGN_UP_REQ_REG_DATETIME_IDX = Internal.createIndex(DSL.name("SIGN_UP_REQ_REG_DATETIME_IDX"), JSignUpReq.SIGN_UP_REQ, new OrderField[] { JSignUpReq.SIGN_UP_REQ.REG_DATETIME }, false);
     public static final Index USER_USER_EMAIL_IDX = Internal.createIndex(DSL.name("USER_EMAIL_IDX"), JUser.USER, new OrderField[] { JUser.USER.EMAIL, JUser.USER.PASSWORD }, false);
 }
