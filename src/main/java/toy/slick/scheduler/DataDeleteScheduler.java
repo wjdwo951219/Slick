@@ -70,7 +70,7 @@ public class DataDeleteScheduler {
 
     @TimeLogAspect.TimeLog
     @Async
-    @Scheduled(cron = "*/10 * * * * *", zone = Const.ZoneId.UTC)
+    @Scheduled(cron = "4 * * * * *", zone = Const.ZoneId.UTC)
     public void deleteSignUpReq() {
         try {
             LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
