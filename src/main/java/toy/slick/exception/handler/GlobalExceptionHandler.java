@@ -4,6 +4,7 @@ import com.mongodb.MongoWriteException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -125,6 +126,16 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
 
         return new Response<>(Response.Status.NULL_ERROR.getCode(), Response.Status.NULL_ERROR.getMessage(), null);
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(value = {
+            MailException.class
+    })
+    public Response<String> handleMailException(MailException e) {
+        log.error(e.getMessage(), e);
+
+        return new Response<>(Response.Status.MAIL_ERROR.getCode(), Response.Status.MAIL_ERROR.getMessage(), null);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

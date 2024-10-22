@@ -8,6 +8,7 @@ import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
+import org.jooq.generated.tables.JSignUpReq;
 import org.jooq.generated.tables.JUser;
 
 
@@ -36,6 +37,11 @@ public class Tables {
      * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
+
+    /**
+     * The table <code>slick_prod.SIGN_UP_REQ</code>.
+     */
+    public static final JSignUpReq SIGN_UP_REQ = JSignUpReq.SIGN_UP_REQ;
 
     /**
      * The table <code>slick_prod.USER</code>.

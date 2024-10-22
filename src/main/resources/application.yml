@@ -31,6 +31,17 @@ spring:
         config:
           default:
             logger-level: headers
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "wjdwo951219@gmail.com"
+    password: ${SPRING_MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   task:
     scheduling:
       pool:

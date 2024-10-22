@@ -19,6 +19,7 @@ public class Response<T> {
         MONGO_WRITE_ERROR("8001", "DB Write Error"),
 
         /* 9000 ~ 9999 : System Error */
+        MAIL_ERROR("9997", "Mail Error"),
         NULL_ERROR("9998", "Null Error"),
         UNKNOWN_ERROR("9999", "Unknown Error");
 
