@@ -13,6 +13,7 @@ import org.jooq.generated.tables.JApiKey;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
+import org.jooq.generated.tables.JSignUpReq;
 import org.jooq.generated.tables.JUser;
 import org.jooq.impl.SchemaImpl;
 
@@ -51,6 +52,11 @@ public class JSlickDev extends SchemaImpl {
     public final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
+     * The table <code>slick_dev.SIGN_UP_REQ</code>.
+     */
+    public final JSignUpReq SIGN_UP_REQ = JSignUpReq.SIGN_UP_REQ;
+
+    /**
      * The table <code>slick_dev.USER</code>.
      */
     public final JUser USER = JUser.USER;
@@ -75,6 +81,7 @@ public class JSlickDev extends SchemaImpl {
             JEconomicEvent.ECONOMIC_EVENT,
             JEconomicIndex.ECONOMIC_INDEX,
             JFearAndGreed.FEAR_AND_GREED,
+            JSignUpReq.SIGN_UP_REQ,
             JUser.USER
         );
     }
