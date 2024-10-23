@@ -24,7 +24,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.generated.Indexes;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.JSlickDev;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.UserRecord;
 import org.jooq.impl.DSL;
@@ -41,7 +41,7 @@ public class JUser extends TableImpl<UserRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.USER</code>
+     * The reference instance of <code>slick_dev.USER</code>
      */
     public static final JUser USER = new JUser();
 
@@ -54,32 +54,32 @@ public class JUser extends TableImpl<UserRecord> {
     }
 
     /**
-     * The column <code>slick_prod.USER.EMAIL</code>.
+     * The column <code>slick_dev.USER.EMAIL</code>.
      */
     public final TableField<UserRecord, String> EMAIL = createField(DSL.name("EMAIL"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.USER.PASSWORD</code>.
+     * The column <code>slick_dev.USER.PASSWORD</code>.
      */
     public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("PASSWORD"), SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.USER.REG_DATETIME</code>.
+     * The column <code>slick_dev.USER.REG_DATETIME</code>.
      */
     public final TableField<UserRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.USER.REG_ID</code>.
+     * The column <code>slick_dev.USER.REG_ID</code>.
      */
     public final TableField<UserRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.USER.UPT_DATETIME</code>.
+     * The column <code>slick_dev.USER.UPT_DATETIME</code>.
      */
     public final TableField<UserRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.USER.UPT_ID</code>.
+     * The column <code>slick_dev.USER.UPT_ID</code>.
      */
     public final TableField<UserRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -92,21 +92,21 @@ public class JUser extends TableImpl<UserRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.USER</code> table reference
+     * Create an aliased <code>slick_dev.USER</code> table reference
      */
     public JUser(String alias) {
         this(DSL.name(alias), USER);
     }
 
     /**
-     * Create an aliased <code>slick_prod.USER</code> table reference
+     * Create an aliased <code>slick_dev.USER</code> table reference
      */
     public JUser(Name alias) {
         this(alias, USER);
     }
 
     /**
-     * Create a <code>slick_prod.USER</code> table reference
+     * Create a <code>slick_dev.USER</code> table reference
      */
     public JUser() {
         this(DSL.name("USER"), null);
@@ -114,7 +114,7 @@ public class JUser extends TableImpl<UserRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : JSlickDev.SLICK_DEV;
     }
 
     @Override
