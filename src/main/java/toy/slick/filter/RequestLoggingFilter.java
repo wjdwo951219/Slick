@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Slf4j
 public class RequestLoggingFilter extends CommonsRequestLoggingFilter {
-    private final Collection<String> excludeUriCollection = Set.of("/actuator/health");
+    private final Collection<String> excludeUriCollection = Set.of();
 
     @Override
     protected boolean shouldLog(HttpServletRequest request) {
