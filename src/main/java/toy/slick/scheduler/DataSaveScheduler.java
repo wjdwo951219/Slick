@@ -28,10 +28,10 @@ import toy.slick.repository.mariadb.EconomicIndexRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -80,29 +80,16 @@ public class DataSaveScheduler {
     @Scheduled(cron = "50 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
     public void saveImportantEconomicEventList() throws IOException {
         try (Response response = economicCalendarFeign.getEconomicCalendar()) {
-            List<EconomicEvent> economicEventList = economicCalendarFeignReader.getEconomicEventList(response)
+            Map<String, EconomicEvent> economicEventMap = economicCalendarFeignReader.getEconomicEventList(response)
                     .stream()
                     .filter(o -> !StringUtils.equals("Low", o.getImportance()))
                     .filter(o -> StringUtils.isNotBlank(o.getActual()))
-                    .collect(Collectors.toList());
+                    .sorted(Comparator.comparing(EconomicEvent::getZonedDateTime))
+                    .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
 
-            if (CollectionUtils.isEmpty(economicEventList)) {
-                log.info("economicEventList is Empty");
+            if (CollectionUtils.isEmpty(economicEventMap.keySet())) {
+                log.info("economicEventMap.keySet() is Empty");
                 return;
-            }
-
-            Map<String, EconomicEvent> economicEventMap = new HashMap<>();
-
-            for (EconomicEvent economicEvent : economicEventList) {
-                String id = economicEvent.getId();
-
-                if (economicEventMap.containsKey(id)) {
-                    if (economicEvent.getZonedDateTime().isAfter(economicEventMap.get(id).getZonedDateTime())) {
-                        economicEventMap.replace(id, economicEvent);
-                    }
-                } else {
-                    economicEventMap.put(id, economicEvent);
-                }
             }
 
             economicEventRepository.delete(economicEventMap.keySet());
@@ -124,8 +111,8 @@ public class DataSaveScheduler {
                     10,
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
-            if (insertCnt != economicEventList.size()) {
-                throw new QueryResultCntException("insertCnt != economicEventList.size()");
+            if (insertCnt != economicEventMap.values().size()) {
+                throw new QueryResultCntException("insertCnt != economicEventMap.values().size()");
             }
         }
     }
