@@ -24,14 +24,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.USER.EMAIL</code>.
+     * Setter for <code>slick_prod.USER.EMAIL</code>.
      */
     public void setEmail(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.EMAIL</code>.
+     * Getter for <code>slick_prod.USER.EMAIL</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -40,14 +40,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.USER.PASSWORD</code>.
+     * Setter for <code>slick_prod.USER.PASSWORD</code>.
      */
     public void setPassword(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.PASSWORD</code>.
+     * Getter for <code>slick_prod.USER.PASSWORD</code>.
      */
     @NotNull
     @Size(max = 128)
@@ -56,14 +56,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.USER.REG_DATETIME</code>.
+     * Setter for <code>slick_prod.USER.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.REG_DATETIME</code>.
+     * Getter for <code>slick_prod.USER.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -71,14 +71,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.USER.REG_ID</code>.
+     * Setter for <code>slick_prod.USER.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.REG_ID</code>.
+     * Getter for <code>slick_prod.USER.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -87,14 +87,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.USER.UPT_DATETIME</code>.
+     * Setter for <code>slick_prod.USER.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.UPT_DATETIME</code>.
+     * Getter for <code>slick_prod.USER.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -102,14 +102,14 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.USER.UPT_ID</code>.
+     * Setter for <code>slick_prod.USER.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.USER.UPT_ID</code>.
+     * Getter for <code>slick_prod.USER.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
