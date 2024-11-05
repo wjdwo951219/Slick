@@ -92,11 +92,7 @@ public class DataSaveScheduler {
                 return;
             }
 
-            int deleteCnt = economicEventRepository.delete(economicEventMap.keySet());
-
-            if (deleteCnt != economicEventMap.keySet().size()) {
-                throw new QueryResultCntException("deleteCnt != economicEventMap.keySet().size()");
-            }
+            economicEventRepository.delete(economicEventMap.keySet());
 
             int insertCnt = economicEventRepository.insertBatch(
                     economicEventMap.values()
