@@ -68,44 +68,16 @@ public interface Const {
 
     @Getter
     enum BucketLevel {
-        BASIC("BASIC", BucketConfiguration.builder()
-                .addLimit(Bandwidth.builder()
-                        .capacity(10)
-                        .refillIntervally(10, Duration.ofMinutes(30))
-                        .build())
-                .addLimit(Bandwidth.builder()
-                        .capacity(1)
-                        .refillIntervally(1, Duration.ofSeconds(10))
-                        .build())
-                .build()),
-        STANDARD("STANDARD", BucketConfiguration.builder()
-                .addLimit(Bandwidth.builder()
-                        .capacity(60)
-                        .refillIntervally(60, Duration.ofMinutes(30))
-                        .build())
+        USER("USER", BucketConfiguration.builder()
                 .addLimit(Bandwidth.builder()
                         .capacity(5)
-                        .refillIntervally(5, Duration.ofSeconds(10))
+                        .refillIntervally(5, Duration.ofSeconds(2))
                         .build())
                 .build()),
-        PREMIUM("PREMIUM", BucketConfiguration.builder()
-                .addLimit(Bandwidth.builder()
-                        .capacity(300)
-                        .refillIntervally(300, Duration.ofMinutes(30))
-                        .build())
+        ADMIN("ADMIN", BucketConfiguration.builder()
                 .addLimit(Bandwidth.builder()
                         .capacity(10)
-                        .refillIntervally(10, Duration.ofSeconds(10))
-                        .build())
-                .build()),
-        INFINITE("INFINITE", BucketConfiguration.builder()
-                .addLimit(Bandwidth.builder()
-                        .capacity(3000)
-                        .refillIntervally(3000, Duration.ofMinutes(30))
-                        .build())
-                .addLimit(Bandwidth.builder()
-                        .capacity(20)
-                        .refillIntervally(20, Duration.ofSeconds(10))
+                        .refillIntervally(10, Duration.ofSeconds(1))
                         .build())
                 .build());
 

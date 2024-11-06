@@ -75,6 +75,7 @@ public class RedisConfig implements CachingConfigurer {
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 
+        redisTemplate.setEnableTransactionSupport(true);
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer(ObjectMapper.getInstance()));
         redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -119,13 +120,16 @@ public class RedisConfig implements CachingConfigurer {
 
     @Bean
     public LettuceBasedProxyManager<String> lettuceBasedProxyManager() {
-        StatefulRedisConnection<String, byte[]> statefulRedisConnection = RedisClient.create(RedisURI.builder()
-                        .withHost(this.host)
-                        .withPort(this.port)
-                        .withClientName(this.username)
-                        .withPassword(this.password.toCharArray())
-                        .build())
-                .connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));
+        StatefulRedisConnection<String, byte[]> statefulRedisConnection;
+
+        try (RedisClient redisClient = RedisClient.create(RedisURI.builder()
+                .withHost(this.host)
+                .withPort(this.port)
+                .withClientName(this.username)
+                .withPassword(this.password.toCharArray())
+                .build())) {
+            statefulRedisConnection = redisClient.connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));
+        }
 
         ExpirationAfterWriteStrategy expirationAfterWriteStrategy
                 = ExpirationAfterWriteStrategy.basedOnTimeForRefillingBucketUpToMax(Duration.ofSeconds(30));
