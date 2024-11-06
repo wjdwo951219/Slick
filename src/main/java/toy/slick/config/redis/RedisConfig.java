@@ -120,6 +120,7 @@ public class RedisConfig implements CachingConfigurer {
 
     @Bean
     public LettuceBasedProxyManager<String> lettuceBasedProxyManager() {
+        @SuppressWarnings({"resource"}) // Annotation to ignore AutoCloseable warning
         StatefulRedisConnection<String, byte[]> statefulRedisConnection = RedisClient.create(RedisURI.builder()
                         .withHost(this.host)
                         .withPort(this.port)
