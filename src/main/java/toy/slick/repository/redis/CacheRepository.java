@@ -17,11 +17,11 @@ public class CacheRepository {
     public long delete() {
         long cnt = 0;
 
-        try (Cursor<String> cursor = redisTemplate.scan(ScanOptions.scanOptions()
+        try (Cursor<String> redisKeyCursor = redisTemplate.scan(ScanOptions.scanOptions()
                 .match(RedisConfig.CacheNames.prefix + "*")
                 .build())) {
-            while (cursor.hasNext()) {
-                redisTemplate.delete(cursor.next());
+            while (redisKeyCursor.hasNext()) {
+                redisTemplate.unlink(redisKeyCursor.next());
                 cnt++;
             }
         }
@@ -32,11 +32,11 @@ public class CacheRepository {
     public long delete(String cacheName) {
         long cnt = 0;
 
-        try (Cursor<String> cursor = redisTemplate.scan(ScanOptions.scanOptions()
+        try (Cursor<String> redisKeyCursor = redisTemplate.scan(ScanOptions.scanOptions()
                 .match(RedisConfig.CacheNames.prefix + cacheName + "::*")
                 .build())) {
-            while (cursor.hasNext()) {
-                redisTemplate.delete(cursor.next());
+            while (redisKeyCursor.hasNext()) {
+                redisTemplate.unlink(redisKeyCursor.next());
                 cnt++;
             }
         }
@@ -47,11 +47,11 @@ public class CacheRepository {
     public long delete(String cacheName, String objectName) {
         long cnt = 0;
 
-        try (Cursor<String> cursor = redisTemplate.scan(ScanOptions.scanOptions()
+        try (Cursor<String> redisKeyCursor = redisTemplate.scan(ScanOptions.scanOptions()
                 .match(RedisConfig.CacheNames.prefix + cacheName + "::" + objectName + "\\.*")
                 .build())) {
-            while (cursor.hasNext()) {
-                redisTemplate.delete(cursor.next());
+            while (redisKeyCursor.hasNext()) {
+                redisTemplate.unlink(redisKeyCursor.next());
                 cnt++;
             }
         }
@@ -62,11 +62,11 @@ public class CacheRepository {
     public long delete(String cacheName, String objectName, String methodName) {
         long cnt = 0;
 
-        try (Cursor<String> cursor = redisTemplate.scan(ScanOptions.scanOptions()
+        try (Cursor<String> redisKeyCursor = redisTemplate.scan(ScanOptions.scanOptions()
                 .match(RedisConfig.CacheNames.prefix + cacheName + "::" + objectName + "\\." + methodName + "\\(*")
                 .build())) {
-            while (cursor.hasNext()) {
-                redisTemplate.delete(cursor.next());
+            while (redisKeyCursor.hasNext()) {
+                redisTemplate.unlink(redisKeyCursor.next());
                 cnt++;
             }
         }

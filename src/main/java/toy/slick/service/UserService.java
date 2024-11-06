@@ -1,11 +1,15 @@
 package toy.slick.service;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.generated.tables.pojos.ApiKey;
 import org.jooq.generated.tables.pojos.User;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -29,15 +33,18 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class UserService {
+    private final RedisTemplate<String, Object> redisTemplate;
     private final JavaMailSender javaMailSender;
     private final UserRepository userRepository;
     private final ApiKeyRepository apiKeyRepository;
     private final SignUpReqRepository signUpReqRepository;
 
-    public UserService(JavaMailSender javaMailSender,
+    public UserService(RedisTemplate<String, Object> redisTemplate,
+                       JavaMailSender javaMailSender,
                        UserRepository userRepository,
                        ApiKeyRepository apiKeyRepository,
                        SignUpReqRepository signUpReqRepository) {
+        this.redisTemplate = redisTemplate;
         this.javaMailSender = javaMailSender;
         this.userRepository = userRepository;
         this.apiKeyRepository = apiKeyRepository;
@@ -141,6 +148,8 @@ public class UserService {
             throw new QueryResultCntException("updateCnt != 1");
         }
 
+        this.unlinkDuplicateSignInSession(user.get().getEmail());
+
         session.setAttribute("email", user.get().getEmail());
         session.setAttribute("requestApiKey", apiKey.get().getKey());
     }
@@ -177,5 +186,21 @@ public class UserService {
                 + System.nanoTime();
 
         return DigestUtils.sha512Hex(String.valueOf(randomNo));
+    }
+
+    private void unlinkDuplicateSignInSession(@NonNull String email) {
+        try (Cursor<String> redisSessionKeyCursor = redisTemplate.scan(ScanOptions.scanOptions()
+                .match("spring:session:sessions:*")
+                .count(100)
+                .build())) {
+            while (redisSessionKeyCursor.hasNext()) {
+                String redisSessionKey = redisSessionKeyCursor.next();
+                String sessionEmail = (String) redisTemplate.opsForHash().get(redisSessionKey, "sessionAttr:email");
+
+                if (email.equals(sessionEmail)) {
+                    redisTemplate.unlink(redisSessionKey);
+                }
+            }
+        }
     }
 }
