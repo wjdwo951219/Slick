@@ -24,14 +24,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.API_KEY.KEY</code>.
+     * Setter for <code>slick_prod.API_KEY.KEY</code>.
      */
     public void setKey(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.KEY</code>.
+     * Getter for <code>slick_prod.API_KEY.KEY</code>.
      */
     @NotNull
     @Size(max = 128)
@@ -40,14 +40,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.EMAIL</code>.
+     * Setter for <code>slick_prod.API_KEY.EMAIL</code>.
      */
     public void setEmail(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.EMAIL</code>.
+     * Getter for <code>slick_prod.API_KEY.EMAIL</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -56,14 +56,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.USE_YN</code>.
+     * Setter for <code>slick_prod.API_KEY.USE_YN</code>.
      */
     public void setUseYn(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.USE_YN</code>.
+     * Getter for <code>slick_prod.API_KEY.USE_YN</code>.
      */
     @Size(max = 1)
     public String getUseYn() {
@@ -71,14 +71,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.EXPIRED_DATETIME</code>.
+     * Setter for <code>slick_prod.API_KEY.EXPIRED_DATETIME</code>.
      */
     public void setExpiredDatetime(LocalDateTime value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.EXPIRED_DATETIME</code>.
+     * Getter for <code>slick_prod.API_KEY.EXPIRED_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getExpiredDatetime() {
@@ -86,14 +86,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.ROLE</code>.
+     * Setter for <code>slick_prod.API_KEY.ROLE</code>.
      */
     public void setRole(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.ROLE</code>.
+     * Getter for <code>slick_prod.API_KEY.ROLE</code>.
      */
     @Size(max = 10)
     public String getRole() {
@@ -101,14 +101,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.BUCKET_LEVEL</code>.
+     * Setter for <code>slick_prod.API_KEY.BUCKET_LEVEL</code>.
      */
     public void setBucketLevel(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.BUCKET_LEVEL</code>.
+     * Getter for <code>slick_prod.API_KEY.BUCKET_LEVEL</code>.
      */
     @Size(max = 10)
     public String getBucketLevel() {
@@ -116,14 +116,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.REG_DATETIME</code>.
+     * Setter for <code>slick_prod.API_KEY.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.REG_DATETIME</code>.
+     * Getter for <code>slick_prod.API_KEY.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -131,14 +131,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.REG_ID</code>.
+     * Setter for <code>slick_prod.API_KEY.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.REG_ID</code>.
+     * Getter for <code>slick_prod.API_KEY.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -147,14 +147,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.UPT_DATETIME</code>.
+     * Setter for <code>slick_prod.API_KEY.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.UPT_DATETIME</code>.
+     * Getter for <code>slick_prod.API_KEY.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -162,14 +162,14 @@ public class ApiKeyRecord extends UpdatableRecordImpl<ApiKeyRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.API_KEY.UPT_ID</code>.
+     * Setter for <code>slick_prod.API_KEY.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>slick_dev.API_KEY.UPT_ID</code>.
+     * Getter for <code>slick_prod.API_KEY.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
