@@ -13,38 +13,38 @@ import org.jooq.generated.tables.JUser;
 
 
 /**
- * Convenience access to all tables in slick_prod.
+ * Convenience access to all tables in slick_dev.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>slick_prod.API_KEY</code>.
+     * The table <code>slick_dev.API_KEY</code>.
      */
     public static final JApiKey API_KEY = JApiKey.API_KEY;
 
     /**
-     * The table <code>slick_prod.ECONOMIC_EVENT</code>.
+     * The table <code>slick_dev.ECONOMIC_EVENT</code>.
      */
     public static final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_prod.ECONOMIC_INDEX</code>.
+     * The table <code>slick_dev.ECONOMIC_INDEX</code>.
      */
     public static final JEconomicIndex ECONOMIC_INDEX = JEconomicIndex.ECONOMIC_INDEX;
 
     /**
-     * The table <code>slick_prod.FEAR_AND_GREED</code>.
+     * The table <code>slick_dev.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>slick_prod.SIGN_UP_REQ</code>.
+     * The table <code>slick_dev.SIGN_UP_REQ</code>.
      */
     public static final JSignUpReq SIGN_UP_REQ = JSignUpReq.SIGN_UP_REQ;
 
     /**
-     * The table <code>slick_prod.USER</code>.
+     * The table <code>slick_dev.USER</code>.
      */
     public static final JUser USER = JUser.USER;
 }
