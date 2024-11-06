@@ -80,7 +80,7 @@ public class UserService {
                         .email(signUpReq.get().getEmail())
                         .useYn("Y")
                         .role(Const.Role.USER.getName())
-                        .bucketLevel(Const.BucketLevel.BASIC.getLevelName())
+                        .bucketLevel(Const.BucketLevel.USER.getLevelName())
                         .build(),
                 signUpReq.get().getEmail());
 
