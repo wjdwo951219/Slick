@@ -120,16 +120,14 @@ public class RedisConfig implements CachingConfigurer {
 
     @Bean
     public LettuceBasedProxyManager<String> lettuceBasedProxyManager() {
-        StatefulRedisConnection<String, byte[]> statefulRedisConnection;
-
-        try (RedisClient redisClient = RedisClient.create(RedisURI.builder()
-                .withHost(this.host)
-                .withPort(this.port)
-                .withClientName(this.username)
-                .withPassword(this.password.toCharArray())
-                .build())) {
-            statefulRedisConnection = redisClient.connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));
-        }
+        @SuppressWarnings({"resource"}) // Annotation to ignore AutoCloseable warning
+        StatefulRedisConnection<String, byte[]> statefulRedisConnection = RedisClient.create(RedisURI.builder()
+                        .withHost(this.host)
+                        .withPort(this.port)
+                        .withClientName(this.username)
+                        .withPassword(this.password.toCharArray())
+                        .build())
+                .connect(RedisCodec.of(StringCodec.UTF8, ByteArrayCodec.INSTANCE));
 
         ExpirationAfterWriteStrategy expirationAfterWriteStrategy
                 = ExpirationAfterWriteStrategy.basedOnTimeForRefillingBucketUpToMax(Duration.ofSeconds(30));
