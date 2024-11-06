@@ -24,7 +24,7 @@ import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
 import org.jooq.generated.Indexes;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.JSlickDev;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.SignUpReqRecord;
 import org.jooq.impl.DSL;
@@ -41,7 +41,7 @@ public class JSignUpReq extends TableImpl<SignUpReqRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.SIGN_UP_REQ</code>
+     * The reference instance of <code>slick_dev.SIGN_UP_REQ</code>
      */
     public static final JSignUpReq SIGN_UP_REQ = new JSignUpReq();
 
@@ -54,37 +54,37 @@ public class JSignUpReq extends TableImpl<SignUpReqRecord> {
     }
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.EMAIL</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.EMAIL</code>.
      */
     public final TableField<SignUpReqRecord, String> EMAIL = createField(DSL.name("EMAIL"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.PASSWORD</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.PASSWORD</code>.
      */
     public final TableField<SignUpReqRecord, String> PASSWORD = createField(DSL.name("PASSWORD"), SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.AUTH_CODE</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.AUTH_CODE</code>.
      */
     public final TableField<SignUpReqRecord, String> AUTH_CODE = createField(DSL.name("AUTH_CODE"), SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.REG_DATETIME</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.REG_DATETIME</code>.
      */
     public final TableField<SignUpReqRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.REG_ID</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.REG_ID</code>.
      */
     public final TableField<SignUpReqRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.UPT_DATETIME</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.UPT_DATETIME</code>.
      */
     public final TableField<SignUpReqRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.SIGN_UP_REQ.UPT_ID</code>.
+     * The column <code>slick_dev.SIGN_UP_REQ.UPT_ID</code>.
      */
     public final TableField<SignUpReqRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -97,21 +97,21 @@ public class JSignUpReq extends TableImpl<SignUpReqRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.SIGN_UP_REQ</code> table reference
+     * Create an aliased <code>slick_dev.SIGN_UP_REQ</code> table reference
      */
     public JSignUpReq(String alias) {
         this(DSL.name(alias), SIGN_UP_REQ);
     }
 
     /**
-     * Create an aliased <code>slick_prod.SIGN_UP_REQ</code> table reference
+     * Create an aliased <code>slick_dev.SIGN_UP_REQ</code> table reference
      */
     public JSignUpReq(Name alias) {
         this(alias, SIGN_UP_REQ);
     }
 
     /**
-     * Create a <code>slick_prod.SIGN_UP_REQ</code> table reference
+     * Create a <code>slick_dev.SIGN_UP_REQ</code> table reference
      */
     public JSignUpReq() {
         this(DSL.name("SIGN_UP_REQ"), null);
@@ -119,7 +119,7 @@ public class JSignUpReq extends TableImpl<SignUpReqRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : JSlickDev.SLICK_DEV;
     }
 
     @Override

@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import toy.slick.common.Const;
-import toy.slick.exception.EmptyException;
 import toy.slick.exception.ApiKeyException;
 import toy.slick.exception.Bucket4jException;
+import toy.slick.exception.EmptyException;
 import toy.slick.service.cacheable.UserCacheableService;
 
 import java.lang.annotation.ElementType;
@@ -56,45 +56,41 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
         String email = session.getAttribute("email").toString();
         ApiKey apiKey = userCacheableService.getApiKey(requestApiKey, email);
 
-        this.checkBucket4j(requestApiKey, Const.BucketLevel.valueOf(apiKey.getBucketLevel()).getBucketConfiguration());
+        this.checkBucket4j(apiKey, Const.BucketLevel.valueOf(apiKey.getBucketLevel()).getBucketConfiguration());
 
-        this.checkApiKey(apiKey);
-
-        this.checkRole(apiKey.getRole(), handler);
+        this.checkApiKey(apiKey, handler);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
-    private void checkApiKey(ApiKey apiKey) throws ApiKeyException {
+    private void checkApiKey(ApiKey apiKey, Object handler) throws ApiKeyException {
         if (!"Y".equals(apiKey.getUseYn())) {
-            throw new ApiKeyException("ApiKey is unusable");
+            throw new ApiKeyException("ApiKey is unusable. [email: " + apiKey.getEmail() + "]");
         }
 
         if (ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
                 .isAfter(apiKey.getExpiredDatetime().atZone(ZoneId.of(Const.ZoneId.UTC)))) {
-            throw new ApiKeyException("ApiKey is expired");
+            throw new ApiKeyException("ApiKey is expired. [email: " + apiKey.getEmail() + "]");
         }
-    }
 
-    private void checkRole(String role, Object handler) throws ApiKeyException {
         // when 404 request, handler -> HandlerMethod casting exception
         if (handler instanceof HandlerMethod handlerMethod) {
             if (handlerMethod.getMethodAnnotation(IsAdmin.class) != null) {
-                if (!Const.Role.ADMIN.getName().equals(role)) {
-                    throw new ApiKeyException("ApiKey has not appropriate role");
+                if (!Const.Role.ADMIN.getName().equals(apiKey.getRole())) {
+                    throw new ApiKeyException("ApiKey has not appropriate role. [email: " + apiKey.getEmail() + "]");
                 }
             }
         }
     }
 
-    private void checkBucket4j(String requestApiKey, BucketConfiguration bucketConfiguration) throws Bucket4jException {
-        String redisKey = "Bucket4j:" + requestApiKey;
+    private void checkBucket4j(ApiKey apiKey, BucketConfiguration bucketConfiguration) throws Bucket4jException {
+        String redisKey = "Bucket4j:" + apiKey.getKey();
 
         Bucket bucket = proxyManager.builder()
                 .build(redisKey, () -> bucketConfiguration);
 
         if (!bucket.tryConsume(1)) {
-            throw new Bucket4jException("bucket consume fail");
+            throw new Bucket4jException("bucket consume fail. [email: " + apiKey.getEmail() + "]");
         }
     }
 }
