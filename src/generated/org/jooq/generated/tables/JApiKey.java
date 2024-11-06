@@ -22,7 +22,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.JSlickDev;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.ApiKeyRecord;
 import org.jooq.impl.DSL;
@@ -39,7 +39,7 @@ public class JApiKey extends TableImpl<ApiKeyRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.API_KEY</code>
+     * The reference instance of <code>slick_dev.API_KEY</code>
      */
     public static final JApiKey API_KEY = new JApiKey();
 
@@ -52,52 +52,52 @@ public class JApiKey extends TableImpl<ApiKeyRecord> {
     }
 
     /**
-     * The column <code>slick_prod.API_KEY.KEY</code>.
+     * The column <code>slick_dev.API_KEY.KEY</code>.
      */
     public final TableField<ApiKeyRecord, String> KEY = createField(DSL.name("KEY"), SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.EMAIL</code>.
+     * The column <code>slick_dev.API_KEY.EMAIL</code>.
      */
     public final TableField<ApiKeyRecord, String> EMAIL = createField(DSL.name("EMAIL"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.USE_YN</code>.
+     * The column <code>slick_dev.API_KEY.USE_YN</code>.
      */
     public final TableField<ApiKeyRecord, String> USE_YN = createField(DSL.name("USE_YN"), SQLDataType.VARCHAR(1).nullable(false).defaultValue(DSL.field(DSL.raw("'N'"), SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.EXPIRED_DATETIME</code>.
+     * The column <code>slick_dev.API_KEY.EXPIRED_DATETIME</code>.
      */
     public final TableField<ApiKeyRecord, LocalDateTime> EXPIRED_DATETIME = createField(DSL.name("EXPIRED_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.ROLE</code>.
+     * The column <code>slick_dev.API_KEY.ROLE</code>.
      */
     public final TableField<ApiKeyRecord, String> ROLE = createField(DSL.name("ROLE"), SQLDataType.VARCHAR(10).nullable(false).defaultValue(DSL.field(DSL.raw("'User'"), SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.BUCKET_LEVEL</code>.
+     * The column <code>slick_dev.API_KEY.BUCKET_LEVEL</code>.
      */
     public final TableField<ApiKeyRecord, String> BUCKET_LEVEL = createField(DSL.name("BUCKET_LEVEL"), SQLDataType.VARCHAR(10).nullable(false).defaultValue(DSL.field(DSL.raw("'Basic'"), SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.REG_DATETIME</code>.
+     * The column <code>slick_dev.API_KEY.REG_DATETIME</code>.
      */
     public final TableField<ApiKeyRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.REG_ID</code>.
+     * The column <code>slick_dev.API_KEY.REG_ID</code>.
      */
     public final TableField<ApiKeyRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.UPT_DATETIME</code>.
+     * The column <code>slick_dev.API_KEY.UPT_DATETIME</code>.
      */
     public final TableField<ApiKeyRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.API_KEY.UPT_ID</code>.
+     * The column <code>slick_dev.API_KEY.UPT_ID</code>.
      */
     public final TableField<ApiKeyRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -110,21 +110,21 @@ public class JApiKey extends TableImpl<ApiKeyRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.API_KEY</code> table reference
+     * Create an aliased <code>slick_dev.API_KEY</code> table reference
      */
     public JApiKey(String alias) {
         this(DSL.name(alias), API_KEY);
     }
 
     /**
-     * Create an aliased <code>slick_prod.API_KEY</code> table reference
+     * Create an aliased <code>slick_dev.API_KEY</code> table reference
      */
     public JApiKey(Name alias) {
         this(alias, API_KEY);
     }
 
     /**
-     * Create a <code>slick_prod.API_KEY</code> table reference
+     * Create a <code>slick_dev.API_KEY</code> table reference
      */
     public JApiKey() {
         this(DSL.name("API_KEY"), null);
@@ -132,7 +132,7 @@ public class JApiKey extends TableImpl<ApiKeyRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : JSlickDev.SLICK_DEV;
     }
 
     @Override
