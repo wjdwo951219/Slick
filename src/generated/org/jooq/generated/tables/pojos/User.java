@@ -55,7 +55,7 @@ public class User implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_prod.USER.EMAIL</code>.
+     * Getter for <code>slick_dev.USER.EMAIL</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -64,14 +64,14 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.EMAIL</code>.
+     * Setter for <code>slick_dev.USER.EMAIL</code>.
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Getter for <code>slick_prod.USER.PASSWORD</code>.
+     * Getter for <code>slick_dev.USER.PASSWORD</code>.
      */
     @NotNull
     @Size(max = 128)
@@ -80,14 +80,14 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.PASSWORD</code>.
+     * Setter for <code>slick_dev.USER.PASSWORD</code>.
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * Getter for <code>slick_prod.USER.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.USER.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -95,14 +95,14 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.USER.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.USER.REG_ID</code>.
+     * Getter for <code>slick_dev.USER.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -111,14 +111,14 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.REG_ID</code>.
+     * Setter for <code>slick_dev.USER.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_prod.USER.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.USER.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -126,14 +126,14 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.USER.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.USER.UPT_ID</code>.
+     * Getter for <code>slick_dev.USER.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -142,7 +142,7 @@ public class User implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.USER.UPT_ID</code>.
+     * Setter for <code>slick_dev.USER.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;
