@@ -50,6 +50,6 @@ public class InvestingFeignReader implements FeignResponseReader {
     }
 
     private String getTitle(Document document) {
-        return document.getElementsByTag("h1").first().text();
+        return document.getElementsByTag("h1").first().ownText();
     }
 }
