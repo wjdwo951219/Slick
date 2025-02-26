@@ -36,4 +36,8 @@ telegram:
       token: ${BOT_SLICK_TOKEN}
   chat:
     slick:
-      id: ${CHAT_SLICK_ID}
+      us:
+        id: ${CHAT_SLICK_US_ID}
+      kr:
+        id: ${CHAT_SLICK_KR_ID}
+

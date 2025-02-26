@@ -14,6 +14,8 @@ import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
 import org.jooq.generated.tables.JHoliday;
 import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JKosdaq;
+import org.jooq.generated.tables.JKospi;
 import org.jooq.generated.tables.JSpx;
 import org.jooq.impl.SchemaImpl;
 
@@ -57,6 +59,16 @@ public class JSlickDev extends SchemaImpl {
     public final JIxic IXIC = JIxic.IXIC;
 
     /**
+     * The table <code>slick_dev.KOSDAQ</code>.
+     */
+    public final JKosdaq KOSDAQ = JKosdaq.KOSDAQ;
+
+    /**
+     * The table <code>slick_dev.KOSPI</code>.
+     */
+    public final JKospi KOSPI = JKospi.KOSPI;
+
+    /**
      * The table <code>slick_dev.SPX</code>.
      */
     public final JSpx SPX = JSpx.SPX;
@@ -82,6 +94,8 @@ public class JSlickDev extends SchemaImpl {
             JFearAndGreed.FEAR_AND_GREED,
             JHoliday.HOLIDAY,
             JIxic.IXIC,
+            JKosdaq.KOSDAQ,
+            JKospi.KOSPI,
             JSpx.SPX
         );
     }

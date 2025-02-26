@@ -9,14 +9,16 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Component;
 import toy.slick.feign.inheritable.FeignResponseReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
+import toy.slick.feign.investing.vo.response.Holiday;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
@@ -46,34 +48,42 @@ public class InvestingFeignReader implements FeignResponseReader {
                 .build());
     }
 
-    public Map<String, Set<String>> getHolidayDateAndCountryListMap(Response feignResponse) throws IOException {
+    public List<Holiday> getHolidayList(Response feignResponse) throws IOException {
         String responseBody = this.getResponseBody(feignResponse);
 
-        Document document = Jsoup.parse(responseBody);
+        Queue<Element> rowQueue = new LinkedList<>(Jsoup.parse(responseBody)
+                .getElementById("holidayCalendarData")
+                .getElementsByTag("tbody").first()
+                .getElementsByTag("tr"));
 
-        Element holidayTable = document.getElementById("holidayCalendarData");
-
-        Element holidayTableBody = holidayTable.getElementsByTag("tbody").first();
-
-        Queue<Element> rowQueue = new LinkedList<>(holidayTableBody.getElementsByTag("tr"));
-        Map<String, Set<String>> holidayDateAndCountrySetMap = new HashMap<>();
-
+        List<Holiday> holidayList = new ArrayList<>();
 
         while (!rowQueue.isEmpty()) {
-            Element row = rowQueue.poll();
+            Element firstRow = rowQueue.poll();
 
-            String date = row.getElementsByClass("date bold center").first().text();
+            String date = firstRow.getElementsByClass("date bold center").first().text();
+
             Set<String> countrySet = new HashSet<>();
-            countrySet.add(row.getElementsByClass("bold cur").first().text());
+
+            countrySet.add(firstRow.getElementsByClass("bold cur").first().text());
 
             while (!rowQueue.isEmpty() && StringUtils.isBlank(rowQueue.peek().getElementsByClass("date bold center").first().text())) {
-                countrySet.add(rowQueue.poll().getElementsByClass("bold cur").first().text());
+                Element nextRow = rowQueue.poll();
+
+                if (nextRow != null) {
+                    countrySet.add(nextRow.getElementsByClass("bold cur").first().text());
+                }
             }
 
-            holidayDateAndCountrySetMap.put(date, countrySet);
+            for (String country : countrySet) {
+                holidayList.add(Holiday.builder()
+                        .date(LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)))
+                        .country(country)
+                        .build());
+            }
         }
 
-        return holidayDateAndCountrySetMap;
+        return holidayList;
     }
 
     private String getPrice(Document document) {

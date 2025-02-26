@@ -5,8 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.generated.tables.pojos.Dji;
-import org.jooq.generated.tables.pojos.Holiday;
 import org.jooq.generated.tables.pojos.Ixic;
+import org.jooq.generated.tables.pojos.Kosdaq;
+import org.jooq.generated.tables.pojos.Kospi;
 import org.jooq.generated.tables.pojos.Spx;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -24,22 +25,20 @@ import toy.slick.feign.economicCalendar.vo.response.EconomicEvent;
 import toy.slick.feign.investing.InvestingFeign;
 import toy.slick.feign.investing.reader.InvestingFeignReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
+import toy.slick.feign.investing.vo.response.Holiday;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
 import toy.slick.repository.mariadb.HolidayRepository;
 import toy.slick.repository.mariadb.IxicRepository;
+import toy.slick.repository.mariadb.KosdaqRepository;
+import toy.slick.repository.mariadb.KospiRepository;
 import toy.slick.repository.mariadb.SpxRepository;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -59,12 +58,14 @@ public class DataSaveScheduler {
     private final InvestingFeignReader investingFeignReader;
 
     /* Repository */
+    private final HolidayRepository holidayRepository;
     private final EconomicEventRepository economicEventRepository;
     private final FearAndGreedRepository fearAndGreedRepository;
     private final DjiRepository djiRepository;
     private final IxicRepository ixicRepository;
     private final SpxRepository spxRepository;
-    private final HolidayRepository holidayRepository;
+    private final KospiRepository kospiRepository;
+    private final KosdaqRepository kosdaqRepository;
 
     public DataSaveScheduler(CnnFeign cnnFeign,
                              EconomicCalendarFeign economicCalendarFeign,
@@ -77,7 +78,9 @@ public class DataSaveScheduler {
                              DjiRepository djiRepository,
                              IxicRepository ixicRepository,
                              SpxRepository spxRepository,
-                             HolidayRepository holidayRepository) {
+                             HolidayRepository holidayRepository, 
+                             KospiRepository kospiRepository, 
+                             KosdaqRepository kosdaqRepository) {
         this.cnnFeign = cnnFeign;
         this.economicCalendarFeign = economicCalendarFeign;
         this.investingFeign = investingFeign;
@@ -90,13 +93,15 @@ public class DataSaveScheduler {
         this.ixicRepository = ixicRepository;
         this.spxRepository = spxRepository;
         this.holidayRepository = holidayRepository;
+        this.kospiRepository = kospiRepository;
+        this.kosdaqRepository = kosdaqRepository;
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
     @Scheduled(cron = "8 8,18,28,38,48,58 * * * *")
-    public void saveEconomicEventList() throws IOException {
+    public void saveEconomicEventList() throws Exception {
         try (Response response = economicCalendarFeign.getEconomicCalendar()) {
             Map<String, EconomicEvent> economicEventMap = economicCalendarFeignReader.getEconomicEventList(response)
                     .stream()
@@ -105,8 +110,7 @@ public class DataSaveScheduler {
                     .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
 
             if (CollectionUtils.isEmpty(economicEventMap.keySet())) {
-                log.info("economicEventMap.keySet() is Empty");
-                return;
+                throw new Exception("economicEventMap.keySet() is Empty");
             }
 
             economicEventRepository.delete(economicEventMap.keySet());
@@ -129,7 +133,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != economicEventMap.values().size()) {
-                log.error("insertCnt != economicEventMap.values().size()");
+                throw new Exception("insertCnt != economicEventMap.values().size()");
             }
         }
     }
@@ -138,13 +142,12 @@ public class DataSaveScheduler {
     @Async
     @Transactional
     @Scheduled(cron = "10 9,19,29,39,49,59 * * * *")
-    public void saveFearAndGreed() throws IOException {
+    public void saveFearAndGreed() throws Exception {
         try (Response response = cnnFeign.getFearAndGreed()) {
             Optional<FearAndGreed> fearAndGreed = cnnFeignReader.getFearAndGreed(response);
 
             if (fearAndGreed.isEmpty()) {
-                log.error("fearAndGreed is Empty"); // TODO: Exception message -> property
-                return;
+                throw new Exception("fearAndGreed is Empty"); // TODO: Exception message -> property
             }
 
             int insertCnt = fearAndGreedRepository.insert(
@@ -155,7 +158,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                log.error("insertCnt != 1");
+                throw new Exception("insertCnt != 1");
             }
         }
     }
@@ -164,13 +167,12 @@ public class DataSaveScheduler {
     @Async
     @Transactional
     @Scheduled(cron = "20 9,19,29,39,49,59 * * * *")
-    public void saveDJI() throws IOException {
+    public void saveDji() throws Exception {
         try (Response response = investingFeign.getDowJonesIndustrialAverage()) {
             Optional<EconomicIndex> dji = investingFeignReader.getEconomicIndex(response);
 
             if (dji.isEmpty()) {
-                log.error("dji is Empty");
-                return;
+                throw new Exception("dji is Empty");
             }
 
             int insertCnt = djiRepository.insert(
@@ -184,7 +186,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                log.error("insertCnt != 1");
+                throw new Exception("insertCnt != 1");
             }
         }
     }
@@ -193,13 +195,12 @@ public class DataSaveScheduler {
     @Async
     @Transactional
     @Scheduled(cron = "30 9,19,29,39,49,59 * * * *")
-    public void saveSPX() throws IOException {
+    public void saveSpx() throws Exception {
         try (Response response = investingFeign.getStandardAndPoor500()) {
             Optional<EconomicIndex> spx = investingFeignReader.getEconomicIndex(response);
 
             if (spx.isEmpty()) {
-                log.error("spx is Empty");
-                return;
+                throw new Exception("spx is Empty");
             }
 
             int insertCnt = spxRepository.insert(
@@ -213,7 +214,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                log.error("insertCnt != 1");
+                throw new Exception("insertCnt != 1");
             }
         }
     }
@@ -222,13 +223,12 @@ public class DataSaveScheduler {
     @Async
     @Transactional
     @Scheduled(cron = "40 9,19,29,39,49,59 * * * *")
-    public void saveIXIC() throws IOException {
+    public void saveIxic() throws Exception {
         try (Response response = investingFeign.getNasdaqComposite()) {
             Optional<EconomicIndex> ixic = investingFeignReader.getEconomicIndex(response);
 
             if (ixic.isEmpty()) {
-                log.error("ixic is Empty");
-                return;
+                throw new Exception("ixic is Empty");
             }
 
             int insertCnt = ixicRepository.insert(
@@ -242,7 +242,63 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                log.error("insertCnt != 1");
+                throw new Exception("insertCnt != 1");
+            }
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Transactional
+    @Scheduled(cron = "30 8,18,28,38,48,58 * * * *")
+    public void saveKospi() throws Exception {
+        try (Response response = investingFeign.getKospi()) {
+            Optional<EconomicIndex> kospi = investingFeignReader.getEconomicIndex(response);
+
+            if (kospi.isEmpty()) {
+                throw new Exception("kospi is Empty");
+            }
+
+            int insertCnt = kospiRepository.insert(
+                    Kospi.builder()
+                            .url(kospi.get().getUrl())
+                            .title(kospi.get().getTitle())
+                            .price(kospi.get().getPrice())
+                            .priceChange(kospi.get().getPriceChange())
+                            .priceChangePercent(kospi.get().getPriceChangePercent())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (insertCnt != 1) {
+                throw new Exception("insertCnt != 1");
+            }
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Transactional
+    @Scheduled(cron = "40 8,18,28,38,48,58 * * * *")
+    public void saveKosdaq() throws Exception {
+        try (Response response = investingFeign.getKosdaq()) {
+            Optional<EconomicIndex> kosdaq = investingFeignReader.getEconomicIndex(response);
+
+            if (kosdaq.isEmpty()) {
+                throw new Exception("kosdaq is Empty");
+            }
+
+            int insertCnt = kosdaqRepository.insert(
+                    Kosdaq.builder()
+                            .url(kosdaq.get().getUrl())
+                            .title(kosdaq.get().getTitle())
+                            .price(kosdaq.get().getPrice())
+                            .priceChange(kosdaq.get().getPriceChange())
+                            .priceChangePercent(kosdaq.get().getPriceChangePercent())
+                            .build(),
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            if (insertCnt != 1) {
+                throw new Exception("insertCnt != 1");
             }
         }
     }
@@ -255,34 +311,21 @@ public class DataSaveScheduler {
         try (Response response = investingFeign.getHolidayCalendar()) {
             holidayRepository.deleteAll();
 
-            Map<String, Set<String>> holidayDateAndCountryListMap = investingFeignReader.getHolidayDateAndCountryListMap(response);
+            List<Holiday> holidayList = investingFeignReader.getHolidayList(response);
 
-            if (holidayDateAndCountryListMap.isEmpty()) {
-                throw new Exception("holidayDateAndCountryListMap is Empty");
-            }
+            int insertCnt = holidayRepository.insertBatch(
+                    holidayList
+                            .stream()
+                            .map(holiday -> org.jooq.generated.tables.pojos.Holiday.builder()
+                                    .date(holiday.getDate())
+                                    .country(holiday.getCountry())
+                                    .build())
+                            .toList(),
+                    10,
+                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
-            for (Map.Entry<String, Set<String>> holidayDateAndCountrySetEntry : holidayDateAndCountryListMap.entrySet()) {
-                LocalDate holidayDate = LocalDate.parse(holidayDateAndCountrySetEntry.getKey(), DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH));
-
-                List<Holiday> holidayList = holidayDateAndCountrySetEntry.getValue()
-                        .stream()
-                        .map(country -> {
-                            return Holiday.builder()
-                                    .country(country)
-                                    .date(holidayDate)
-                                    .build();
-                        })
-                        .toList();
-
-                int insertCnt = holidayRepository.insertBatch(
-                        holidayList,
-                        10,
-                        Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName()
-                );
-
-                if (insertCnt != holidayList.size()) {
-                    throw new Exception("insertCnt != holidayList.size()");
-                }
+            if (insertCnt != holidayList.size()) {
+                throw new Exception("insertCnt != holidayList.size()");
             }
         }
     }

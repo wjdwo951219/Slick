@@ -11,12 +11,16 @@ import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
 import org.jooq.generated.tables.JHoliday;
 import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JKosdaq;
+import org.jooq.generated.tables.JKospi;
 import org.jooq.generated.tables.JSpx;
 import org.jooq.generated.tables.records.DjiRecord;
 import org.jooq.generated.tables.records.EconomicEventRecord;
 import org.jooq.generated.tables.records.FearAndGreedRecord;
 import org.jooq.generated.tables.records.HolidayRecord;
 import org.jooq.generated.tables.records.IxicRecord;
+import org.jooq.generated.tables.records.KosdaqRecord;
+import org.jooq.generated.tables.records.KospiRecord;
 import org.jooq.generated.tables.records.SpxRecord;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
@@ -38,5 +42,7 @@ public class Keys {
     public static final UniqueKey<FearAndGreedRecord> KEY_FEAR_AND_GREED_PRIMARY = Internal.createUniqueKey(JFearAndGreed.FEAR_AND_GREED, DSL.name("KEY_FEAR_AND_GREED_PRIMARY"), new TableField[] { JFearAndGreed.FEAR_AND_GREED.REG_DATETIME }, true);
     public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(JHoliday.HOLIDAY, DSL.name("KEY_HOLIDAY_PRIMARY"), new TableField[] { JHoliday.HOLIDAY.COUNTRY, JHoliday.HOLIDAY.DATE }, true);
     public static final UniqueKey<IxicRecord> KEY_IXIC_PRIMARY = Internal.createUniqueKey(JIxic.IXIC, DSL.name("KEY_IXIC_PRIMARY"), new TableField[] { JIxic.IXIC.REG_DATETIME }, true);
+    public static final UniqueKey<KosdaqRecord> KEY_KOSDAQ_PRIMARY = Internal.createUniqueKey(JKosdaq.KOSDAQ, DSL.name("KEY_KOSDAQ_PRIMARY"), new TableField[] { JKosdaq.KOSDAQ.REG_DATETIME }, true);
+    public static final UniqueKey<KospiRecord> KEY_KOSPI_PRIMARY = Internal.createUniqueKey(JKospi.KOSPI, DSL.name("KEY_KOSPI_PRIMARY"), new TableField[] { JKospi.KOSPI.REG_DATETIME }, true);
     public static final UniqueKey<SpxRecord> KEY_SPX_PRIMARY = Internal.createUniqueKey(JSpx.SPX, DSL.name("KEY_SPX_PRIMARY"), new TableField[] { JSpx.SPX.REG_DATETIME }, true);
 }

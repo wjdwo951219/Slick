@@ -9,6 +9,8 @@ import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
 import org.jooq.generated.tables.JHoliday;
 import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JKosdaq;
+import org.jooq.generated.tables.JKospi;
 import org.jooq.generated.tables.JSpx;
 
 
@@ -42,6 +44,16 @@ public class Tables {
      * The table <code>slick_dev.IXIC</code>.
      */
     public static final JIxic IXIC = JIxic.IXIC;
+
+    /**
+     * The table <code>slick_dev.KOSDAQ</code>.
+     */
+    public static final JKosdaq KOSDAQ = JKosdaq.KOSDAQ;
+
+    /**
+     * The table <code>slick_dev.KOSPI</code>.
+     */
+    public static final JKospi KOSPI = JKospi.KOSPI;
 
     /**
      * The table <code>slick_dev.SPX</code>.
