@@ -5,13 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import toy.slick.common.Const;
 
 import java.time.ZoneId;
 import java.util.TimeZone;
 
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 600)
 @EnableFeignClients
 @EnableScheduling
 @SpringBootApplication

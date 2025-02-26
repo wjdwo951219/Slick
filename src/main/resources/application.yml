@@ -14,34 +14,12 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-  data:
-    mongodb:
-      uri: ${MONGODB_URI}
-      database: ${MONGODB_DATABASE}
-    redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
-      username: ${REDIS_USERNAME}
-      password: ${REDIS_PASSWORD}
-      repositories:
-        enabled: false
   cloud:
     openfeign:
       client:
         config:
           default:
             logger-level: headers
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: "wjdwo951219@gmail.com"
-    password: ${SPRING_MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
   task:
     scheduling:
       pool:
@@ -51,30 +29,6 @@ logging:
   level:
     toy.slick.feign: debug
     org.jooq.tools.LoggerListener: debug
-    org.springframework.data.mongodb.core.MongoTemplate: debug
-
-management:
-  endpoints:
-    enabled-by-default: false
-    jmx:
-      exposure:
-        exclude: "*"
-    web:
-      exposure:
-        include: info, health
-  endpoint:
-    info:
-      enabled: true
-    health:
-      enabled: true
-  info:
-    env:
-      enabled: true
-
-info:
-  contact:
-    email: wjdwo951219@gmail.com
-  github: https://github.com/key824999/Slick
 
 telegram:
   bot:

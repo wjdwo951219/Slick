@@ -9,12 +9,12 @@ import java.util.List;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
-import org.jooq.generated.tables.JApiKey;
+import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
-import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
-import org.jooq.generated.tables.JSignUpReq;
-import org.jooq.generated.tables.JUser;
+import org.jooq.generated.tables.JHoliday;
+import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JSpx;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -32,9 +32,9 @@ public class JSlickDev extends SchemaImpl {
     public static final JSlickDev SLICK_DEV = new JSlickDev();
 
     /**
-     * The table <code>slick_dev.API_KEY</code>.
+     * The table <code>slick_dev.DJI</code>.
      */
-    public final JApiKey API_KEY = JApiKey.API_KEY;
+    public final JDji DJI = JDji.DJI;
 
     /**
      * The table <code>slick_dev.ECONOMIC_EVENT</code>.
@@ -42,24 +42,24 @@ public class JSlickDev extends SchemaImpl {
     public final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_dev.ECONOMIC_INDEX</code>.
-     */
-    public final JEconomicIndex ECONOMIC_INDEX = JEconomicIndex.ECONOMIC_INDEX;
-
-    /**
      * The table <code>slick_dev.FEAR_AND_GREED</code>.
      */
     public final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>slick_dev.SIGN_UP_REQ</code>.
+     * The table <code>slick_dev.HOLIDAY</code>.
      */
-    public final JSignUpReq SIGN_UP_REQ = JSignUpReq.SIGN_UP_REQ;
+    public final JHoliday HOLIDAY = JHoliday.HOLIDAY;
 
     /**
-     * The table <code>slick_dev.USER</code>.
+     * The table <code>slick_dev.IXIC</code>.
      */
-    public final JUser USER = JUser.USER;
+    public final JIxic IXIC = JIxic.IXIC;
+
+    /**
+     * The table <code>slick_dev.SPX</code>.
+     */
+    public final JSpx SPX = JSpx.SPX;
 
     /**
      * No further instances allowed
@@ -77,12 +77,12 @@ public class JSlickDev extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            JApiKey.API_KEY,
+            JDji.DJI,
             JEconomicEvent.ECONOMIC_EVENT,
-            JEconomicIndex.ECONOMIC_INDEX,
             JFearAndGreed.FEAR_AND_GREED,
-            JSignUpReq.SIGN_UP_REQ,
-            JUser.USER
+            JHoliday.HOLIDAY,
+            JIxic.IXIC,
+            JSpx.SPX
         );
     }
 }

@@ -4,6 +4,10 @@ import feign.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.generated.tables.pojos.Dji;
+import org.jooq.generated.tables.pojos.Holiday;
+import org.jooq.generated.tables.pojos.Ixic;
+import org.jooq.generated.tables.pojos.Spx;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -11,9 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import toy.slick.aspect.TimeLogAspect;
-import toy.slick.common.Const;
-import toy.slick.exception.EmptyException;
-import toy.slick.exception.QueryResultCntException;
 import toy.slick.feign.cnn.CnnFeign;
 import toy.slick.feign.cnn.reader.CnnFeignReader;
 import toy.slick.feign.cnn.vo.response.FearAndGreed;
@@ -23,14 +24,22 @@ import toy.slick.feign.economicCalendar.vo.response.EconomicEvent;
 import toy.slick.feign.investing.InvestingFeign;
 import toy.slick.feign.investing.reader.InvestingFeignReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
+import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
-import toy.slick.repository.mariadb.EconomicIndexRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
+import toy.slick.repository.mariadb.HolidayRepository;
+import toy.slick.repository.mariadb.IxicRepository;
+import toy.slick.repository.mariadb.SpxRepository;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -52,7 +61,10 @@ public class DataSaveScheduler {
     /* Repository */
     private final EconomicEventRepository economicEventRepository;
     private final FearAndGreedRepository fearAndGreedRepository;
-    private final EconomicIndexRepository economicIndexRepository;
+    private final DjiRepository djiRepository;
+    private final IxicRepository ixicRepository;
+    private final SpxRepository spxRepository;
+    private final HolidayRepository holidayRepository;
 
     public DataSaveScheduler(CnnFeign cnnFeign,
                              EconomicCalendarFeign economicCalendarFeign,
@@ -62,7 +74,10 @@ public class DataSaveScheduler {
                              InvestingFeignReader investingFeignReader,
                              EconomicEventRepository economicEventRepository,
                              FearAndGreedRepository fearAndGreedRepository,
-                             EconomicIndexRepository economicIndexRepository) {
+                             DjiRepository djiRepository,
+                             IxicRepository ixicRepository,
+                             SpxRepository spxRepository,
+                             HolidayRepository holidayRepository) {
         this.cnnFeign = cnnFeign;
         this.economicCalendarFeign = economicCalendarFeign;
         this.investingFeign = investingFeign;
@@ -71,18 +86,20 @@ public class DataSaveScheduler {
         this.investingFeignReader = investingFeignReader;
         this.economicEventRepository = economicEventRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
-        this.economicIndexRepository = economicIndexRepository;
+        this.djiRepository = djiRepository;
+        this.ixicRepository = ixicRepository;
+        this.spxRepository = spxRepository;
+        this.holidayRepository = holidayRepository;
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "50 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
-    public void saveImportantEconomicEventList() throws IOException {
+    @Scheduled(cron = "8 8,18,28,38,48,58 * * * *")
+    public void saveEconomicEventList() throws IOException {
         try (Response response = economicCalendarFeign.getEconomicCalendar()) {
             Map<String, EconomicEvent> economicEventMap = economicCalendarFeignReader.getEconomicEventList(response)
                     .stream()
-                    .filter(o -> !StringUtils.equals("Low", o.getImportance()))
                     .filter(o -> StringUtils.isNotBlank(o.getActual()))
                     .sorted(Comparator.comparing(EconomicEvent::getZonedDateTime))
                     .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
@@ -112,7 +129,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != economicEventMap.values().size()) {
-                throw new QueryResultCntException("insertCnt != economicEventMap.values().size()");
+                log.error("insertCnt != economicEventMap.values().size()");
             }
         }
     }
@@ -120,13 +137,14 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "10 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
+    @Scheduled(cron = "10 9,19,29,39,49,59 * * * *")
     public void saveFearAndGreed() throws IOException {
         try (Response response = cnnFeign.getFearAndGreed()) {
             Optional<FearAndGreed> fearAndGreed = cnnFeignReader.getFearAndGreed(response);
 
             if (fearAndGreed.isEmpty()) {
-                throw new EmptyException("fearAndGreed is Empty"); // TODO: Exception message -> property
+                log.error("fearAndGreed is Empty"); // TODO: Exception message -> property
+                return;
             }
 
             int insertCnt = fearAndGreedRepository.insert(
@@ -137,7 +155,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new QueryResultCntException("insertCnt != 1");
+                log.error("insertCnt != 1");
             }
         }
     }
@@ -145,24 +163,18 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "20 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
+    @Scheduled(cron = "20 9,19,29,39,49,59 * * * *")
     public void saveDJI() throws IOException {
         try (Response response = investingFeign.getDowJonesIndustrialAverage()) {
             Optional<EconomicIndex> dji = investingFeignReader.getEconomicIndex(response);
 
             if (dji.isEmpty()) {
-                throw new EmptyException("dji is Empty");
+                log.error("dji is Empty");
+                return;
             }
 
-            int deleteCnt = economicIndexRepository.delete(Const.EconomicIndex.DJI.getCode());
-
-            if (deleteCnt > 1) {
-                throw new QueryResultCntException("deleteCnt > 1");
-            }
-
-            int insertCnt = economicIndexRepository.insert(
-                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                            .code(Const.EconomicIndex.DJI.getCode())
+            int insertCnt = djiRepository.insert(
+                    Dji.builder()
                             .url(dji.get().getUrl())
                             .title(dji.get().getTitle())
                             .price(dji.get().getPrice())
@@ -172,7 +184,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new QueryResultCntException("insertCnt != 1");
+                log.error("insertCnt != 1");
             }
         }
     }
@@ -180,24 +192,18 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "30 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
+    @Scheduled(cron = "30 9,19,29,39,49,59 * * * *")
     public void saveSPX() throws IOException {
         try (Response response = investingFeign.getStandardAndPoor500()) {
             Optional<EconomicIndex> spx = investingFeignReader.getEconomicIndex(response);
 
             if (spx.isEmpty()) {
-                throw new EmptyException("spx is Empty");
+                log.error("spx is Empty");
+                return;
             }
 
-            int deleteCnt = economicIndexRepository.delete(Const.EconomicIndex.SPX.getCode());
-
-            if (deleteCnt > 1) {
-                throw new QueryResultCntException("deleteCnt > 1");
-            }
-
-            int insertCnt = economicIndexRepository.insert(
-                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                            .code(Const.EconomicIndex.SPX.getCode())
+            int insertCnt = spxRepository.insert(
+                    Spx.builder()
                             .url(spx.get().getUrl())
                             .title(spx.get().getTitle())
                             .price(spx.get().getPrice())
@@ -207,7 +213,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new QueryResultCntException("insertCnt != 1");
+                log.error("insertCnt != 1");
             }
         }
     }
@@ -215,24 +221,18 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "40 9,19,29,39,49,59 * * * *", zone = Const.ZoneId.NEW_YORK)
+    @Scheduled(cron = "40 9,19,29,39,49,59 * * * *")
     public void saveIXIC() throws IOException {
         try (Response response = investingFeign.getNasdaqComposite()) {
             Optional<EconomicIndex> ixic = investingFeignReader.getEconomicIndex(response);
 
             if (ixic.isEmpty()) {
-                throw new EmptyException("ixic is Empty");
+                log.error("ixic is Empty");
+                return;
             }
 
-            int deleteCnt = economicIndexRepository.delete(Const.EconomicIndex.IXIC.getCode());
-
-            if (deleteCnt > 1) {
-                throw new QueryResultCntException("deleteCnt > 1");
-            }
-
-            int insertCnt = economicIndexRepository.insert(
-                    org.jooq.generated.tables.pojos.EconomicIndex.builder()
-                            .code(Const.EconomicIndex.IXIC.getCode())
+            int insertCnt = ixicRepository.insert(
+                    Ixic.builder()
                             .url(ixic.get().getUrl())
                             .title(ixic.get().getTitle())
                             .price(ixic.get().getPrice())
@@ -242,7 +242,47 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new QueryResultCntException("insertCnt != 1");
+                log.error("insertCnt != 1");
+            }
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Transactional
+    @Scheduled(cron = "7 7 7 * * *")
+    public void saveHoliday() throws Exception {
+        try (Response response = investingFeign.getHolidayCalendar()) {
+            holidayRepository.deleteAll();
+
+            Map<String, Set<String>> holidayDateAndCountryListMap = investingFeignReader.getHolidayDateAndCountryListMap(response);
+
+            if (holidayDateAndCountryListMap.isEmpty()) {
+                throw new Exception("holidayDateAndCountryListMap is Empty");
+            }
+
+            for (Map.Entry<String, Set<String>> holidayDateAndCountrySetEntry : holidayDateAndCountryListMap.entrySet()) {
+                LocalDate holidayDate = LocalDate.parse(holidayDateAndCountrySetEntry.getKey(), DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH));
+
+                List<Holiday> holidayList = holidayDateAndCountrySetEntry.getValue()
+                        .stream()
+                        .map(country -> {
+                            return Holiday.builder()
+                                    .country(country)
+                                    .date(holidayDate)
+                                    .build();
+                        })
+                        .toList();
+
+                int insertCnt = holidayRepository.insertBatch(
+                        holidayList,
+                        10,
+                        Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName()
+                );
+
+                if (insertCnt != holidayList.size()) {
+                    throw new Exception("insertCnt != holidayList.size()");
+                }
             }
         }
     }

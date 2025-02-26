@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
         return rows.stream()
                 .filter(row -> row.hasAttr("event_attr_id"))
                 .map(row -> {
-                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(row.attr("event_timestamp"), Const.DateTimeFormat.yyyyMMddHHmmss.getDateTimeFormatter()), ZoneId.of(Const.ZoneId.UTC));
+                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(row.attr("event_timestamp"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), ZoneId.of(Const.ZoneId.UTC));
                     String country = row.getElementsByClass("flagCur").first().getElementsByTag("span").first().attr("title");
                     String importance = row.getElementsByClass("sentiment").first().attr("title").split(" ")[0];
                     String id = row.attr("event_attr_id");

@@ -6,18 +6,18 @@ package org.jooq.generated;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
-import org.jooq.generated.tables.JApiKey;
+import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
-import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
-import org.jooq.generated.tables.JSignUpReq;
-import org.jooq.generated.tables.JUser;
-import org.jooq.generated.tables.records.ApiKeyRecord;
+import org.jooq.generated.tables.JHoliday;
+import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JSpx;
+import org.jooq.generated.tables.records.DjiRecord;
 import org.jooq.generated.tables.records.EconomicEventRecord;
-import org.jooq.generated.tables.records.EconomicIndexRecord;
 import org.jooq.generated.tables.records.FearAndGreedRecord;
-import org.jooq.generated.tables.records.SignUpReqRecord;
-import org.jooq.generated.tables.records.UserRecord;
+import org.jooq.generated.tables.records.HolidayRecord;
+import org.jooq.generated.tables.records.IxicRecord;
+import org.jooq.generated.tables.records.SpxRecord;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 
@@ -33,11 +33,10 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<ApiKeyRecord> KEY_API_KEY_API_KEY_UNIQUE = Internal.createUniqueKey(JApiKey.API_KEY, DSL.name("KEY_API_KEY_API_KEY_UNIQUE"), new TableField[] { JApiKey.API_KEY.EMAIL }, true);
-    public static final UniqueKey<ApiKeyRecord> KEY_API_KEY_PRIMARY = Internal.createUniqueKey(JApiKey.API_KEY, DSL.name("KEY_API_KEY_PRIMARY"), new TableField[] { JApiKey.API_KEY.KEY }, true);
+    public static final UniqueKey<DjiRecord> KEY_DJI_PRIMARY = Internal.createUniqueKey(JDji.DJI, DSL.name("KEY_DJI_PRIMARY"), new TableField[] { JDji.DJI.REG_DATETIME }, true);
     public static final UniqueKey<EconomicEventRecord> KEY_ECONOMIC_EVENT_PRIMARY = Internal.createUniqueKey(JEconomicEvent.ECONOMIC_EVENT, DSL.name("KEY_ECONOMIC_EVENT_PRIMARY"), new TableField[] { JEconomicEvent.ECONOMIC_EVENT.ID }, true);
-    public static final UniqueKey<EconomicIndexRecord> KEY_ECONOMIC_INDEX_PRIMARY = Internal.createUniqueKey(JEconomicIndex.ECONOMIC_INDEX, DSL.name("KEY_ECONOMIC_INDEX_PRIMARY"), new TableField[] { JEconomicIndex.ECONOMIC_INDEX.CODE }, true);
     public static final UniqueKey<FearAndGreedRecord> KEY_FEAR_AND_GREED_PRIMARY = Internal.createUniqueKey(JFearAndGreed.FEAR_AND_GREED, DSL.name("KEY_FEAR_AND_GREED_PRIMARY"), new TableField[] { JFearAndGreed.FEAR_AND_GREED.REG_DATETIME }, true);
-    public static final UniqueKey<SignUpReqRecord> KEY_SIGN_UP_REQ_PRIMARY = Internal.createUniqueKey(JSignUpReq.SIGN_UP_REQ, DSL.name("KEY_SIGN_UP_REQ_PRIMARY"), new TableField[] { JSignUpReq.SIGN_UP_REQ.EMAIL }, true);
-    public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(JUser.USER, DSL.name("KEY_USER_PRIMARY"), new TableField[] { JUser.USER.EMAIL }, true);
+    public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(JHoliday.HOLIDAY, DSL.name("KEY_HOLIDAY_PRIMARY"), new TableField[] { JHoliday.HOLIDAY.COUNTRY, JHoliday.HOLIDAY.DATE }, true);
+    public static final UniqueKey<IxicRecord> KEY_IXIC_PRIMARY = Internal.createUniqueKey(JIxic.IXIC, DSL.name("KEY_IXIC_PRIMARY"), new TableField[] { JIxic.IXIC.REG_DATETIME }, true);
+    public static final UniqueKey<SpxRecord> KEY_SPX_PRIMARY = Internal.createUniqueKey(JSpx.SPX, DSL.name("KEY_SPX_PRIMARY"), new TableField[] { JSpx.SPX.REG_DATETIME }, true);
 }
