@@ -42,6 +42,7 @@ import java.util.Optional;
 @EnableAsync
 @EnableScheduling
 public class TelegramScheduler {
+    private final String SPRING_PROFILES_ACTIVE;
     private final String BOT_SLICK_TOKEN;
     private final String CHAT_SLICK_US_ID;
     private final String CHAT_SLICK_KR_ID;
@@ -59,8 +60,9 @@ public class TelegramScheduler {
     private final KospiRepository kospiRepository;
     private final KosdaqRepository kosdaqRepository;
 
-// TODO : 국가별 분리, refactoring
-    public TelegramScheduler(@Value("${telegram.bot.slick.token}") String BOT_SLICK_TOKEN,
+    // TODO : 국가별 분리, refactoring
+    public TelegramScheduler(@Value("${spring.profiles.active}") String SPRING_PROFILES_ACTIVE,
+                             @Value("${telegram.bot.slick.token}") String BOT_SLICK_TOKEN,
                              @Value("${telegram.chat.slick.us.id}") String CHAT_SLICK_US_ID,
                              @Value("${telegram.chat.slick.kr.id}") String CHAT_SLICK_KR_ID,
                              TelegramFeign telegramFeign,
@@ -72,6 +74,7 @@ public class TelegramScheduler {
                              HolidayRepository holidayRepository,
                              KospiRepository kospiRepository,
                              KosdaqRepository kosdaqRepository) {
+        this.SPRING_PROFILES_ACTIVE = SPRING_PROFILES_ACTIVE;
         this.BOT_SLICK_TOKEN = BOT_SLICK_TOKEN;
         this.CHAT_SLICK_US_ID = CHAT_SLICK_US_ID;
         this.CHAT_SLICK_KR_ID = CHAT_SLICK_KR_ID;
@@ -89,7 +92,11 @@ public class TelegramScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "0 15 18 * * 1-5", zone = Const.ZoneId.NEW_YORK)
-    public void sendFearAndGreedForUnitedStates() {
+    public void sendFearAndGreedForUnitedStates() throws Exception {
+        if (!"prod".equals(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
+
         if (holidayRepository.select("United States", LocalDate.now(ZoneId.of(Const.ZoneId.NEW_YORK))).isPresent()) {
             return;
         }
@@ -97,29 +104,26 @@ public class TelegramScheduler {
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID,
                 this.getFearAndGreedTelegramMessage())) {
             log.info(response.toString());
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
         }
-
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "0 0 8 * * *", zone = Const.ZoneId.NEW_YORK)
     public void sendEconomicEventListForUnitedStates() {
-        try {
-            ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.NEW_YORK))
-                    .minusDays(1)
-                    .withHour(7)
-                    .withMinute(49)
-                    .withSecond(0);
+        if (!"prod".equals(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
 
-            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID,
-                    this.getEconomicEventListTelegramMessage("United States", searchDateTime))) {
-                log.info(response.toString());
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.NEW_YORK))
+                .minusDays(1)
+                .withHour(7)
+                .withMinute(49)
+                .withSecond(0);
+
+        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID,
+                this.getEconomicEventListTelegramMessage("United States", searchDateTime))) {
+            log.info(response.toString());
         }
     }
 
@@ -127,112 +131,112 @@ public class TelegramScheduler {
     @Async
     @Scheduled(cron = "0 0 8 * * *", zone = Const.ZoneId.SEOUL)
     public void sendEconomicEventListForSouthKorea() {
-        try {
-            ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL))
-                    .minusDays(1)
-                    .withHour(7)
-                    .withMinute(49)
-                    .withSecond(0);
+        if (!"prod".equals(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
 
-            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID,
-                    this.getEconomicEventListTelegramMessage("South Korea", searchDateTime))) {
-                log.info(response.toString());
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL))
+                .minusDays(1)
+                .withHour(7)
+                .withMinute(49)
+                .withSecond(0);
+
+        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID,
+                this.getEconomicEventListTelegramMessage("South Korea", searchDateTime))) {
+            log.info(response.toString());
         }
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "0 20 18 * * 1-5", zone = Const.ZoneId.NEW_YORK)
-    public void sendIndicesForUnitedStates() {
+    public void sendIndicesForUnitedStates() throws Exception {
+        if (!"prod".equals(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
+
         if (holidayRepository.select("United States", LocalDate.now(ZoneId.of(Const.ZoneId.NEW_YORK))).isPresent()) {
             return;
         }
 
-        try {
-            Optional<Dji> dji = djiRepository.selectRecentOne();
-            Optional<Ixic> ixic = ixicRepository.selectRecentOne();
-            Optional<Spx> spx = spxRepository.selectRecentOne();
+        Optional<Dji> dji = djiRepository.selectRecentOne();
+        Optional<Ixic> ixic = ixicRepository.selectRecentOne();
+        Optional<Spx> spx = spxRepository.selectRecentOne();
 
-            StringBuilder telegramMessageBuilder = new StringBuilder();
+        StringBuilder telegramMessageBuilder = new StringBuilder();
 
-            if (dji.isPresent()) {
-                String titleIcon = dji.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        if (dji.isPresent()) {
+            String titleIcon = dji.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                telegramMessageBuilder.append(titleIcon + "<b><a href='" + dji.get().getUrl() + "'>" + dji.get().getTitle() + "</a></b>\n"
-                        + " - price : <b><u>" + dji.get().getPrice() + "</u></b>\n"
-                        + " - change : <b><u>" + dji.get().getPriceChange() + " (" + dji.get().getPriceChangePercent() + ")</u></b>\n");
-            }
+            telegramMessageBuilder.append(titleIcon + "<b><a href='" + dji.get().getUrl() + "'>" + dji.get().getTitle() + "</a></b>\n"
+                    + " - price : <b><u>" + dji.get().getPrice() + "</u></b>\n"
+                    + " - change : <b><u>" + dji.get().getPriceChange() + " (" + dji.get().getPriceChangePercent() + ")</u></b>\n");
+        }
 
-            if (spx.isPresent()) {
-                String titleIcon = spx.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        if (spx.isPresent()) {
+            String titleIcon = spx.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                telegramMessageBuilder.append(titleIcon + "<b><a href='" + spx.get().getUrl() + "'>" + spx.get().getTitle() + "</a></b>\n"
-                        + " - price : <b><u>" + spx.get().getPrice() + "</u></b>\n"
-                        + " - change : <b><u>" + spx.get().getPriceChange() + " (" + spx.get().getPriceChangePercent() + ")</u></b>\n");
-            }
+            telegramMessageBuilder.append(titleIcon + "<b><a href='" + spx.get().getUrl() + "'>" + spx.get().getTitle() + "</a></b>\n"
+                    + " - price : <b><u>" + spx.get().getPrice() + "</u></b>\n"
+                    + " - change : <b><u>" + spx.get().getPriceChange() + " (" + spx.get().getPriceChangePercent() + ")</u></b>\n");
+        }
 
-            if (ixic.isPresent()) {
-                String titleIcon = ixic.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        if (ixic.isPresent()) {
+            String titleIcon = ixic.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                telegramMessageBuilder.append(titleIcon + "<b><a href='" + ixic.get().getUrl() + "'>" + ixic.get().getTitle() + "</a></b>\n"
-                        + " - price : <b><u>" + ixic.get().getPrice() + "</u></b>\n"
-                        + " - change : <b><u>" + ixic.get().getPriceChange() + " (" + ixic.get().getPriceChangePercent() + ")</u></b>\n");
-            }
+            telegramMessageBuilder.append(titleIcon + "<b><a href='" + ixic.get().getUrl() + "'>" + ixic.get().getTitle() + "</a></b>\n"
+                    + " - price : <b><u>" + ixic.get().getPrice() + "</u></b>\n"
+                    + " - change : <b><u>" + ixic.get().getPriceChange() + " (" + ixic.get().getPriceChangePercent() + ")</u></b>\n");
+        }
 
-            if (telegramMessageBuilder.isEmpty()) {
-                throw new Exception("telegramMessageBuilder is Empty");
-            }
+        if (telegramMessageBuilder.isEmpty()) {
+            throw new Exception("telegramMessageBuilder is Empty");
+        }
 
-            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID, telegramMessageBuilder.toString())) {
-                log.info(response.toString());
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID, telegramMessageBuilder.toString())) {
+            log.info(response.toString());
         }
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "0 20 18 * * 1-5", zone = Const.ZoneId.SEOUL)
-    public void sendIndicesForSouthKorea() {
+    public void sendIndicesForSouthKorea() throws Exception {
+        if (!"prod".equals(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
+
         if (holidayRepository.select("South Korea", LocalDate.now(ZoneId.of(Const.ZoneId.SEOUL))).isPresent()) {
             return;
         }
 
-        try {
-            Optional<Kospi> kospi = kospiRepository.selectRecentOne();
-            Optional<Kosdaq> kosdaq = kosdaqRepository.selectRecentOne();
+        Optional<Kospi> kospi = kospiRepository.selectRecentOne();
+        Optional<Kosdaq> kosdaq = kosdaqRepository.selectRecentOne();
 
-            StringBuilder telegramMessageBuilder = new StringBuilder();
+        StringBuilder telegramMessageBuilder = new StringBuilder();
 
-            if (kospi.isPresent()) {
-                String titleIcon = kospi.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        if (kospi.isPresent()) {
+            String titleIcon = kospi.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                telegramMessageBuilder.append(titleIcon + "<b><a href='" + kospi.get().getUrl() + "'>" + kospi.get().getTitle() + "</a></b>\n"
-                        + " - price : <b><u>" + kospi.get().getPrice() + "</u></b>\n"
-                        + " - change : <b><u>" + kospi.get().getPriceChange() + " (" + kospi.get().getPriceChangePercent() + ")</u></b>\n");
-            }
+            telegramMessageBuilder.append(titleIcon + "<b><a href='" + kospi.get().getUrl() + "'>" + kospi.get().getTitle() + "</a></b>\n"
+                    + " - price : <b><u>" + kospi.get().getPrice() + "</u></b>\n"
+                    + " - change : <b><u>" + kospi.get().getPriceChange() + " (" + kospi.get().getPriceChangePercent() + ")</u></b>\n");
+        }
 
-            if (kosdaq.isPresent()) {
-                String titleIcon = kosdaq.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
+        if (kosdaq.isPresent()) {
+            String titleIcon = kosdaq.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART;
 
-                telegramMessageBuilder.append(titleIcon + "<b><a href='" + kosdaq.get().getUrl() + "'>" + kosdaq.get().getTitle() + "</a></b>\n"
-                        + " - price : <b><u>" + kosdaq.get().getPrice() + "</u></b>\n"
-                        + " - change : <b><u>" + kosdaq.get().getPriceChange() + " (" + kosdaq.get().getPriceChangePercent() + ")</u></b>\n");
-            }
+            telegramMessageBuilder.append(titleIcon + "<b><a href='" + kosdaq.get().getUrl() + "'>" + kosdaq.get().getTitle() + "</a></b>\n"
+                    + " - price : <b><u>" + kosdaq.get().getPrice() + "</u></b>\n"
+                    + " - change : <b><u>" + kosdaq.get().getPriceChange() + " (" + kosdaq.get().getPriceChangePercent() + ")</u></b>\n");
+        }
 
-            if (telegramMessageBuilder.isEmpty()) {
-                throw new Exception("telegramMessageBuilder is Empty");
-            }
+        if (telegramMessageBuilder.isEmpty()) {
+            throw new Exception("telegramMessageBuilder is Empty");
+        }
 
-            try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, telegramMessageBuilder.toString())) {
-                log.info(response.toString());
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, telegramMessageBuilder.toString())) {
+            log.info(response.toString());
         }
     }
 
