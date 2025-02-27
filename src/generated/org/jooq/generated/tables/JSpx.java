@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.JSlickProd;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.SpxRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JSpx extends TableImpl<SpxRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.SPX</code>
+     * The reference instance of <code>slick_prod.SPX</code>
      */
     public static final JSpx SPX = new JSpx();
 
@@ -50,47 +50,47 @@ public class JSpx extends TableImpl<SpxRecord> {
     }
 
     /**
-     * The column <code>slick_dev.SPX.TITLE</code>.
+     * The column <code>slick_prod.SPX.TITLE</code>.
      */
     public final TableField<SpxRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.PRICE</code>.
+     * The column <code>slick_prod.SPX.PRICE</code>.
      */
     public final TableField<SpxRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.PRICE_CHANGE</code>.
+     * The column <code>slick_prod.SPX.PRICE_CHANGE</code>.
      */
     public final TableField<SpxRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.PRICE_CHANGE_PERCENT</code>.
+     * The column <code>slick_prod.SPX.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<SpxRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.URL</code>.
+     * The column <code>slick_prod.SPX.URL</code>.
      */
     public final TableField<SpxRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.REG_DATETIME</code>.
+     * The column <code>slick_prod.SPX.REG_DATETIME</code>.
      */
     public final TableField<SpxRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.REG_ID</code>.
+     * The column <code>slick_prod.SPX.REG_ID</code>.
      */
     public final TableField<SpxRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.UPT_DATETIME</code>.
+     * The column <code>slick_prod.SPX.UPT_DATETIME</code>.
      */
     public final TableField<SpxRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.SPX.UPT_ID</code>.
+     * The column <code>slick_prod.SPX.UPT_ID</code>.
      */
     public final TableField<SpxRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -103,21 +103,21 @@ public class JSpx extends TableImpl<SpxRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.SPX</code> table reference
+     * Create an aliased <code>slick_prod.SPX</code> table reference
      */
     public JSpx(String alias) {
         this(DSL.name(alias), SPX);
     }
 
     /**
-     * Create an aliased <code>slick_dev.SPX</code> table reference
+     * Create an aliased <code>slick_prod.SPX</code> table reference
      */
     public JSpx(Name alias) {
         this(alias, SPX);
     }
 
     /**
-     * Create a <code>slick_dev.SPX</code> table reference
+     * Create a <code>slick_prod.SPX</code> table reference
      */
     public JSpx() {
         this(DSL.name("SPX"), null);
@@ -125,7 +125,7 @@ public class JSpx extends TableImpl<SpxRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : JSlickProd.SLICK_PROD;
     }
 
     @Override

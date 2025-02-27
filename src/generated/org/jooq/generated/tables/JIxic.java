@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.JSlickProd;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.IxicRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JIxic extends TableImpl<IxicRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.IXIC</code>
+     * The reference instance of <code>slick_prod.IXIC</code>
      */
     public static final JIxic IXIC = new JIxic();
 
@@ -50,47 +50,47 @@ public class JIxic extends TableImpl<IxicRecord> {
     }
 
     /**
-     * The column <code>slick_dev.IXIC.TITLE</code>.
+     * The column <code>slick_prod.IXIC.TITLE</code>.
      */
     public final TableField<IxicRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.PRICE</code>.
+     * The column <code>slick_prod.IXIC.PRICE</code>.
      */
     public final TableField<IxicRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.PRICE_CHANGE</code>.
+     * The column <code>slick_prod.IXIC.PRICE_CHANGE</code>.
      */
     public final TableField<IxicRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.PRICE_CHANGE_PERCENT</code>.
+     * The column <code>slick_prod.IXIC.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<IxicRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.URL</code>.
+     * The column <code>slick_prod.IXIC.URL</code>.
      */
     public final TableField<IxicRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.REG_DATETIME</code>.
+     * The column <code>slick_prod.IXIC.REG_DATETIME</code>.
      */
     public final TableField<IxicRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.REG_ID</code>.
+     * The column <code>slick_prod.IXIC.REG_ID</code>.
      */
     public final TableField<IxicRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.UPT_DATETIME</code>.
+     * The column <code>slick_prod.IXIC.UPT_DATETIME</code>.
      */
     public final TableField<IxicRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.IXIC.UPT_ID</code>.
+     * The column <code>slick_prod.IXIC.UPT_ID</code>.
      */
     public final TableField<IxicRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -103,21 +103,21 @@ public class JIxic extends TableImpl<IxicRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.IXIC</code> table reference
+     * Create an aliased <code>slick_prod.IXIC</code> table reference
      */
     public JIxic(String alias) {
         this(DSL.name(alias), IXIC);
     }
 
     /**
-     * Create an aliased <code>slick_dev.IXIC</code> table reference
+     * Create an aliased <code>slick_prod.IXIC</code> table reference
      */
     public JIxic(Name alias) {
         this(alias, IXIC);
     }
 
     /**
-     * Create a <code>slick_dev.IXIC</code> table reference
+     * Create a <code>slick_prod.IXIC</code> table reference
      */
     public JIxic() {
         this(DSL.name("IXIC"), null);
@@ -125,7 +125,7 @@ public class JIxic extends TableImpl<IxicRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : JSlickProd.SLICK_PROD;
     }
 
     @Override
