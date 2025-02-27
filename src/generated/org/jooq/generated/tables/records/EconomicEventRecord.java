@@ -24,14 +24,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.ID</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.ID</code>.
      */
     public void setId(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.ID</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.ID</code>.
      */
     @NotNull
     @Size(max = 10)
@@ -40,14 +40,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.DATETIME</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.DATETIME</code>.
      */
     public void setDatetime(LocalDateTime value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.DATETIME</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getDatetime() {
@@ -55,14 +55,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.NAME</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.NAME</code>.
      */
     public void setName(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.NAME</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.NAME</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -71,14 +71,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.COUNTRY</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.COUNTRY</code>.
      */
     public void setCountry(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.COUNTRY</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.COUNTRY</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -87,14 +87,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.IMPORTANCE</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     public void setImportance(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.IMPORTANCE</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     @NotNull
     @Size(max = 10)
@@ -103,14 +103,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.ACTUAL</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.ACTUAL</code>.
      */
     public void setActual(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.ACTUAL</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.ACTUAL</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -119,14 +119,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.FORECAST</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.FORECAST</code>.
      */
     public void setForecast(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.FORECAST</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.FORECAST</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -135,14 +135,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.PREVIOUS</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     public void setPrevious(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.PREVIOUS</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -151,14 +151,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -166,14 +166,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.REG_ID</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.REG_ID</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -182,14 +182,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(10, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -197,14 +197,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.UPT_ID</code>.
+     * Setter for <code>slick_dev.ECONOMIC_EVENT.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(11, value);
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.UPT_ID</code>.
+     * Getter for <code>slick_dev.ECONOMIC_EVENT.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)

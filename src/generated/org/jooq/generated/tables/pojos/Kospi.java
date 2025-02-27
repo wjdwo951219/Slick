@@ -67,7 +67,7 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.TITLE</code>.
+     * Getter for <code>slick_dev.KOSPI.TITLE</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -76,14 +76,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.TITLE</code>.
+     * Setter for <code>slick_dev.KOSPI.TITLE</code>.
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.PRICE</code>.
+     * Getter for <code>slick_dev.KOSPI.PRICE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -92,14 +92,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.PRICE</code>.
+     * Setter for <code>slick_dev.KOSPI.PRICE</code>.
      */
     public void setPrice(String price) {
         this.price = price;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.PRICE_CHANGE</code>.
+     * Getter for <code>slick_dev.KOSPI.PRICE_CHANGE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -108,14 +108,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.PRICE_CHANGE</code>.
+     * Setter for <code>slick_dev.KOSPI.PRICE_CHANGE</code>.
      */
     public void setPriceChange(String priceChange) {
         this.priceChange = priceChange;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.PRICE_CHANGE_PERCENT</code>.
+     * Getter for <code>slick_dev.KOSPI.PRICE_CHANGE_PERCENT</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -124,14 +124,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.PRICE_CHANGE_PERCENT</code>.
+     * Setter for <code>slick_dev.KOSPI.PRICE_CHANGE_PERCENT</code>.
      */
     public void setPriceChangePercent(String priceChangePercent) {
         this.priceChangePercent = priceChangePercent;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.URL</code>.
+     * Getter for <code>slick_dev.KOSPI.URL</code>.
      */
     @NotNull
     @Size(max = 500)
@@ -140,14 +140,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.URL</code>.
+     * Setter for <code>slick_dev.KOSPI.URL</code>.
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.REG_DATETIME</code>.
+     * Getter for <code>slick_dev.KOSPI.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -155,14 +155,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.REG_DATETIME</code>.
+     * Setter for <code>slick_dev.KOSPI.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.REG_ID</code>.
+     * Getter for <code>slick_dev.KOSPI.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -171,14 +171,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.REG_ID</code>.
+     * Setter for <code>slick_dev.KOSPI.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.UPT_DATETIME</code>.
+     * Getter for <code>slick_dev.KOSPI.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -186,14 +186,14 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.UPT_DATETIME</code>.
+     * Setter for <code>slick_dev.KOSPI.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.KOSPI.UPT_ID</code>.
+     * Getter for <code>slick_dev.KOSPI.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -202,7 +202,7 @@ public class Kospi implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.KOSPI.UPT_ID</code>.
+     * Setter for <code>slick_dev.KOSPI.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;
