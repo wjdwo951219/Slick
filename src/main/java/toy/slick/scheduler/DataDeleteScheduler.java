@@ -12,6 +12,8 @@ import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
 import toy.slick.repository.mariadb.IxicRepository;
+import toy.slick.repository.mariadb.KosdaqRepository;
+import toy.slick.repository.mariadb.KospiRepository;
 import toy.slick.repository.mariadb.SpxRepository;
 
 import java.time.LocalDateTime;
@@ -29,18 +31,24 @@ public class DataDeleteScheduler {
     private final DjiRepository djiRepository;
     private final IxicRepository ixicRepository;
     private final SpxRepository spxRepository;
+    private final KospiRepository kospiRepository;
+    private final KosdaqRepository kosdaqRepository;
 
     public DataDeleteScheduler(EconomicEventRepository economicEventRepository,
                                FearAndGreedRepository fearAndGreedRepository,
                                DjiRepository djiRepository,
                                IxicRepository ixicRepository,
-                               SpxRepository spxRepository) {
+                               SpxRepository spxRepository,
+                               KospiRepository kospiRepository,
+                               KosdaqRepository kosdaqRepository) {
         this.economicEventRepository = economicEventRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
         this.djiRepository = djiRepository;
         this.ixicRepository = ixicRepository;
 
         this.spxRepository = spxRepository;
+        this.kospiRepository = kospiRepository;
+        this.kosdaqRepository = kosdaqRepository;
     }
 
     @TimeLogAspect.TimeLog
@@ -104,6 +112,40 @@ public class DataDeleteScheduler {
                     .toLocalDateTime();
 
             int deleteCnt = spxRepository.delete(untilDateTime);
+
+            log.info("deleteCnt : " + deleteCnt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Scheduled(cron = "4 44 4 * * *", zone = Const.ZoneId.SEOUL)
+    public void deleteKospi() {
+        try {
+            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusDays(2)
+                    .toLocalDateTime();
+
+            int deleteCnt = kospiRepository.delete(untilDateTime);
+
+            log.info("deleteCnt : " + deleteCnt);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Scheduled(cron = "4 54 4 * * *", zone = Const.ZoneId.SEOUL)
+    public void deleteKosdaq() {
+        try {
+            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                    .minusDays(2)
+                    .toLocalDateTime();
+
+            int deleteCnt = kosdaqRepository.delete(untilDateTime);
 
             log.info("deleteCnt : " + deleteCnt);
         } catch (Exception e) {

@@ -22,5 +22,4 @@ public class SlickApplication {
     public void setTimeZone() {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneId.of(Const.ZoneId.UTC)));
     }
-
 }

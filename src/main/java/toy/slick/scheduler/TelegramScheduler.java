@@ -299,14 +299,14 @@ public class TelegramScheduler {
 
         if (countryEconomicEventListMap.isEmpty()) {
             return Const.CHECK_MARK
-                    + "<b><a href='https://m.investing.com/economic-calendar/'>Economic Index List</a> is Empty</b>";
+                    + "<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a> is Empty</b>";
         }
 
         StringBuilder messageBuilder = new StringBuilder();
 
         messageBuilder
                 .append(Const.CHECK_MARK)
-                .append("<b><a href='https://m.investing.com/economic-calendar/'>Economic Index List</a></b>")
+                .append("<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a></b>")
                 .append("\n")
                 .append(" : Actual | Forecast | Previous")
                 .append("\n")

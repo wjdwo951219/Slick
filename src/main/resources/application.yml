@@ -29,6 +29,7 @@ logging:
   level:
     toy.slick.feign: debug
     org.jooq.tools.LoggerListener: debug
+    org.jooq.Constants: off
 
 telegram:
   bot:
