@@ -4,12 +4,14 @@
 package org.jooq.generated;
 
 
-import org.jooq.generated.tables.JApiKey;
+import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
-import org.jooq.generated.tables.JEconomicIndex;
 import org.jooq.generated.tables.JFearAndGreed;
-import org.jooq.generated.tables.JSignUpReq;
-import org.jooq.generated.tables.JUser;
+import org.jooq.generated.tables.JHoliday;
+import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JKosdaq;
+import org.jooq.generated.tables.JKospi;
+import org.jooq.generated.tables.JSpx;
 
 
 /**
@@ -19,9 +21,9 @@ import org.jooq.generated.tables.JUser;
 public class Tables {
 
     /**
-     * The table <code>slick_prod.API_KEY</code>.
+     * The table <code>slick_prod.DJI</code>.
      */
-    public static final JApiKey API_KEY = JApiKey.API_KEY;
+    public static final JDji DJI = JDji.DJI;
 
     /**
      * The table <code>slick_prod.ECONOMIC_EVENT</code>.
@@ -29,22 +31,32 @@ public class Tables {
     public static final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_prod.ECONOMIC_INDEX</code>.
-     */
-    public static final JEconomicIndex ECONOMIC_INDEX = JEconomicIndex.ECONOMIC_INDEX;
-
-    /**
      * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>slick_prod.SIGN_UP_REQ</code>.
+     * The table <code>slick_prod.HOLIDAY</code>.
      */
-    public static final JSignUpReq SIGN_UP_REQ = JSignUpReq.SIGN_UP_REQ;
+    public static final JHoliday HOLIDAY = JHoliday.HOLIDAY;
 
     /**
-     * The table <code>slick_prod.USER</code>.
+     * The table <code>slick_prod.IXIC</code>.
      */
-    public static final JUser USER = JUser.USER;
+    public static final JIxic IXIC = JIxic.IXIC;
+
+    /**
+     * The table <code>slick_prod.KOSDAQ</code>.
+     */
+    public static final JKosdaq KOSDAQ = JKosdaq.KOSDAQ;
+
+    /**
+     * The table <code>slick_prod.KOSPI</code>.
+     */
+    public static final JKospi KOSPI = JKospi.KOSPI;
+
+    /**
+     * The table <code>slick_prod.SPX</code>.
+     */
+    public static final JSpx SPX = JSpx.SPX;
 }

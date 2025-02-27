@@ -27,10 +27,11 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         super(dslContext);
     }
 
-    public List<EconomicEvent> select(@NonNull LocalDateTime startDateTime, @NonNull LocalDateTime endDateTime) {
+    public List<EconomicEvent> select(@NonNull String country, @NonNull LocalDateTime startDateTime, @NonNull LocalDateTime endDateTime) {
         SelectConditionStep<Record> query = this.querySelect(
                 tEconomicEvent,
-                tEconomicEvent.DATETIME.greaterOrEqual(startDateTime)
+                tEconomicEvent.COUNTRY.equal(country)
+                        .and(tEconomicEvent.DATETIME.greaterOrEqual(startDateTime))
                         .and(tEconomicEvent.DATETIME.lessThan(endDateTime)));
 
         return query.fetchInto(EconomicEvent.class);

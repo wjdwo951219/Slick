@@ -5,12 +5,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Component;
 import toy.slick.feign.inheritable.FeignResponseReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
+import toy.slick.feign.investing.vo.response.Holiday;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.Queue;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -35,6 +46,44 @@ public class InvestingFeignReader implements FeignResponseReader {
                 .url(url)
                 .title(title)
                 .build());
+    }
+
+    public List<Holiday> getHolidayList(Response feignResponse) throws IOException {
+        String responseBody = this.getResponseBody(feignResponse);
+
+        Queue<Element> rowQueue = new LinkedList<>(Jsoup.parse(responseBody)
+                .getElementById("holidayCalendarData")
+                .getElementsByTag("tbody").first()
+                .getElementsByTag("tr"));
+
+        List<Holiday> holidayList = new ArrayList<>();
+
+        while (!rowQueue.isEmpty()) {
+            Element firstRow = rowQueue.poll();
+
+            String date = firstRow.getElementsByClass("date bold center").first().text();
+
+            Set<String> countrySet = new HashSet<>();
+
+            countrySet.add(firstRow.getElementsByClass("bold cur").first().text());
+
+            while (!rowQueue.isEmpty() && StringUtils.isBlank(rowQueue.peek().getElementsByClass("date bold center").first().text())) {
+                Element nextRow = rowQueue.poll();
+
+                if (nextRow != null) {
+                    countrySet.add(nextRow.getElementsByClass("bold cur").first().text());
+                }
+            }
+
+            for (String country : countrySet) {
+                holidayList.add(Holiday.builder()
+                        .date(LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)))
+                        .country(country)
+                        .build());
+            }
+        }
+
+        return holidayList;
     }
 
     private String getPrice(Document document) {
