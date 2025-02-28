@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
 import toy.slick.common.EnvUtils;
+import toy.slick.common.MsgUtils;
 import toy.slick.feign.telegram.TelegramFeign;
 import toy.slick.service.TelegramService;
 
@@ -63,7 +64,7 @@ public class TelegramScheduler_KR {
         String message = telegramService.getEconomicEventListMessage(Const.Country.KR, searchDateTime, searchDateTime.plusDays(1));
 
         if (StringUtils.isBlank(message)) {
-            throw new Exception("message is Blank");
+            throw new Exception(MsgUtils.blankMsg(message));
         }
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, message)) {
@@ -75,7 +76,7 @@ public class TelegramScheduler_KR {
 
     @TimeLogAspect.TimeLog
     @Async
-    @Scheduled(cron = "0 20 18 * * 1-5", zone = Const.ZoneId.SEOUL)
+    @Scheduled(cron = "*/10 * * * * *", zone = Const.ZoneId.SEOUL)
     public void sendIndices() throws Exception {
         if (EnvUtils.isNotProd(SPRING_PROFILES_ACTIVE)) {
             return;
@@ -91,7 +92,7 @@ public class TelegramScheduler_KR {
         String message = kospiMessage + kosdaqMessage;
 
         if (StringUtils.isBlank(message)) {
-            throw new Exception("message is Blank");
+            throw new Exception(MsgUtils.blankMsg(message));
         }
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, message)) {

@@ -11,6 +11,7 @@ import org.jooq.generated.tables.pojos.Kospi;
 import org.jooq.generated.tables.pojos.Spx;
 import org.springframework.stereotype.Service;
 import toy.slick.common.Const;
+import toy.slick.common.MsgUtils;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
@@ -156,7 +157,7 @@ public class TelegramService {
         Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOne();
 
         if (fearAndGreed.isEmpty()) {
-            throw new Exception("fearAndGreed is Empty");
+            throw new Exception(MsgUtils.emptyMsg(fearAndGreed));
         }
 
         String rating = fearAndGreed.get().getRating();

@@ -111,7 +111,7 @@ public class DataSaveScheduler {
                     .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
 
             if (CollectionUtils.isEmpty(economicEventMap.keySet())) {
-                throw new Exception("economicEventMap.keySet() is Empty");
+                return;
             }
 
             int deleteCnt = economicEventRepository.delete(economicEventMap.keySet());
@@ -136,7 +136,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != economicEventMap.values().size()) {
-                throw new Exception(MsgUtils.insertCntMsg(insertCnt));
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, economicEventMap.values().size()));
             }
         }
     }
@@ -161,7 +161,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception(MsgUtils.insertCntMsg(insertCnt));
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -175,7 +175,7 @@ public class DataSaveScheduler {
             Optional<EconomicIndex> dji = investingFeignReader.getEconomicIndex(response);
 
             if (dji.isEmpty()) {
-                throw new Exception("dji is Empty");
+                throw new Exception(MsgUtils.emptyMsg(dji));
             }
 
             int insertCnt = djiRepository.insert(
@@ -189,7 +189,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -203,7 +203,7 @@ public class DataSaveScheduler {
             Optional<EconomicIndex> spx = investingFeignReader.getEconomicIndex(response);
 
             if (spx.isEmpty()) {
-                throw new Exception("spx is Empty");
+                throw new Exception(MsgUtils.emptyMsg(spx));
             }
 
             int insertCnt = spxRepository.insert(
@@ -217,7 +217,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -231,7 +231,7 @@ public class DataSaveScheduler {
             Optional<EconomicIndex> ixic = investingFeignReader.getEconomicIndex(response);
 
             if (ixic.isEmpty()) {
-                throw new Exception("ixic is Empty");
+                throw new Exception(MsgUtils.emptyMsg(ixic));
             }
 
             int insertCnt = ixicRepository.insert(
@@ -245,7 +245,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -259,7 +259,7 @@ public class DataSaveScheduler {
             Optional<EconomicIndex> kospi = investingFeignReader.getEconomicIndex(response);
 
             if (kospi.isEmpty()) {
-                throw new Exception("kospi is Empty");
+                throw new Exception(MsgUtils.emptyMsg(kospi));
             }
 
             int insertCnt = kospiRepository.insert(
@@ -273,7 +273,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -287,7 +287,7 @@ public class DataSaveScheduler {
             Optional<EconomicIndex> kosdaq = investingFeignReader.getEconomicIndex(response);
 
             if (kosdaq.isEmpty()) {
-                throw new Exception("kosdaq is Empty");
+                throw new Exception(MsgUtils.emptyMsg(kosdaq));
             }
 
             int insertCnt = kosdaqRepository.insert(
@@ -301,7 +301,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, 1));
             }
         }
     }
@@ -330,7 +330,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != holidayList.size()) {
-                throw new Exception("insertCnt != holidayList.size()");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, holidayList.size()));
             }
         }
     }
