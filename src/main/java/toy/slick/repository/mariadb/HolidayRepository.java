@@ -65,14 +65,6 @@ public class HolidayRepository extends QueryCRUD<HolidayRecord> {
         return Optional.ofNullable(query.fetchOneInto(Holiday.class));
     }
 
-    public int delete(@NonNull LocalDate untilDate) {
-        DeleteConditionStep<HolidayRecord> query = this.queryDelete(
-                tHoliday,
-                tHoliday.DATE.lessThan(untilDate));
-
-        return query.execute();
-    }
-
     public int deleteAll() {
         DeleteConditionStep<HolidayRecord> query = this.queryDelete(
                 tHoliday,

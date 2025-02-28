@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
+import toy.slick.common.MsgUtils;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
@@ -61,7 +62,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -74,7 +75,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = djiRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -87,7 +88,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = ixicRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -100,7 +101,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = spxRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -113,7 +114,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = kospiRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -126,7 +127,7 @@ public class DataDeleteScheduler {
 
         int deleteCnt = kosdaqRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
@@ -139,6 +140,6 @@ public class DataDeleteScheduler {
 
         int deleteCnt = economicEventRepository.delete(untilDateTime);
 
-        log.info("deleteCnt : " + deleteCnt);
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import toy.slick.aspect.TimeLogAspect;
+import toy.slick.common.MsgUtils;
 import toy.slick.feign.cnn.CnnFeign;
 import toy.slick.feign.cnn.reader.CnnFeignReader;
 import toy.slick.feign.cnn.vo.response.FearAndGreed;
@@ -78,8 +79,8 @@ public class DataSaveScheduler {
                              DjiRepository djiRepository,
                              IxicRepository ixicRepository,
                              SpxRepository spxRepository,
-                             HolidayRepository holidayRepository, 
-                             KospiRepository kospiRepository, 
+                             HolidayRepository holidayRepository,
+                             KospiRepository kospiRepository,
                              KosdaqRepository kosdaqRepository) {
         this.cnnFeign = cnnFeign;
         this.economicCalendarFeign = economicCalendarFeign;
@@ -113,7 +114,9 @@ public class DataSaveScheduler {
                 throw new Exception("economicEventMap.keySet() is Empty");
             }
 
-            economicEventRepository.delete(economicEventMap.keySet());
+            int deleteCnt = economicEventRepository.delete(economicEventMap.keySet());
+
+            log.info(MsgUtils.deleteCntMsg(deleteCnt));
 
             int insertCnt = economicEventRepository.insertBatch(
                     economicEventMap.values()
@@ -133,7 +136,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != economicEventMap.values().size()) {
-                throw new Exception("insertCnt != economicEventMap.values().size()");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt));
             }
         }
     }
@@ -147,7 +150,7 @@ public class DataSaveScheduler {
             Optional<FearAndGreed> fearAndGreed = cnnFeignReader.getFearAndGreed(response);
 
             if (fearAndGreed.isEmpty()) {
-                throw new Exception("fearAndGreed is Empty"); // TODO: Exception message -> property
+                throw new Exception(MsgUtils.emptyMsg(fearAndGreed));
             }
 
             int insertCnt = fearAndGreedRepository.insert(
@@ -158,7 +161,7 @@ public class DataSaveScheduler {
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             if (insertCnt != 1) {
-                throw new Exception("insertCnt != 1");
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt));
             }
         }
     }
@@ -309,7 +312,9 @@ public class DataSaveScheduler {
     @Scheduled(cron = "7 7 7 * * *")
     public void saveHoliday() throws Exception {
         try (Response response = investingFeign.getHolidayCalendar()) {
-            holidayRepository.deleteAll();
+            int deleteCnt = holidayRepository.deleteAll();
+
+            log.info(MsgUtils.deleteCntMsg(deleteCnt));
 
             List<Holiday> holidayList = investingFeignReader.getHolidayList(response);
 

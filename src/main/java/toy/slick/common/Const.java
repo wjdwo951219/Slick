@@ -1,7 +1,5 @@
 package toy.slick.common;
 
-import lombok.Getter;
-
 public interface Const {
     String FACE_SCREAMING_IN_FEAR = "\uD83D\uDE31"; // 😱
     String FEARFUL_FACE = "\uD83D\uDE28"; // 😨
@@ -17,5 +15,10 @@ public interface Const {
         String NEW_YORK = "America/New_York";
         String SEOUL = "Asia/Seoul";
         String UTC = "UTC";
+    }
+
+    interface Country {
+        String US = "United States";
+        String KR = "South Korea";
     }
 }
