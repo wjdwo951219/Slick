@@ -24,14 +24,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.IXIC.TITLE</code>.
+     * Setter for <code>slick_prod.IXIC.TITLE</code>.
      */
     public void setTitle(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.TITLE</code>.
+     * Getter for <code>slick_prod.IXIC.TITLE</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -40,14 +40,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.PRICE</code>.
+     * Setter for <code>slick_prod.IXIC.PRICE</code>.
      */
     public void setPrice(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.PRICE</code>.
+     * Getter for <code>slick_prod.IXIC.PRICE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -56,14 +56,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.PRICE_CHANGE</code>.
+     * Setter for <code>slick_prod.IXIC.PRICE_CHANGE</code>.
      */
     public void setPriceChange(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.PRICE_CHANGE</code>.
+     * Getter for <code>slick_prod.IXIC.PRICE_CHANGE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -72,14 +72,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.PRICE_CHANGE_PERCENT</code>.
+     * Setter for <code>slick_prod.IXIC.PRICE_CHANGE_PERCENT</code>.
      */
     public void setPriceChangePercent(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.PRICE_CHANGE_PERCENT</code>.
+     * Getter for <code>slick_prod.IXIC.PRICE_CHANGE_PERCENT</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -88,14 +88,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.URL</code>.
+     * Setter for <code>slick_prod.IXIC.URL</code>.
      */
     public void setUrl(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.URL</code>.
+     * Getter for <code>slick_prod.IXIC.URL</code>.
      */
     @NotNull
     @Size(max = 500)
@@ -104,14 +104,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.REG_DATETIME</code>.
+     * Setter for <code>slick_prod.IXIC.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.REG_DATETIME</code>.
+     * Getter for <code>slick_prod.IXIC.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -119,14 +119,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.REG_ID</code>.
+     * Setter for <code>slick_prod.IXIC.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.REG_ID</code>.
+     * Getter for <code>slick_prod.IXIC.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -135,14 +135,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.UPT_DATETIME</code>.
+     * Setter for <code>slick_prod.IXIC.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.UPT_DATETIME</code>.
+     * Getter for <code>slick_prod.IXIC.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -150,14 +150,14 @@ public class IxicRecord extends UpdatableRecordImpl<IxicRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.IXIC.UPT_ID</code>.
+     * Setter for <code>slick_prod.IXIC.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>slick_dev.IXIC.UPT_ID</code>.
+     * Getter for <code>slick_prod.IXIC.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)

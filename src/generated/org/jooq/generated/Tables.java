@@ -15,48 +15,48 @@ import org.jooq.generated.tables.JSpx;
 
 
 /**
- * Convenience access to all tables in slick_dev.
+ * Convenience access to all tables in slick_prod.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>slick_dev.DJI</code>.
+     * The table <code>slick_prod.DJI</code>.
      */
     public static final JDji DJI = JDji.DJI;
 
     /**
-     * The table <code>slick_dev.ECONOMIC_EVENT</code>.
+     * The table <code>slick_prod.ECONOMIC_EVENT</code>.
      */
     public static final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_dev.FEAR_AND_GREED</code>.
+     * The table <code>slick_prod.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>slick_dev.HOLIDAY</code>.
+     * The table <code>slick_prod.HOLIDAY</code>.
      */
     public static final JHoliday HOLIDAY = JHoliday.HOLIDAY;
 
     /**
-     * The table <code>slick_dev.IXIC</code>.
+     * The table <code>slick_prod.IXIC</code>.
      */
     public static final JIxic IXIC = JIxic.IXIC;
 
     /**
-     * The table <code>slick_dev.KOSDAQ</code>.
+     * The table <code>slick_prod.KOSDAQ</code>.
      */
     public static final JKosdaq KOSDAQ = JKosdaq.KOSDAQ;
 
     /**
-     * The table <code>slick_dev.KOSPI</code>.
+     * The table <code>slick_prod.KOSPI</code>.
      */
     public static final JKospi KOSPI = JKospi.KOSPI;
 
     /**
-     * The table <code>slick_dev.SPX</code>.
+     * The table <code>slick_prod.SPX</code>.
      */
     public static final JSpx SPX = JSpx.SPX;
 }
