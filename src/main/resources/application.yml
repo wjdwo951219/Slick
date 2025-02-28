@@ -47,3 +47,6 @@ telegram:
       kr:
         id: ${CHAT_SLICK_KR_ID}
 
+controller:
+  key: ${CONTROLLER_KEY}
+

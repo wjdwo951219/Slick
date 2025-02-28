@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
+import toy.slick.common.MsgUtils;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
@@ -55,118 +56,90 @@ public class DataDeleteScheduler {
     @Async
     @Scheduled(cron = "4 4 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteFearAndGreed() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
+        int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 14 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteDji() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = djiRepository.delete(untilDateTime);
+        int deleteCnt = djiRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 24 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteIxic() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = ixicRepository.delete(untilDateTime);
+        int deleteCnt = ixicRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 34 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteSpx() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = spxRepository.delete(untilDateTime);
+        int deleteCnt = spxRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 44 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteKospi() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = kospiRepository.delete(untilDateTime);
+        int deleteCnt = kospiRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 54 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteKosdaq() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(2)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .toLocalDateTime();
 
-            int deleteCnt = kosdaqRepository.delete(untilDateTime);
+        int deleteCnt = kosdaqRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 5 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteEconomicEvent() {
-        try {
-            LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                    .minusDays(7)
-                    .toLocalDateTime();
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(7)
+                .toLocalDateTime();
 
-            int deleteCnt = economicEventRepository.delete(untilDateTime);
+        int deleteCnt = economicEventRepository.delete(untilDateTime);
 
-            log.info("deleteCnt : " + deleteCnt);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
+        log.info(MsgUtils.deleteCntMsg(deleteCnt));
     }
 }
