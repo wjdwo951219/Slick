@@ -252,13 +252,13 @@ public class TelegramScheduler {
         StringBuilder messageBuilder = new StringBuilder();
 
         messageBuilder
-                .append("Current <a href='https://www.cnn.com/markets/fear-and-greed'>CNN Fear & Greed Index</a> Information").append("\n")
+                .append("Current <b><a href='https://www.cnn.com/markets/fear-and-greed'>CNN Fear & Greed Index</a></b> Information").append("\n")
                 .append(" - Rating : <b><u>")
                 .append(rating)
-                .append("</b></u>\n")
+                .append("</u></b>\n")
                 .append(" - Score : <b><u>")
                 .append(String.format("%.2f", score))
-                .append("</b></u> ");
+                .append("</u></b> ");
 
         if (score < 25) {
             messageBuilder.append(Const.FACE_SCREAMING_IN_FEAR);
