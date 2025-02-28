@@ -165,7 +165,7 @@ public class TelegramService {
         StringBuilder messageBuilder = new StringBuilder();
 
         messageBuilder
-                .append("Current <b><a href='https://www.cnn.com/markets/fear-and-greed'>CNN Fear & Greed Index</a></b> Information").append("\n")
+                .append("Current <a href='https://www.cnn.com/markets/fear-and-greed'><b>CNN Fear & Greed Index</b></a> Information").append("\n")
                 .append(" - Rating : <b><u>")
                 .append(rating)
                 .append("</u></b>\n")
