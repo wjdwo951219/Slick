@@ -69,14 +69,14 @@ public class TelegramScheduler_KR {
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, message)) {
             if (response.status() >= 400) {
-                log.error(response.toString());
+                throw new Exception(response.toString());
             }
         }
     }
 
     @TimeLogAspect.TimeLog
     @Async
-    @Scheduled(cron = "*/10 * * * * *", zone = Const.ZoneId.SEOUL)
+    @Scheduled(cron = "0 20 18 * * 1-5", zone = Const.ZoneId.SEOUL)
     public void sendIndices() throws Exception {
         if (EnvUtils.isNotProd(SPRING_PROFILES_ACTIVE)) {
             return;
@@ -97,7 +97,7 @@ public class TelegramScheduler_KR {
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, message)) {
             if (response.status() >= 400) {
-                log.error(response.toString());
+                throw new Exception(response.toString());
             }
         }
     }

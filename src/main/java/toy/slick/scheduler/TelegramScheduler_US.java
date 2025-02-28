@@ -69,7 +69,7 @@ public class TelegramScheduler_US {
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID, message)) {
             if (response.status() >= 400) {
-                log.error(response.toString());
+                throw new Exception(response.toString());
             }
         }
     }
@@ -94,7 +94,7 @@ public class TelegramScheduler_US {
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID, message)) {
             if (response.status() >= 400) {
-                log.error(response.toString());
+                throw new Exception(response.toString());
             }
         }
     }
@@ -123,7 +123,7 @@ public class TelegramScheduler_US {
 
         try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_US_ID, message)) {
             if (response.status() >= 400) {
-                log.error(response.toString());
+                throw new Exception(response.toString());
             }
         }
     }
