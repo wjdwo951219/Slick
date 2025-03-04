@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <appender name="MongoDBAppender" class="toy.slick.config.logback.MongodbAppender">
+    <appender name="MongodbAppender" class="toy.slick.config.logback.MongodbAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>WARN</level>
         </filter>
@@ -16,6 +16,6 @@
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="MongoDBAppender"/>
+        <appender-ref ref="MongodbAppender"/>
     </root>
 </configuration>
