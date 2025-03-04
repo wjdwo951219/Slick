@@ -3,28 +3,44 @@ package toy.slick.feign.investing;
 import feign.Response;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import toy.slick.common.Const;
 
 @FeignClient(name = "InvestingFeign", url = "https://investing.com")
 public interface InvestingFeign {
 
-    @GetMapping(value = "/indices/us-30")
+    @GetMapping(value = "/indices/us-30", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
     Response getDowJonesIndustrialAverage();
 
-    @GetMapping(value = "/indices/us-spx-500")
+    @GetMapping(value = "/indices/us-spx-500", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
     Response getStandardAndPoor500();
 
-    @GetMapping(value = "/indices/nasdaq-composite")
+    @GetMapping(value = "/indices/nasdaq-composite", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
     Response getNasdaqComposite();
 
     @GetMapping(value = "/holiday-calendar", headers = {
-            "accept-language=ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
     })
     Response getHolidayCalendar();
 
-    @GetMapping(value = "/indices/kospi")
+    @GetMapping(value = "/indices/kospi", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
     Response getKospi();
 
-    @GetMapping(value = "/indices/kosdaq")
+    @GetMapping(value = "/indices/kosdaq", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
     Response getKosdaq();
 }

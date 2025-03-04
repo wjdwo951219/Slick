@@ -111,11 +111,9 @@ public class TelegramScheduler_US {
             return;
         }
 
-        String djiMessage = telegramService.getDjiMessage();
-        String ixicMessage = telegramService.getIxicMessage();
-        String spxMessage = telegramService.getSpxMessage();
-
-        String message = djiMessage + ixicMessage + spxMessage;
+        String message = telegramService.getDjiMessage()
+                + telegramService.getIxicMessage()
+                + telegramService.getSpxMessage();
 
         if (StringUtils.isBlank(message)) {
             throw new Exception(MsgUtils.blankMsg(message));

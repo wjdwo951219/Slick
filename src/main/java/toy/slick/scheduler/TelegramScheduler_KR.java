@@ -101,4 +101,31 @@ public class TelegramScheduler_KR {
             }
         }
     }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Scheduled(cron = "0 15 9 * * 1-5", zone = Const.ZoneId.SEOUL)
+    public void sendCurrencies() throws Exception {
+        if (EnvUtils.isNotProd(SPRING_PROFILES_ACTIVE)) {
+            return;
+        }
+
+        if (telegramService.isHoliday(Const.Country.KR, LocalDate.now(ZoneId.of(Const.ZoneId.SEOUL)))) {
+            return;
+        }
+
+        String message = telegramService.getCurrencyUsdKrwMessage()
+                + telegramService.getCurrencyJpyKrwMessage()
+                + telegramService.getCurrencyEurKrwMessage();
+
+        if (StringUtils.isBlank(message)) {
+            throw new Exception(MsgUtils.blankMsg(message));
+        }
+
+        try (Response response = telegramFeign.sendHtmlWithoutPreview(BOT_SLICK_TOKEN, CHAT_SLICK_KR_ID, message)) {
+            if (response.status() >= 400) {
+                throw new Exception(response.toString());
+            }
+        }
+    }
 }

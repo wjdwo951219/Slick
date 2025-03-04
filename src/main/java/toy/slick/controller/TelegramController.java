@@ -71,4 +71,20 @@ public class TelegramController {
 
         return HttpStatus.OK.toString();
     }
+
+    @GetMapping("/sendCurrencies/{channel}")
+    public String sendFearAndGreed(
+            @RequestHeader @NotBlank String key,
+            @PathVariable @NotBlank String channel) throws Exception {
+        if (!CONTROLLER_KEY.equals(key)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        switch (channel) {
+            case Const.Country.KR -> telegramScheduler_KR.sendCurrencies();
+            // TODO : add other countries
+        }
+
+        return HttpStatus.OK.toString();
+    }
 }
