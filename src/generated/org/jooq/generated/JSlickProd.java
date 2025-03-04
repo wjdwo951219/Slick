@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
+import org.jooq.generated.tables.JCurrencyEurKrw;
+import org.jooq.generated.tables.JCurrencyJpyKrw;
+import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
@@ -32,6 +35,21 @@ public class JSlickProd extends SchemaImpl {
      * The reference instance of <code>slick_prod</code>
      */
     public static final JSlickProd SLICK_PROD = new JSlickProd();
+
+    /**
+     * The table <code>slick_prod.CURRENCY_EUR_KRW</code>.
+     */
+    public final JCurrencyEurKrw CURRENCY_EUR_KRW = JCurrencyEurKrw.CURRENCY_EUR_KRW;
+
+    /**
+     * The table <code>slick_prod.CURRENCY_JPY_KRW</code>.
+     */
+    public final JCurrencyJpyKrw CURRENCY_JPY_KRW = JCurrencyJpyKrw.CURRENCY_JPY_KRW;
+
+    /**
+     * The table <code>slick_prod.CURRENCY_USD_KRW</code>.
+     */
+    public final JCurrencyUsdKrw CURRENCY_USD_KRW = JCurrencyUsdKrw.CURRENCY_USD_KRW;
 
     /**
      * The table <code>slick_prod.DJI</code>.
@@ -89,6 +107,9 @@ public class JSlickProd extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            JCurrencyEurKrw.CURRENCY_EUR_KRW,
+            JCurrencyJpyKrw.CURRENCY_JPY_KRW,
+            JCurrencyUsdKrw.CURRENCY_USD_KRW,
             JDji.DJI,
             JEconomicEvent.ECONOMIC_EVENT,
             JFearAndGreed.FEAR_AND_GREED,
