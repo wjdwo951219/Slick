@@ -11,9 +11,9 @@ public interface Const {
         String CHECK_MARK = "\u2705"; // ✅
         String DOWN_CHART = "\uD83D\uDCC9"; // 📉
         String UP_CHART = "\uD83D\uDCC8"; // 📈
-        String YEN = "\uD83D\uDCB4"; // 💴
-        String DOLLAR = "\uD83D\uDCB5"; // 💵
-        String EURO = "\uD83D\uDCB6"; // 💶
+        String YEN_BANKNOTE = "\uD83D\uDCB4"; // 💴
+        String DOLLAR_BANKNOTE = "\uD83D\uDCB5"; // 💵
+        String EURO_BANKNOTE = "\uD83D\uDCB6"; // 💶
     }
 
     interface ZoneId {

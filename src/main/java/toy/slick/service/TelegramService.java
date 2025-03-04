@@ -262,7 +262,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.EURO,
+                Const.Emoji.EURO_BANKNOTE,
                 currencyEurKrw.get().getUrl(),
                 "1€(EUR)",
                 currencyEurKrw.get().getPrice(),
@@ -279,7 +279,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.YEN,
+                Const.Emoji.YEN_BANKNOTE,
                 currencyJpyKrw.get().getUrl(),
                 "100¥(JPY)",
                 currencyJpyKrw.get().getPrice(),
@@ -296,7 +296,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.DOLLAR,
+                Const.Emoji.DOLLAR_BANKNOTE,
                 currencyJpyKrw.get().getUrl(),
                 "1$(USD)",
                 currencyJpyKrw.get().getPrice(),
