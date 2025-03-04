@@ -24,14 +24,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.KOSPI.TITLE</code>.
+     * Setter for <code>slick_prod.KOSPI.TITLE</code>.
      */
     public void setTitle(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.TITLE</code>.
+     * Getter for <code>slick_prod.KOSPI.TITLE</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -40,14 +40,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.PRICE</code>.
+     * Setter for <code>slick_prod.KOSPI.PRICE</code>.
      */
     public void setPrice(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.PRICE</code>.
+     * Getter for <code>slick_prod.KOSPI.PRICE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -56,14 +56,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.PRICE_CHANGE</code>.
+     * Setter for <code>slick_prod.KOSPI.PRICE_CHANGE</code>.
      */
     public void setPriceChange(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.PRICE_CHANGE</code>.
+     * Getter for <code>slick_prod.KOSPI.PRICE_CHANGE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -72,14 +72,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.PRICE_CHANGE_PERCENT</code>.
+     * Setter for <code>slick_prod.KOSPI.PRICE_CHANGE_PERCENT</code>.
      */
     public void setPriceChangePercent(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.PRICE_CHANGE_PERCENT</code>.
+     * Getter for <code>slick_prod.KOSPI.PRICE_CHANGE_PERCENT</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -88,14 +88,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.URL</code>.
+     * Setter for <code>slick_prod.KOSPI.URL</code>.
      */
     public void setUrl(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.URL</code>.
+     * Getter for <code>slick_prod.KOSPI.URL</code>.
      */
     @NotNull
     @Size(max = 500)
@@ -104,14 +104,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.REG_DATETIME</code>.
+     * Setter for <code>slick_prod.KOSPI.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.REG_DATETIME</code>.
+     * Getter for <code>slick_prod.KOSPI.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -119,14 +119,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.REG_ID</code>.
+     * Setter for <code>slick_prod.KOSPI.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.REG_ID</code>.
+     * Getter for <code>slick_prod.KOSPI.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -135,14 +135,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.UPT_DATETIME</code>.
+     * Setter for <code>slick_prod.KOSPI.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.UPT_DATETIME</code>.
+     * Getter for <code>slick_prod.KOSPI.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -150,14 +150,14 @@ public class KospiRecord extends UpdatableRecordImpl<KospiRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSPI.UPT_ID</code>.
+     * Setter for <code>slick_prod.KOSPI.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSPI.UPT_ID</code>.
+     * Getter for <code>slick_prod.KOSPI.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
