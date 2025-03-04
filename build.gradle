@@ -89,10 +89,7 @@ jooq {
                         name = "org.jooq.meta.mariadb.MariaDBDatabase"
                         schemata {
                             schema {
-                                inputSchema = System.getenv("DB_INPUT_SCHEMA_PROD")
-                            }
-                            schema {
-                                inputSchema = System.getenv("DB_INPUT_SCHEMA_DEV")
+                                inputSchema = System.getenv("DB_INPUT_SCHEMA")
                             }
                         }
                     }
