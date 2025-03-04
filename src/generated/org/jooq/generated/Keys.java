@@ -6,6 +6,9 @@ package org.jooq.generated;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
+import org.jooq.generated.tables.JCurrencyEurKrw;
+import org.jooq.generated.tables.JCurrencyJpyKrw;
+import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
@@ -14,6 +17,9 @@ import org.jooq.generated.tables.JIxic;
 import org.jooq.generated.tables.JKosdaq;
 import org.jooq.generated.tables.JKospi;
 import org.jooq.generated.tables.JSpx;
+import org.jooq.generated.tables.records.CurrencyEurKrwRecord;
+import org.jooq.generated.tables.records.CurrencyJpyKrwRecord;
+import org.jooq.generated.tables.records.CurrencyUsdKrwRecord;
 import org.jooq.generated.tables.records.DjiRecord;
 import org.jooq.generated.tables.records.EconomicEventRecord;
 import org.jooq.generated.tables.records.FearAndGreedRecord;
@@ -37,6 +43,9 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<CurrencyEurKrwRecord> KEY_CURRENCY_EUR_KRW_PRIMARY = Internal.createUniqueKey(JCurrencyEurKrw.CURRENCY_EUR_KRW, DSL.name("KEY_CURRENCY_EUR_KRW_PRIMARY"), new TableField[] { JCurrencyEurKrw.CURRENCY_EUR_KRW.REG_DATETIME }, true);
+    public static final UniqueKey<CurrencyJpyKrwRecord> KEY_CURRENCY_JPY_KRW_PRIMARY = Internal.createUniqueKey(JCurrencyJpyKrw.CURRENCY_JPY_KRW, DSL.name("KEY_CURRENCY_JPY_KRW_PRIMARY"), new TableField[] { JCurrencyJpyKrw.CURRENCY_JPY_KRW.REG_DATETIME }, true);
+    public static final UniqueKey<CurrencyUsdKrwRecord> KEY_CURRENCY_USD_KRW_PRIMARY = Internal.createUniqueKey(JCurrencyUsdKrw.CURRENCY_USD_KRW, DSL.name("KEY_CURRENCY_USD_KRW_PRIMARY"), new TableField[] { JCurrencyUsdKrw.CURRENCY_USD_KRW.REG_DATETIME }, true);
     public static final UniqueKey<DjiRecord> KEY_DJI_PRIMARY = Internal.createUniqueKey(JDji.DJI, DSL.name("KEY_DJI_PRIMARY"), new TableField[] { JDji.DJI.REG_DATETIME }, true);
     public static final UniqueKey<EconomicEventRecord> KEY_ECONOMIC_EVENT_PRIMARY = Internal.createUniqueKey(JEconomicEvent.ECONOMIC_EVENT, DSL.name("KEY_ECONOMIC_EVENT_PRIMARY"), new TableField[] { JEconomicEvent.ECONOMIC_EVENT.ID }, true);
     public static final UniqueKey<FearAndGreedRecord> KEY_FEAR_AND_GREED_PRIMARY = Internal.createUniqueKey(JFearAndGreed.FEAR_AND_GREED, DSL.name("KEY_FEAR_AND_GREED_PRIMARY"), new TableField[] { JFearAndGreed.FEAR_AND_GREED.REG_DATETIME }, true);

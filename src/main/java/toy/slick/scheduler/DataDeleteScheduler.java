@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import toy.slick.aspect.TimeLogAspect;
 import toy.slick.common.Const;
 import toy.slick.common.MsgUtils;
+import toy.slick.repository.mariadb.CurrencyEurKrwRepository;
+import toy.slick.repository.mariadb.CurrencyJpyKrwRepository;
+import toy.slick.repository.mariadb.CurrencyUsdKrwRepository;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
@@ -34,6 +37,9 @@ public class DataDeleteScheduler {
     private final SpxRepository spxRepository;
     private final KospiRepository kospiRepository;
     private final KosdaqRepository kosdaqRepository;
+    private final CurrencyEurKrwRepository currencyEurKrwRepository;
+    private final CurrencyJpyKrwRepository currencyJpyKrwRepository;
+    private final CurrencyUsdKrwRepository currencyUsdKrwRepository;
 
     public DataDeleteScheduler(EconomicEventRepository economicEventRepository,
                                FearAndGreedRepository fearAndGreedRepository,
@@ -41,93 +47,41 @@ public class DataDeleteScheduler {
                                IxicRepository ixicRepository,
                                SpxRepository spxRepository,
                                KospiRepository kospiRepository,
-                               KosdaqRepository kosdaqRepository) {
+                               KosdaqRepository kosdaqRepository,
+                               CurrencyEurKrwRepository currencyEurKrwRepository,
+                               CurrencyJpyKrwRepository currencyJpyKrwRepository,
+                               CurrencyUsdKrwRepository currencyUsdKrwRepository) {
         this.economicEventRepository = economicEventRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
         this.djiRepository = djiRepository;
         this.ixicRepository = ixicRepository;
-
         this.spxRepository = spxRepository;
         this.kospiRepository = kospiRepository;
         this.kosdaqRepository = kosdaqRepository;
-    }
-
-    @TimeLogAspect.TimeLog
-    @Async
-    @Scheduled(cron = "4 4 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteFearAndGreed() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
-
-        int deleteCnt = fearAndGreedRepository.delete(untilDateTime);
-
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
-    }
-
-    @TimeLogAspect.TimeLog
-    @Async
-    @Scheduled(cron = "4 14 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteDji() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
-
-        int deleteCnt = djiRepository.delete(untilDateTime);
-
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
-    }
-
-    @TimeLogAspect.TimeLog
-    @Async
-    @Scheduled(cron = "4 24 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteIxic() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
-
-        int deleteCnt = ixicRepository.delete(untilDateTime);
-
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
-    }
-
-    @TimeLogAspect.TimeLog
-    @Async
-    @Scheduled(cron = "4 34 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteSpx() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
-
-        int deleteCnt = spxRepository.delete(untilDateTime);
-
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
+        this.currencyEurKrwRepository = currencyEurKrwRepository;
+        this.currencyJpyKrwRepository = currencyJpyKrwRepository;
+        this.currencyUsdKrwRepository = currencyUsdKrwRepository;
     }
 
     @TimeLogAspect.TimeLog
     @Async
     @Scheduled(cron = "4 44 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteKospi() {
+    public void deleteEconomicIndices() {
         LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
                 .minusDays(2)
                 .toLocalDateTime();
 
-        int deleteCnt = kospiRepository.delete(untilDateTime);
+        log.info(MsgUtils.deleteCntMsg(kosdaqRepository.delete(untilDateTime)));
 
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
-    }
+        log.info(MsgUtils.deleteCntMsg(kospiRepository.delete(untilDateTime)));
 
-    @TimeLogAspect.TimeLog
-    @Async
-    @Scheduled(cron = "4 54 4 * * *", zone = Const.ZoneId.SEOUL)
-    public void deleteKosdaq() {
-        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
-                .toLocalDateTime();
+        log.info(MsgUtils.deleteCntMsg(spxRepository.delete(untilDateTime)));
 
-        int deleteCnt = kosdaqRepository.delete(untilDateTime);
+        log.info(MsgUtils.deleteCntMsg(ixicRepository.delete(untilDateTime)));
 
-        log.info(MsgUtils.deleteCntMsg(deleteCnt));
+        log.info(MsgUtils.deleteCntMsg(djiRepository.delete(untilDateTime)));
+
+        log.info(MsgUtils.deleteCntMsg(fearAndGreedRepository.delete(untilDateTime)));
     }
 
     @TimeLogAspect.TimeLog
@@ -141,5 +95,21 @@ public class DataDeleteScheduler {
         int deleteCnt = economicEventRepository.delete(untilDateTime);
 
         log.info(MsgUtils.deleteCntMsg(deleteCnt));
+    }
+
+    @TimeLogAspect.TimeLog
+    @Async
+    @Scheduled(cron = "4 14 4 * * *", zone = Const.ZoneId.SEOUL)
+    public void deleteCurrencies() {
+        LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
+                .minusDays(2)
+                .withHour(0)
+                .toLocalDateTime();
+
+        log.info(MsgUtils.deleteCntMsg(currencyEurKrwRepository.delete(untilDateTime)));
+
+        log.info(MsgUtils.deleteCntMsg(currencyJpyKrwRepository.delete(untilDateTime)));
+
+        log.info(MsgUtils.deleteCntMsg(currencyUsdKrwRepository.delete(untilDateTime)));
     }
 }

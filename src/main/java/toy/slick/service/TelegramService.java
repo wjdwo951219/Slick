@@ -2,6 +2,9 @@ package toy.slick.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jooq.generated.tables.pojos.CurrencyEurKrw;
+import org.jooq.generated.tables.pojos.CurrencyJpyKrw;
+import org.jooq.generated.tables.pojos.CurrencyUsdKrw;
 import org.jooq.generated.tables.pojos.Dji;
 import org.jooq.generated.tables.pojos.EconomicEvent;
 import org.jooq.generated.tables.pojos.FearAndGreed;
@@ -12,6 +15,9 @@ import org.jooq.generated.tables.pojos.Spx;
 import org.springframework.stereotype.Service;
 import toy.slick.common.Const;
 import toy.slick.common.MsgUtils;
+import toy.slick.repository.mariadb.CurrencyEurKrwRepository;
+import toy.slick.repository.mariadb.CurrencyJpyKrwRepository;
+import toy.slick.repository.mariadb.CurrencyUsdKrwRepository;
 import toy.slick.repository.mariadb.DjiRepository;
 import toy.slick.repository.mariadb.EconomicEventRepository;
 import toy.slick.repository.mariadb.FearAndGreedRepository;
@@ -39,6 +45,9 @@ public class TelegramService {
     private final SpxRepository spxRepository;
     private final KospiRepository kospiRepository;
     private final KosdaqRepository kosdaqRepository;
+    private final CurrencyEurKrwRepository currencyEurKrwRepository;
+    private final CurrencyJpyKrwRepository currencyJpyKrwRepository;
+    private final CurrencyUsdKrwRepository currencyUsdKrwRepository;
 
     public TelegramService(HolidayRepository holidayRepository,
                            FearAndGreedRepository fearAndGreedRepository,
@@ -47,7 +56,10 @@ public class TelegramService {
                            IxicRepository ixicRepository,
                            SpxRepository spxRepository,
                            KospiRepository kospiRepository,
-                           KosdaqRepository kosdaqRepository) {
+                           KosdaqRepository kosdaqRepository,
+                           CurrencyEurKrwRepository currencyEurKrwRepository,
+                           CurrencyJpyKrwRepository currencyJpyKrwRepository,
+                           CurrencyUsdKrwRepository currencyUsdKrwRepository) {
         this.holidayRepository = holidayRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
         this.economicEventRepository = economicEventRepository;
@@ -56,6 +68,9 @@ public class TelegramService {
         this.spxRepository = spxRepository;
         this.kospiRepository = kospiRepository;
         this.kosdaqRepository = kosdaqRepository;
+        this.currencyEurKrwRepository = currencyEurKrwRepository;
+        this.currencyJpyKrwRepository = currencyJpyKrwRepository;
+        this.currencyUsdKrwRepository = currencyUsdKrwRepository;
     }
 
     public boolean isHoliday(String country, LocalDate date) {
@@ -70,7 +85,7 @@ public class TelegramService {
         }
 
         return this.generateIndexMessage(
-                dji.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART,
+                dji.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
                 dji.get().getUrl(),
                 dji.get().getTitle(),
                 dji.get().getPrice(),
@@ -87,7 +102,7 @@ public class TelegramService {
         }
 
         return this.generateIndexMessage(
-                spx.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART,
+                spx.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
                 spx.get().getUrl(),
                 spx.get().getTitle(),
                 spx.get().getPrice(),
@@ -104,7 +119,7 @@ public class TelegramService {
         }
 
         return this.generateIndexMessage(
-                ixic.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART,
+                ixic.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
                 ixic.get().getUrl(),
                 ixic.get().getTitle(),
                 ixic.get().getPrice(),
@@ -121,7 +136,7 @@ public class TelegramService {
         }
 
         return this.generateIndexMessage(
-                kosdaq.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART,
+                kosdaq.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
                 kosdaq.get().getUrl(),
                 kosdaq.get().getTitle(),
                 kosdaq.get().getPrice(),
@@ -138,7 +153,7 @@ public class TelegramService {
         }
 
         return this.generateIndexMessage(
-                kospi.get().getPriceChange().startsWith("-") ? Const.DOWN_CHART : Const.UP_CHART,
+                kospi.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
                 kospi.get().getUrl(),
                 kospi.get().getTitle(),
                 kospi.get().getPrice(),
@@ -174,15 +189,15 @@ public class TelegramService {
                 .append("</u></b> ");
 
         if (score < 25) {
-            messageBuilder.append(Const.FACE_SCREAMING_IN_FEAR);
+            messageBuilder.append(Const.Emoji.FACE_SCREAMING_IN_FEAR);
         } else if (score < 30) {
-            messageBuilder.append(Const.FEARFUL_FACE);
+            messageBuilder.append(Const.Emoji.FEARFUL_FACE);
         } else if (score < 70) {
-            messageBuilder.append(Const.THINKING_FACE);
+            messageBuilder.append(Const.Emoji.THINKING_FACE);
         } else if (score < 75) {
-            messageBuilder.append(Const.GRINNING_SQUINTING_FACE);
+            messageBuilder.append(Const.Emoji.GRINNING_SQUINTING_FACE);
         } else {
-            messageBuilder.append(Const.ZANY_FACE);
+            messageBuilder.append(Const.Emoji.ZANY_FACE);
         }
 
         return messageBuilder.toString();
@@ -195,7 +210,7 @@ public class TelegramService {
                         endDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime());
 
         if (CollectionUtils.isEmpty(economicEventList)) {
-            return Const.CHECK_MARK
+            return Const.Emoji.CHECK_MARK
                     + "<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a> is Empty</b>";
         }
 
@@ -216,7 +231,7 @@ public class TelegramService {
         StringBuilder messageBuilder = new StringBuilder();
 
         messageBuilder
-                .append(Const.CHECK_MARK)
+                .append(Const.Emoji.CHECK_MARK)
                 .append("<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a></b>")
                 .append("\n")
                 .append(" : Actual | Forecast | Previous")
@@ -225,7 +240,7 @@ public class TelegramService {
 
         for (Map.Entry<String, List<String>> economicEventListEntry : economicEventListMap.entrySet()) {
             messageBuilder
-                    .append(Const.FLAG)
+                    .append(Const.Emoji.FLAG)
                     .append("<b>")
                     .append(economicEventListEntry.getKey())
                     .append("</b>")
@@ -237,5 +252,61 @@ public class TelegramService {
         }
 
         return messageBuilder.toString();
+    }
+
+    public String getCurrencyEurKrwMessage() {
+        Optional<CurrencyEurKrw> currencyEurKrw = currencyEurKrwRepository.selectRecentOne();
+
+        if (currencyEurKrw.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+
+        return this.generateCurrencyMessage(
+                Const.Emoji.EURO,
+                currencyEurKrw.get().getUrl(),
+                "1€(EUR)",
+                currencyEurKrw.get().getPrice(),
+                currencyEurKrw.get().getPriceChange(),
+                currencyEurKrw.get().getPriceChangePercent()
+        );
+    }
+
+    public String getCurrencyJpyKrwMessage() {
+        Optional<CurrencyJpyKrw> currencyJpyKrw = currencyJpyKrwRepository.selectRecentOne();
+
+        if (currencyJpyKrw.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+
+        return this.generateCurrencyMessage(
+                Const.Emoji.YEN,
+                currencyJpyKrw.get().getUrl(),
+                "100¥(JPY)",
+                currencyJpyKrw.get().getPrice(),
+                currencyJpyKrw.get().getPriceChange(),
+                currencyJpyKrw.get().getPriceChangePercent()
+        );
+    }
+
+    public String getCurrencyUsdKrwMessage() {
+        Optional<CurrencyUsdKrw> currencyJpyKrw = currencyUsdKrwRepository.selectRecentOne();
+
+        if (currencyJpyKrw.isEmpty()) {
+            return StringUtils.EMPTY;
+        }
+
+        return this.generateCurrencyMessage(
+                Const.Emoji.DOLLAR,
+                currencyJpyKrw.get().getUrl(),
+                "1$(USD)",
+                currencyJpyKrw.get().getPrice(),
+                currencyJpyKrw.get().getPriceChange(),
+                currencyJpyKrw.get().getPriceChangePercent()
+        );
+    }
+
+    private String generateCurrencyMessage(String titleIcon, String url, String title, String price, String priceChange, String priceChangePercent) {
+        return titleIcon + "<b><a href='" + url + "'>" + title + "</a></b>\n"
+                + " = <b><u>" + price + "₩</u></b> (" + priceChange + ", " + priceChangePercent + ")\n";
     }
 }

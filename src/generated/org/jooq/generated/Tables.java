@@ -4,6 +4,9 @@
 package org.jooq.generated;
 
 
+import org.jooq.generated.tables.JCurrencyEurKrw;
+import org.jooq.generated.tables.JCurrencyJpyKrw;
+import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
@@ -19,6 +22,21 @@ import org.jooq.generated.tables.JSpx;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>slick_dev.CURRENCY_EUR_KRW</code>.
+     */
+    public static final JCurrencyEurKrw CURRENCY_EUR_KRW = JCurrencyEurKrw.CURRENCY_EUR_KRW;
+
+    /**
+     * The table <code>slick_dev.CURRENCY_JPY_KRW</code>.
+     */
+    public static final JCurrencyJpyKrw CURRENCY_JPY_KRW = JCurrencyJpyKrw.CURRENCY_JPY_KRW;
+
+    /**
+     * The table <code>slick_dev.CURRENCY_USD_KRW</code>.
+     */
+    public static final JCurrencyUsdKrw CURRENCY_USD_KRW = JCurrencyUsdKrw.CURRENCY_USD_KRW;
 
     /**
      * The table <code>slick_dev.DJI</code>.
