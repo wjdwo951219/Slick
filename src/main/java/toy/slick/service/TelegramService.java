@@ -307,6 +307,6 @@ public class TelegramService {
 
     private String generateCurrencyMessage(String titleIcon, String url, String title, String price, String priceChange, String priceChangePercent) {
         return titleIcon + "<b><a href='" + url + "'>" + title + "</a></b>\n"
-                + " = <b><u>" + price + "₩</u></b> (" + priceChange + ", " + priceChangePercent + ")\n";
+                + " = <u>" + price + "₩</u> (" + priceChange + ", " + priceChangePercent + ")\n";
     }
 }
