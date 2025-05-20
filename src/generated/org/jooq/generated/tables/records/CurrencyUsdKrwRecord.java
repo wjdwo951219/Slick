@@ -24,14 +24,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.PRICE</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.PRICE</code>.
      */
     public void setPrice(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.PRICE</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.PRICE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -40,14 +40,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.PRICE_CHANGE</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.PRICE_CHANGE</code>.
      */
     public void setPriceChange(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.PRICE_CHANGE</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.PRICE_CHANGE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -56,14 +56,16 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.PRICE_CHANGE_PERCENT</code>.
+     * Setter for
+     * <code>786b676a8e45.CURRENCY_USD_KRW.PRICE_CHANGE_PERCENT</code>.
      */
     public void setPriceChangePercent(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.PRICE_CHANGE_PERCENT</code>.
+     * Getter for
+     * <code>786b676a8e45.CURRENCY_USD_KRW.PRICE_CHANGE_PERCENT</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -72,14 +74,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.URL</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.URL</code>.
      */
     public void setUrl(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.URL</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.URL</code>.
      */
     @NotNull
     @Size(max = 500)
@@ -88,14 +90,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.REG_DATETIME</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.REG_DATETIME</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -103,14 +105,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.REG_ID</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.REG_ID</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -119,14 +121,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.UPT_DATETIME</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.UPT_DATETIME</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -134,14 +136,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
-     * Setter for <code>slick_dev.CURRENCY_USD_KRW.UPT_ID</code>.
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_dev.CURRENCY_USD_KRW.UPT_ID</code>.
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)

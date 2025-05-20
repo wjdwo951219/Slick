@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 @Builder
 public class EconomicEvent {
     private ZonedDateTime zonedDateTime;
-    private String id;
+    private String url;
     private String name;
     private String country;
     private String importance;

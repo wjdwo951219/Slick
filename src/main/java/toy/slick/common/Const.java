@@ -1,5 +1,7 @@
 package toy.slick.common;
 
+import lombok.Getter;
+
 public interface Const {
     interface Emoji {
         String FACE_SCREAMING_IN_FEAR = "\uD83D\uDE31"; // 😱
@@ -22,9 +24,26 @@ public interface Const {
         String UTC = "UTC";
     }
 
-    interface Country {
-        String US = "United States";
-        String KR = "South Korea";
+    @Getter
+    enum Country {
+        KOREA("KR", "ko", "South Korea"),
+        UNITED_STATES("US", "en", "United States");
+
+        private final String countryCode;
+        private final String languageCode;
+        private final String countryName;
+
+        Country(String countryCode, String languageCode, String countryName) {
+            this.countryCode = countryCode;
+            this.languageCode = languageCode;
+            this.countryName = countryName;
+        }
+    }
+
+    interface ChannelSuffix {
+        String DEV = "DEV";
+        String US = "US";
+        String KR = "KR";
     }
 
     interface HttpRequestHeader {

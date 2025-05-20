@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.FearAndGreedRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JFearAndGreed extends TableImpl<FearAndGreedRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.FEAR_AND_GREED</code>
+     * The reference instance of <code>786b676a8e45.FEAR_AND_GREED</code>
      */
     public static final JFearAndGreed FEAR_AND_GREED = new JFearAndGreed();
 
@@ -50,32 +50,32 @@ public class JFearAndGreed extends TableImpl<FearAndGreedRecord> {
     }
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.RATING</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.RATING</code>.
      */
     public final TableField<FearAndGreedRecord, String> RATING = createField(DSL.name("RATING"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.SCORE</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.SCORE</code>.
      */
     public final TableField<FearAndGreedRecord, Double> SCORE = createField(DSL.name("SCORE"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.REG_DATETIME</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     public final TableField<FearAndGreedRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.REG_ID</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.REG_ID</code>.
      */
     public final TableField<FearAndGreedRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.UPT_DATETIME</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     public final TableField<FearAndGreedRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.FEAR_AND_GREED.UPT_ID</code>.
+     * The column <code>786b676a8e45.FEAR_AND_GREED.UPT_ID</code>.
      */
     public final TableField<FearAndGreedRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -88,21 +88,23 @@ public class JFearAndGreed extends TableImpl<FearAndGreedRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.FEAR_AND_GREED</code> table reference
+     * Create an aliased <code>786b676a8e45.FEAR_AND_GREED</code> table
+     * reference
      */
     public JFearAndGreed(String alias) {
         this(DSL.name(alias), FEAR_AND_GREED);
     }
 
     /**
-     * Create an aliased <code>slick_dev.FEAR_AND_GREED</code> table reference
+     * Create an aliased <code>786b676a8e45.FEAR_AND_GREED</code> table
+     * reference
      */
     public JFearAndGreed(Name alias) {
         this(alias, FEAR_AND_GREED);
     }
 
     /**
-     * Create a <code>slick_dev.FEAR_AND_GREED</code> table reference
+     * Create a <code>786b676a8e45.FEAR_AND_GREED</code> table reference
      */
     public JFearAndGreed() {
         this(DSL.name("FEAR_AND_GREED"), null);
@@ -110,7 +112,7 @@ public class JFearAndGreed extends TableImpl<FearAndGreedRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : J_786b676a8e45._786B676A8E45;
     }
 
     @Override

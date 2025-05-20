@@ -24,14 +24,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.TITLE</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.TITLE</code>.
      */
     public void setTitle(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.TITLE</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.TITLE</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -40,14 +40,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.PRICE</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.PRICE</code>.
      */
     public void setPrice(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.PRICE</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.PRICE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -56,14 +56,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.PRICE_CHANGE</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.PRICE_CHANGE</code>.
      */
     public void setPriceChange(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.PRICE_CHANGE</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.PRICE_CHANGE</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -72,14 +72,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
      */
     public void setPriceChangePercent(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -88,14 +88,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.URL</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.URL</code>.
      */
     public void setUrl(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.URL</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.URL</code>.
      */
     @NotNull
     @Size(max = 500)
@@ -104,14 +104,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.REG_DATETIME</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.REG_DATETIME</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -119,14 +119,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.REG_ID</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.REG_ID</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -135,14 +135,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.UPT_DATETIME</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.UPT_DATETIME</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -150,14 +150,14 @@ public class KosdaqRecord extends UpdatableRecordImpl<KosdaqRecord> {
     }
 
     /**
-     * Setter for <code>slick_dev.KOSDAQ.UPT_ID</code>.
+     * Setter for <code>786b676a8e45.KOSDAQ.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(8, value);
     }
 
     /**
-     * Getter for <code>slick_dev.KOSDAQ.UPT_ID</code>.
+     * Getter for <code>786b676a8e45.KOSDAQ.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)

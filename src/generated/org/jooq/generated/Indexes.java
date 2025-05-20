@@ -12,7 +12,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables in slick_dev.
+ * A class modelling indexes of tables in 786b676a8e45.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Indexes {

@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.KosdaqRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JKosdaq extends TableImpl<KosdaqRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.KOSDAQ</code>
+     * The reference instance of <code>786b676a8e45.KOSDAQ</code>
      */
     public static final JKosdaq KOSDAQ = new JKosdaq();
 
@@ -50,47 +50,47 @@ public class JKosdaq extends TableImpl<KosdaqRecord> {
     }
 
     /**
-     * The column <code>slick_dev.KOSDAQ.TITLE</code>.
+     * The column <code>786b676a8e45.KOSDAQ.TITLE</code>.
      */
     public final TableField<KosdaqRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.PRICE</code>.
+     * The column <code>786b676a8e45.KOSDAQ.PRICE</code>.
      */
     public final TableField<KosdaqRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.PRICE_CHANGE</code>.
+     * The column <code>786b676a8e45.KOSDAQ.PRICE_CHANGE</code>.
      */
     public final TableField<KosdaqRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
+     * The column <code>786b676a8e45.KOSDAQ.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<KosdaqRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.URL</code>.
+     * The column <code>786b676a8e45.KOSDAQ.URL</code>.
      */
     public final TableField<KosdaqRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.REG_DATETIME</code>.
+     * The column <code>786b676a8e45.KOSDAQ.REG_DATETIME</code>.
      */
     public final TableField<KosdaqRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.REG_ID</code>.
+     * The column <code>786b676a8e45.KOSDAQ.REG_ID</code>.
      */
     public final TableField<KosdaqRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.UPT_DATETIME</code>.
+     * The column <code>786b676a8e45.KOSDAQ.UPT_DATETIME</code>.
      */
     public final TableField<KosdaqRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.KOSDAQ.UPT_ID</code>.
+     * The column <code>786b676a8e45.KOSDAQ.UPT_ID</code>.
      */
     public final TableField<KosdaqRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -103,21 +103,21 @@ public class JKosdaq extends TableImpl<KosdaqRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.KOSDAQ</code> table reference
+     * Create an aliased <code>786b676a8e45.KOSDAQ</code> table reference
      */
     public JKosdaq(String alias) {
         this(DSL.name(alias), KOSDAQ);
     }
 
     /**
-     * Create an aliased <code>slick_dev.KOSDAQ</code> table reference
+     * Create an aliased <code>786b676a8e45.KOSDAQ</code> table reference
      */
     public JKosdaq(Name alias) {
         this(alias, KOSDAQ);
     }
 
     /**
-     * Create a <code>slick_dev.KOSDAQ</code> table reference
+     * Create a <code>786b676a8e45.KOSDAQ</code> table reference
      */
     public JKosdaq() {
         this(DSL.name("KOSDAQ"), null);
@@ -125,7 +125,7 @@ public class JKosdaq extends TableImpl<KosdaqRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : J_786b676a8e45._786B676A8E45;
     }
 
     @Override

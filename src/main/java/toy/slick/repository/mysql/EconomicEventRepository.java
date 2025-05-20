@@ -1,4 +1,4 @@
-package toy.slick.repository.mariadb;
+package toy.slick.repository.mysql;
 
 import lombok.NonNull;
 import org.apache.commons.collections4.ListUtils;
@@ -12,7 +12,7 @@ import org.jooq.generated.tables.pojos.EconomicEvent;
 import org.jooq.generated.tables.records.EconomicEventRecord;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
-import toy.slick.repository.mariadb.inheritable.QueryCRUD;
+import toy.slick.repository.mysql.inheritable.QueryCRUD;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -49,7 +49,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
                                 LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
                                 return new EconomicEventRecord(
-                                        economicEvent.getId(),
+                                        economicEvent.getUrl(),
                                         economicEvent.getDatetime(),
                                         economicEvent.getName(),
                                         economicEvent.getCountry(),
@@ -78,10 +78,10 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         return query.execute();
     }
 
-    public int delete(@NonNull Set<String> idSet) {
+    public int delete(@NonNull Set<String> urlSet) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.ID.in(idSet));
+                tEconomicEvent.URL.in(urlSet));
 
         return query.execute();
     }

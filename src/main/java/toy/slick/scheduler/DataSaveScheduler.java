@@ -33,17 +33,17 @@ import toy.slick.feign.investing.vo.response.Holiday;
 import toy.slick.feign.naver.NaverFeign;
 import toy.slick.feign.naver.reader.NaverFeignReader;
 import toy.slick.feign.naver.vo.response.Currency;
-import toy.slick.repository.mariadb.CurrencyEurKrwRepository;
-import toy.slick.repository.mariadb.CurrencyJpyKrwRepository;
-import toy.slick.repository.mariadb.CurrencyUsdKrwRepository;
-import toy.slick.repository.mariadb.DjiRepository;
-import toy.slick.repository.mariadb.EconomicEventRepository;
-import toy.slick.repository.mariadb.FearAndGreedRepository;
-import toy.slick.repository.mariadb.HolidayRepository;
-import toy.slick.repository.mariadb.IxicRepository;
-import toy.slick.repository.mariadb.KosdaqRepository;
-import toy.slick.repository.mariadb.KospiRepository;
-import toy.slick.repository.mariadb.SpxRepository;
+import toy.slick.repository.mysql.CurrencyEurKrwRepository;
+import toy.slick.repository.mysql.CurrencyJpyKrwRepository;
+import toy.slick.repository.mysql.CurrencyUsdKrwRepository;
+import toy.slick.repository.mysql.DjiRepository;
+import toy.slick.repository.mysql.EconomicEventRepository;
+import toy.slick.repository.mysql.FearAndGreedRepository;
+import toy.slick.repository.mysql.HolidayRepository;
+import toy.slick.repository.mysql.IxicRepository;
+import toy.slick.repository.mysql.KosdaqRepository;
+import toy.slick.repository.mysql.KospiRepository;
+import toy.slick.repository.mysql.SpxRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -132,7 +132,7 @@ public class DataSaveScheduler {
                     .stream()
                     .filter(o -> StringUtils.isNotBlank(o.getActual()))
                     .sorted(Comparator.comparing(EconomicEvent::getZonedDateTime))
-                    .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
+                    .collect(Collectors.toMap(EconomicEvent::getUrl, Function.identity(), (o1, o2) -> o2));
 
             if (CollectionUtils.isEmpty(economicEventMap.keySet())) {
                 return;
@@ -146,7 +146,7 @@ public class DataSaveScheduler {
                     economicEventMap.values()
                             .stream()
                             .map(o -> org.jooq.generated.tables.pojos.EconomicEvent.builder()
-                                    .id(o.getId())
+                                    .url(o.getUrl())
                                     .name(o.getName())
                                     .datetime(o.getZonedDateTime().toLocalDateTime())
                                     .country(o.getCountry())

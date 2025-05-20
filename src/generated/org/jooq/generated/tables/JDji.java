@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickDev;
+import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.DjiRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JDji extends TableImpl<DjiRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_dev.DJI</code>
+     * The reference instance of <code>786b676a8e45.DJI</code>
      */
     public static final JDji DJI = new JDji();
 
@@ -50,47 +50,47 @@ public class JDji extends TableImpl<DjiRecord> {
     }
 
     /**
-     * The column <code>slick_dev.DJI.TITLE</code>.
+     * The column <code>786b676a8e45.DJI.TITLE</code>.
      */
     public final TableField<DjiRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(100).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.PRICE</code>.
+     * The column <code>786b676a8e45.DJI.PRICE</code>.
      */
     public final TableField<DjiRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.PRICE_CHANGE</code>.
+     * The column <code>786b676a8e45.DJI.PRICE_CHANGE</code>.
      */
     public final TableField<DjiRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.PRICE_CHANGE_PERCENT</code>.
+     * The column <code>786b676a8e45.DJI.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<DjiRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.URL</code>.
+     * The column <code>786b676a8e45.DJI.URL</code>.
      */
     public final TableField<DjiRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.REG_DATETIME</code>.
+     * The column <code>786b676a8e45.DJI.REG_DATETIME</code>.
      */
     public final TableField<DjiRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.REG_ID</code>.
+     * The column <code>786b676a8e45.DJI.REG_ID</code>.
      */
     public final TableField<DjiRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.UPT_DATETIME</code>.
+     * The column <code>786b676a8e45.DJI.UPT_DATETIME</code>.
      */
     public final TableField<DjiRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_dev.DJI.UPT_ID</code>.
+     * The column <code>786b676a8e45.DJI.UPT_ID</code>.
      */
     public final TableField<DjiRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -103,21 +103,21 @@ public class JDji extends TableImpl<DjiRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_dev.DJI</code> table reference
+     * Create an aliased <code>786b676a8e45.DJI</code> table reference
      */
     public JDji(String alias) {
         this(DSL.name(alias), DJI);
     }
 
     /**
-     * Create an aliased <code>slick_dev.DJI</code> table reference
+     * Create an aliased <code>786b676a8e45.DJI</code> table reference
      */
     public JDji(Name alias) {
         this(alias, DJI);
     }
 
     /**
-     * Create a <code>slick_dev.DJI</code> table reference
+     * Create a <code>786b676a8e45.DJI</code> table reference
      */
     public JDji() {
         this(DSL.name("DJI"), null);
@@ -125,7 +125,7 @@ public class JDji extends TableImpl<DjiRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickDev.SLICK_DEV;
+        return aliased() ? null : J_786b676a8e45._786B676A8E45;
     }
 
     @Override

@@ -1,6 +1,6 @@
 plugins {
     id "java"
-    id "org.springframework.boot" version "3.3.4"
+    id "org.springframework.boot" version "3.4.2"
     id "io.spring.dependency-management" version "1.1.6"
     id "nu.studer.jooq" version "9.0"
 }
@@ -26,7 +26,7 @@ repositories {
     mavenCentral()
 }
 
-String jooqVersion = "3.19.11"
+String jooqVersion = "3.19.18"
 
 dependencies {
     /* JOOQ */
@@ -41,13 +41,11 @@ dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-web-services')
     implementation ('org.springframework.boot:spring-boot-starter-aop')
     implementation ('org.springframework.boot:spring-boot-starter-validation')
-    implementation ('org.springframework.boot:spring-boot-starter-data-mongodb')
-    implementation ('org.springframework.cloud:spring-cloud-starter-openfeign:4.1.4') {
-        exclude group: 'commons-io', module: 'commons-io'
-    }
+    implementation ('org.springframework.boot:spring-boot-starter-actuator:3.4.5')
+    implementation ('org.springframework.cloud:spring-cloud-starter-openfeign:4.2.1')
     implementation ('commons-io:commons-io:2.14.0')
     implementation ('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0')
-    implementation ('org.mariadb.jdbc:mariadb-java-client')
+    implementation ('com.mysql:mysql-connector-j:9.3.0')
     implementation ('org.apache.commons:commons-lang3')
     implementation ('org.apache.commons:commons-collections4:4.4')
     implementation ('org.apache.commons:commons-text:1.12.0')
@@ -78,7 +76,7 @@ jooq {
         slick {
             generationTool {
                 jdbc {
-                    driver = "org.mariadb.jdbc.Driver"
+                    driver = "com.mysql.cj.jdbc.Driver"
                     url = System.getenv("JDBC_URL")
                     user = System.getenv("JDBC_USER")
                     password = System.getenv("JDBC_PASSWORD")
@@ -86,7 +84,7 @@ jooq {
                 generator {
                     name = "toy.slick.config.jooq.JooqGenerator"
                     database {
-                        name = "org.jooq.meta.mariadb.MariaDBDatabase"
+                        name = "org.jooq.meta.mysql.MySQLDatabase"
                         schemata {
                             schema {
                                 inputSchema = System.getenv("DB_INPUT_SCHEMA")

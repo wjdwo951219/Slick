@@ -56,7 +56,7 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.COUNTRY</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.COUNTRY</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -65,14 +65,14 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.COUNTRY</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.COUNTRY</code>.
      */
     public void setCountry(String country) {
         this.country = country;
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.DATE</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.DATE</code>.
      */
     @NotNull
     public LocalDate getDate() {
@@ -80,14 +80,14 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.DATE</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.DATE</code>.
      */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.REG_DATETIME</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -95,14 +95,14 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.REG_DATETIME</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.REG_ID</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -111,14 +111,14 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.REG_ID</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.UPT_DATETIME</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -126,14 +126,14 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.UPT_DATETIME</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_dev.HOLIDAY.UPT_ID</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -142,7 +142,7 @@ public class Holiday implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_dev.HOLIDAY.UPT_ID</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;

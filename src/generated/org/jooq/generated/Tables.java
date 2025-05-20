@@ -18,63 +18,63 @@ import org.jooq.generated.tables.JSpx;
 
 
 /**
- * Convenience access to all tables in slick_dev.
+ * Convenience access to all tables in 786b676a8e45.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>slick_dev.CURRENCY_EUR_KRW</code>.
+     * The table <code>786b676a8e45.CURRENCY_EUR_KRW</code>.
      */
     public static final JCurrencyEurKrw CURRENCY_EUR_KRW = JCurrencyEurKrw.CURRENCY_EUR_KRW;
 
     /**
-     * The table <code>slick_dev.CURRENCY_JPY_KRW</code>.
+     * The table <code>786b676a8e45.CURRENCY_JPY_KRW</code>.
      */
     public static final JCurrencyJpyKrw CURRENCY_JPY_KRW = JCurrencyJpyKrw.CURRENCY_JPY_KRW;
 
     /**
-     * The table <code>slick_dev.CURRENCY_USD_KRW</code>.
+     * The table <code>786b676a8e45.CURRENCY_USD_KRW</code>.
      */
     public static final JCurrencyUsdKrw CURRENCY_USD_KRW = JCurrencyUsdKrw.CURRENCY_USD_KRW;
 
     /**
-     * The table <code>slick_dev.DJI</code>.
+     * The table <code>786b676a8e45.DJI</code>.
      */
     public static final JDji DJI = JDji.DJI;
 
     /**
-     * The table <code>slick_dev.ECONOMIC_EVENT</code>.
+     * The table <code>786b676a8e45.ECONOMIC_EVENT</code>.
      */
     public static final JEconomicEvent ECONOMIC_EVENT = JEconomicEvent.ECONOMIC_EVENT;
 
     /**
-     * The table <code>slick_dev.FEAR_AND_GREED</code>.
+     * The table <code>786b676a8e45.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>slick_dev.HOLIDAY</code>.
+     * The table <code>786b676a8e45.HOLIDAY</code>.
      */
     public static final JHoliday HOLIDAY = JHoliday.HOLIDAY;
 
     /**
-     * The table <code>slick_dev.IXIC</code>.
+     * The table <code>786b676a8e45.IXIC</code>.
      */
     public static final JIxic IXIC = JIxic.IXIC;
 
     /**
-     * The table <code>slick_dev.KOSDAQ</code>.
+     * The table <code>786b676a8e45.KOSDAQ</code>.
      */
     public static final JKosdaq KOSDAQ = JKosdaq.KOSDAQ;
 
     /**
-     * The table <code>slick_dev.KOSPI</code>.
+     * The table <code>786b676a8e45.KOSPI</code>.
      */
     public static final JKospi KOSPI = JKospi.KOSPI;
 
     /**
-     * The table <code>slick_dev.SPX</code>.
+     * The table <code>786b676a8e45.SPX</code>.
      */
     public static final JSpx SPX = JSpx.SPX;
 }
