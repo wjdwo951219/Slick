@@ -21,7 +21,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.HolidayRecord;
 import org.jooq.impl.DSL;
@@ -38,7 +38,7 @@ public class JHoliday extends TableImpl<HolidayRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.HOLIDAY</code>
+     * The reference instance of <code>786b676a8e45.HOLIDAY</code>
      */
     public static final JHoliday HOLIDAY = new JHoliday();
 
@@ -51,32 +51,32 @@ public class JHoliday extends TableImpl<HolidayRecord> {
     }
 
     /**
-     * The column <code>slick_prod.HOLIDAY.COUNTRY</code>.
+     * The column <code>786b676a8e45.HOLIDAY.COUNTRY</code>.
      */
     public final TableField<HolidayRecord, String> COUNTRY = createField(DSL.name("COUNTRY"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.HOLIDAY.DATE</code>.
+     * The column <code>786b676a8e45.HOLIDAY.DATE</code>.
      */
     public final TableField<HolidayRecord, LocalDate> DATE = createField(DSL.name("DATE"), SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.HOLIDAY.REG_DATETIME</code>.
+     * The column <code>786b676a8e45.HOLIDAY.REG_DATETIME</code>.
      */
     public final TableField<HolidayRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.HOLIDAY.REG_ID</code>.
+     * The column <code>786b676a8e45.HOLIDAY.REG_ID</code>.
      */
     public final TableField<HolidayRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.HOLIDAY.UPT_DATETIME</code>.
+     * The column <code>786b676a8e45.HOLIDAY.UPT_DATETIME</code>.
      */
     public final TableField<HolidayRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.HOLIDAY.UPT_ID</code>.
+     * The column <code>786b676a8e45.HOLIDAY.UPT_ID</code>.
      */
     public final TableField<HolidayRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -89,21 +89,21 @@ public class JHoliday extends TableImpl<HolidayRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.HOLIDAY</code> table reference
+     * Create an aliased <code>786b676a8e45.HOLIDAY</code> table reference
      */
     public JHoliday(String alias) {
         this(DSL.name(alias), HOLIDAY);
     }
 
     /**
-     * Create an aliased <code>slick_prod.HOLIDAY</code> table reference
+     * Create an aliased <code>786b676a8e45.HOLIDAY</code> table reference
      */
     public JHoliday(Name alias) {
         this(alias, HOLIDAY);
     }
 
     /**
-     * Create a <code>slick_prod.HOLIDAY</code> table reference
+     * Create a <code>786b676a8e45.HOLIDAY</code> table reference
      */
     public JHoliday() {
         this(DSL.name("HOLIDAY"), null);
@@ -111,7 +111,7 @@ public class JHoliday extends TableImpl<HolidayRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : J_786b676a8e45._786B676A8E45;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package toy.slick.repository.mariadb.inheritable;
+package toy.slick.repository.mysql.inheritable;
 
 import lombok.NonNull;
 import org.jooq.Condition;

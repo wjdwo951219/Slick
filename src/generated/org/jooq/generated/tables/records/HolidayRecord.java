@@ -25,14 +25,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.COUNTRY</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.COUNTRY</code>.
      */
     public void setCountry(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.COUNTRY</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.COUNTRY</code>.
      */
     @NotNull
     @Size(max = 50)
@@ -41,14 +41,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.DATE</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.DATE</code>.
      */
     public void setDate(LocalDate value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.DATE</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.DATE</code>.
      */
     @NotNull
     public LocalDate getDate() {
@@ -56,14 +56,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.REG_DATETIME</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.REG_DATETIME</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -71,14 +71,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.REG_ID</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.REG_ID</code>.
      */
     public void setRegId(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.REG_ID</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -87,14 +87,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.UPT_DATETIME</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.UPT_DATETIME</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -102,14 +102,14 @@ public class HolidayRecord extends UpdatableRecordImpl<HolidayRecord> {
     }
 
     /**
-     * Setter for <code>slick_prod.HOLIDAY.UPT_ID</code>.
+     * Setter for <code>786b676a8e45.HOLIDAY.UPT_ID</code>.
      */
     public void setUptId(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>slick_prod.HOLIDAY.UPT_ID</code>.
+     * Getter for <code>786b676a8e45.HOLIDAY.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)

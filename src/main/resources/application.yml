@@ -10,14 +10,10 @@ spring:
     virtual:
       enabled: true
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-  data:
-    mongodb:
-      uri: ${MONGODB_URI}
-      database: ${MONGODB_DATABASE}
   cloud:
     openfeign:
       client:
@@ -32,7 +28,6 @@ spring:
 logging:
   level:
     toy.slick.feign: debug
-    org.springframework.data.mongodb.core.MongoTemplate: debug
     org.jooq.tools.LoggerListener: debug
     org.jooq.Constants: off
 
@@ -42,6 +37,8 @@ telegram:
       token: ${BOT_SLICK_TOKEN}
   chat:
     slick:
+      dev:
+        id: ${CHAT_SLICK_DEV_ID}
       us:
         id: ${CHAT_SLICK_US_ID}
       kr:
@@ -50,3 +47,26 @@ telegram:
 controller:
   key: ${CONTROLLER_KEY}
 
+management:
+  endpoints:
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: info, health
+    access:
+      default: read_only
+  endpoint:
+    info:
+      access: read_only
+    health:
+      access: read_only
+  info:
+    env:
+      enabled: true
+
+info:
+  contact:
+    email: wjdwo951219@gmail.com
+    github: https://github.com/wjdwo951219/Slick

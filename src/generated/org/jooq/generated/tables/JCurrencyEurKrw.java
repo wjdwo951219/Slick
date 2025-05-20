@@ -20,7 +20,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
-import org.jooq.generated.JSlickProd;
+import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.CurrencyEurKrwRecord;
 import org.jooq.impl.DSL;
@@ -37,7 +37,7 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>slick_prod.CURRENCY_EUR_KRW</code>
+     * The reference instance of <code>786b676a8e45.CURRENCY_EUR_KRW</code>
      */
     public static final JCurrencyEurKrw CURRENCY_EUR_KRW = new JCurrencyEurKrw();
 
@@ -50,42 +50,43 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
     }
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.PRICE</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.PRICE</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> PRICE = createField(DSL.name("PRICE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.PRICE_CHANGE</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.PRICE_CHANGE</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> PRICE_CHANGE = createField(DSL.name("PRICE_CHANGE"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.PRICE_CHANGE_PERCENT</code>.
+     * The column
+     * <code>786b676a8e45.CURRENCY_EUR_KRW.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.URL</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.URL</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(500).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.REG_DATETIME</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.REG_DATETIME</code>.
      */
     public final TableField<CurrencyEurKrwRecord, LocalDateTime> REG_DATETIME = createField(DSL.name("REG_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.REG_ID</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.REG_ID</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> REG_ID = createField(DSL.name("REG_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.UPT_DATETIME</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.UPT_DATETIME</code>.
      */
     public final TableField<CurrencyEurKrwRecord, LocalDateTime> UPT_DATETIME = createField(DSL.name("UPT_DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
-     * The column <code>slick_prod.CURRENCY_EUR_KRW.UPT_ID</code>.
+     * The column <code>786b676a8e45.CURRENCY_EUR_KRW.UPT_ID</code>.
      */
     public final TableField<CurrencyEurKrwRecord, String> UPT_ID = createField(DSL.name("UPT_ID"), SQLDataType.VARCHAR(200).nullable(false), this, "");
 
@@ -98,7 +99,7 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.CURRENCY_EUR_KRW</code> table
+     * Create an aliased <code>786b676a8e45.CURRENCY_EUR_KRW</code> table
      * reference
      */
     public JCurrencyEurKrw(String alias) {
@@ -106,7 +107,7 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
     }
 
     /**
-     * Create an aliased <code>slick_prod.CURRENCY_EUR_KRW</code> table
+     * Create an aliased <code>786b676a8e45.CURRENCY_EUR_KRW</code> table
      * reference
      */
     public JCurrencyEurKrw(Name alias) {
@@ -114,7 +115,7 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
     }
 
     /**
-     * Create a <code>slick_prod.CURRENCY_EUR_KRW</code> table reference
+     * Create a <code>786b676a8e45.CURRENCY_EUR_KRW</code> table reference
      */
     public JCurrencyEurKrw() {
         this(DSL.name("CURRENCY_EUR_KRW"), null);
@@ -122,7 +123,7 @@ public class JCurrencyEurKrw extends TableImpl<CurrencyEurKrwRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : JSlickProd.SLICK_PROD;
+        return aliased() ? null : J_786b676a8e45._786B676A8E45;
     }
 
     @Override

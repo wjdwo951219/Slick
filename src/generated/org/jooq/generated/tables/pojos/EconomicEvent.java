@@ -20,7 +20,7 @@ public class EconomicEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private String url;
     private LocalDateTime datetime;
     private String name;
     private String country;
@@ -36,7 +36,7 @@ public class EconomicEvent implements Serializable {
     public EconomicEvent() {}
 
     public EconomicEvent(EconomicEvent value) {
-        this.id = value.id;
+        this.url = value.url;
         this.datetime = value.datetime;
         this.name = value.name;
         this.country = value.country;
@@ -51,7 +51,7 @@ public class EconomicEvent implements Serializable {
     }
 
     public EconomicEvent(
-        String id,
+        String url,
         LocalDateTime datetime,
         String name,
         String country,
@@ -64,7 +64,7 @@ public class EconomicEvent implements Serializable {
         LocalDateTime uptDatetime,
         String uptId
     ) {
-        this.id = id;
+        this.url = url;
         this.datetime = datetime;
         this.name = name;
         this.country = country;
@@ -79,23 +79,23 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.ID</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.URL</code>.
      */
     @NotNull
-    @Size(max = 10)
-    public String getId() {
-        return this.id;
+    @Size(max = 200)
+    public String getUrl() {
+        return this.url;
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.ID</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.URL</code>.
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.DATETIME</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getDatetime() {
@@ -103,14 +103,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.DATETIME</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.DATETIME</code>.
      */
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.NAME</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.NAME</code>.
      */
     @NotNull
     @Size(max = 100)
@@ -119,14 +119,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.NAME</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.NAME</code>.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.COUNTRY</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.COUNTRY</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -135,14 +135,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.COUNTRY</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.COUNTRY</code>.
      */
     public void setCountry(String country) {
         this.country = country;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.IMPORTANCE</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     @NotNull
     @Size(max = 10)
@@ -151,14 +151,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.IMPORTANCE</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     public void setImportance(String importance) {
         this.importance = importance;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.ACTUAL</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.ACTUAL</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -167,14 +167,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.ACTUAL</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.ACTUAL</code>.
      */
     public void setActual(String actual) {
         this.actual = actual;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.FORECAST</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.FORECAST</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -183,14 +183,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.FORECAST</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.FORECAST</code>.
      */
     public void setForecast(String forecast) {
         this.forecast = forecast;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.PREVIOUS</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     @NotNull
     @Size(max = 20)
@@ -199,14 +199,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.PREVIOUS</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     public void setPrevious(String previous) {
         this.previous = previous;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.REG_DATETIME</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
@@ -214,14 +214,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.REG_DATETIME</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime regDatetime) {
         this.regDatetime = regDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.REG_ID</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.REG_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -230,14 +230,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.REG_ID</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.REG_ID</code>.
      */
     public void setRegId(String regId) {
         this.regId = regId;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.UPT_DATETIME</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
@@ -245,14 +245,14 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.UPT_DATETIME</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime uptDatetime) {
         this.uptDatetime = uptDatetime;
     }
 
     /**
-     * Getter for <code>slick_prod.ECONOMIC_EVENT.UPT_ID</code>.
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_ID</code>.
      */
     @NotNull
     @Size(max = 200)
@@ -261,7 +261,7 @@ public class EconomicEvent implements Serializable {
     }
 
     /**
-     * Setter for <code>slick_prod.ECONOMIC_EVENT.UPT_ID</code>.
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_ID</code>.
      */
     public void setUptId(String uptId) {
         this.uptId = uptId;
@@ -276,11 +276,11 @@ public class EconomicEvent implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final EconomicEvent other = (EconomicEvent) obj;
-        if (this.id == null) {
-            if (other.id != null)
+        if (this.url == null) {
+            if (other.url != null)
                 return false;
         }
-        else if (!this.id.equals(other.id))
+        else if (!this.url.equals(other.url))
             return false;
         if (this.datetime == null) {
             if (other.datetime != null)
@@ -355,7 +355,7 @@ public class EconomicEvent implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime * result + ((this.url == null) ? 0 : this.url.hashCode());
         result = prime * result + ((this.datetime == null) ? 0 : this.datetime.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.country == null) ? 0 : this.country.hashCode());
@@ -374,7 +374,7 @@ public class EconomicEvent implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("EconomicEvent (");
 
-        sb.append(id);
+        sb.append(url);
         sb.append(", ").append(datetime);
         sb.append(", ").append(name);
         sb.append(", ").append(country);

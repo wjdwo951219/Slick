@@ -1,4 +1,4 @@
-package toy.slick.repository.mariadb;
+package toy.slick.repository.mysql;
 
 import lombok.NonNull;
 import org.jooq.DSLContext;
@@ -12,7 +12,7 @@ import org.jooq.generated.tables.records.KospiRecord;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
-import toy.slick.repository.mariadb.inheritable.QueryCRUD;
+import toy.slick.repository.mysql.inheritable.QueryCRUD;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

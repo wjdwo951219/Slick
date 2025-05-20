@@ -2,6 +2,7 @@ package toy.slick.feign.economicCalendar.reader;
 
 import feign.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -25,23 +26,33 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
     public List<EconomicEvent> getEconomicEventList(Response feignResponse) throws IOException {
         String responseBody = this.getResponseBody(feignResponse);
 
-        Element table = Jsoup.parse(responseBody).getElementById("ecEventsTable");
+        Element table = Jsoup.parse(responseBody).getElementById("calendar");
         Elements rows = table.select("tbody tr");
 
         return rows.stream()
-                .filter(row -> row.hasAttr("event_attr_id"))
+                .filter(row -> !row.getElementsByClass("calendar-event").isEmpty())
+                .filter(row -> !StringUtils.isBlank(row.firstElementChild().getElementsByTag("span").first().text()))
                 .map(row -> {
-                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(row.attr("event_timestamp"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), ZoneId.of(Const.ZoneId.UTC));
-                    String country = row.getElementsByClass("flagCur").first().getElementsByTag("span").first().attr("title");
-                    String importance = row.getElementsByClass("sentiment").first().attr("title").split(" ")[0];
-                    String id = row.attr("event_attr_id");
-                    String name = row.getElementsByClass("event").first().text();
-                    String actual = row.getElementsByClass("act").first().text();
-                    String forecast = row.getElementsByClass("fore").first().text();
-                    String previous = row.getElementsByClass("prev").first().text();
+                    String date = row.firstElementChild().attr("class").trim();
+                    String time = row.firstElementChild().getElementsByTag("span").first().text().trim().substring(0, 5);
+
+                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(date + time, DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm")), ZoneId.of(Const.ZoneId.UTC));
+                    String country = row.getElementsByTag("table").first().getElementsByTag("div").first().attr("title");
+                    String importanceStr = row.firstElementChild().getElementsByTag("span").first().attr("class");
+                    String importance = importanceStr.substring(importanceStr.length() - 1);
+                    String url = "https://tradingeconomics.com" + row.getElementsByClass("calendar-event").first().attr("href");
+                    String name = row.getElementsByClass("calendar-event").first().text();
+
+                    Element actualElement = row.getElementById("actual");
+                    Element forecastElement = row.getElementById("forecast");
+                    Element previousElement = row.getElementById("previous");
+
+                    String actual = actualElement != null ? actualElement.text() : StringUtils.EMPTY;
+                    String forecast = forecastElement != null ? forecastElement.text() : StringUtils.EMPTY;
+                    String previous = previousElement != null ? previousElement.text() : StringUtils.EMPTY;
 
                     return EconomicEvent.builder()
-                            .id(id)
+                            .url(url)
                             .name(name)
                             .zonedDateTime(zonedDateTime)
                             .country(country)

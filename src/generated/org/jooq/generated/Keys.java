@@ -34,7 +34,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables in
- * slick_prod.
+ * 786b676a8e45.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {
@@ -47,7 +47,7 @@ public class Keys {
     public static final UniqueKey<CurrencyJpyKrwRecord> KEY_CURRENCY_JPY_KRW_PRIMARY = Internal.createUniqueKey(JCurrencyJpyKrw.CURRENCY_JPY_KRW, DSL.name("KEY_CURRENCY_JPY_KRW_PRIMARY"), new TableField[] { JCurrencyJpyKrw.CURRENCY_JPY_KRW.REG_DATETIME }, true);
     public static final UniqueKey<CurrencyUsdKrwRecord> KEY_CURRENCY_USD_KRW_PRIMARY = Internal.createUniqueKey(JCurrencyUsdKrw.CURRENCY_USD_KRW, DSL.name("KEY_CURRENCY_USD_KRW_PRIMARY"), new TableField[] { JCurrencyUsdKrw.CURRENCY_USD_KRW.REG_DATETIME }, true);
     public static final UniqueKey<DjiRecord> KEY_DJI_PRIMARY = Internal.createUniqueKey(JDji.DJI, DSL.name("KEY_DJI_PRIMARY"), new TableField[] { JDji.DJI.REG_DATETIME }, true);
-    public static final UniqueKey<EconomicEventRecord> KEY_ECONOMIC_EVENT_PRIMARY = Internal.createUniqueKey(JEconomicEvent.ECONOMIC_EVENT, DSL.name("KEY_ECONOMIC_EVENT_PRIMARY"), new TableField[] { JEconomicEvent.ECONOMIC_EVENT.ID }, true);
+    public static final UniqueKey<EconomicEventRecord> KEY_ECONOMIC_EVENT_PRIMARY = Internal.createUniqueKey(JEconomicEvent.ECONOMIC_EVENT, DSL.name("KEY_ECONOMIC_EVENT_PRIMARY"), new TableField[] { JEconomicEvent.ECONOMIC_EVENT.URL }, true);
     public static final UniqueKey<FearAndGreedRecord> KEY_FEAR_AND_GREED_PRIMARY = Internal.createUniqueKey(JFearAndGreed.FEAR_AND_GREED, DSL.name("KEY_FEAR_AND_GREED_PRIMARY"), new TableField[] { JFearAndGreed.FEAR_AND_GREED.REG_DATETIME }, true);
     public static final UniqueKey<HolidayRecord> KEY_HOLIDAY_PRIMARY = Internal.createUniqueKey(JHoliday.HOLIDAY, DSL.name("KEY_HOLIDAY_PRIMARY"), new TableField[] { JHoliday.HOLIDAY.COUNTRY, JHoliday.HOLIDAY.DATE }, true);
     public static final UniqueKey<IxicRecord> KEY_IXIC_PRIMARY = Internal.createUniqueKey(JIxic.IXIC, DSL.name("KEY_IXIC_PRIMARY"), new TableField[] { JIxic.IXIC.REG_DATETIME }, true);

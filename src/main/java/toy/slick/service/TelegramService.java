@@ -15,17 +15,17 @@ import org.jooq.generated.tables.pojos.Spx;
 import org.springframework.stereotype.Service;
 import toy.slick.common.Const;
 import toy.slick.common.MsgUtils;
-import toy.slick.repository.mariadb.CurrencyEurKrwRepository;
-import toy.slick.repository.mariadb.CurrencyJpyKrwRepository;
-import toy.slick.repository.mariadb.CurrencyUsdKrwRepository;
-import toy.slick.repository.mariadb.DjiRepository;
-import toy.slick.repository.mariadb.EconomicEventRepository;
-import toy.slick.repository.mariadb.FearAndGreedRepository;
-import toy.slick.repository.mariadb.HolidayRepository;
-import toy.slick.repository.mariadb.IxicRepository;
-import toy.slick.repository.mariadb.KosdaqRepository;
-import toy.slick.repository.mariadb.KospiRepository;
-import toy.slick.repository.mariadb.SpxRepository;
+import toy.slick.repository.mysql.CurrencyEurKrwRepository;
+import toy.slick.repository.mysql.CurrencyJpyKrwRepository;
+import toy.slick.repository.mysql.CurrencyUsdKrwRepository;
+import toy.slick.repository.mysql.DjiRepository;
+import toy.slick.repository.mysql.EconomicEventRepository;
+import toy.slick.repository.mysql.FearAndGreedRepository;
+import toy.slick.repository.mysql.HolidayRepository;
+import toy.slick.repository.mysql.IxicRepository;
+import toy.slick.repository.mysql.KosdaqRepository;
+import toy.slick.repository.mysql.KospiRepository;
+import toy.slick.repository.mysql.SpxRepository;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -203,28 +203,32 @@ public class TelegramService {
         return messageBuilder.toString();
     }
 
-    public String getEconomicEventListMessage(String country, ZonedDateTime startDateTime, ZonedDateTime endDateTime) {
+    public String getEconomicEventListMessage(Const.Country country, ZonedDateTime startDateTime, ZonedDateTime endDateTime) {
         List<EconomicEvent> economicEventList = economicEventRepository
-                .select(country,
+                .select(country.getCountryName(),
                         startDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime(),
                         endDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime());
 
+        String languagePrefix = Const.Country.UNITED_STATES.equals(country)
+                ? StringUtils.EMPTY
+                : country.getLanguageCode() + ".";
+
         if (CollectionUtils.isEmpty(economicEventList)) {
             return Const.Emoji.CHECK_MARK
-                    + "<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a> is Empty</b>";
+                    + "<b><a href='https://" + languagePrefix + "tradingeconomics.com/calendar'>Economic Event List</a> is Empty</b>";
         }
 
         Map<String, List<String>> economicEventListMap = economicEventList
                 .stream()
                 .collect(Collectors.groupingBy(EconomicEvent::getCountry,
                         Collectors.mapping(economicEvent -> {
-                            String eventId = economicEvent.getId();
+                            String url = economicEvent.getUrl();
                             String eventName = economicEvent.getName();
                             String actualValue = economicEvent.getActual();
                             String forecastValue = StringUtils.defaultIfBlank(economicEvent.getForecast(), "-");
                             String previousValue = economicEvent.getPrevious();
 
-                            return "<a href='https://m.investing.com/economic-calendar/" + eventId + "'>" + eventName + "</a>" + "\n"
+                            return "<a href='" + url.replace("https://", "https://" + languagePrefix) + "'>" + eventName + "</a>" + "\n"
                                     + " : " + actualValue + " | " + forecastValue + " | " + previousValue;
                         }, Collectors.toList())));
 
@@ -232,7 +236,9 @@ public class TelegramService {
 
         messageBuilder
                 .append(Const.Emoji.CHECK_MARK)
-                .append("<b><a href='https://m.investing.com/economic-calendar/'>Economic Event List</a></b>")
+                .append("<b><a href='https://")
+                .append(languagePrefix)
+                .append("tradingeconomics.com/calendar'>Economic Event List</a></b>")
                 .append("\n")
                 .append(" : Actual | Forecast | Previous")
                 .append("\n")
@@ -262,7 +268,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.EURO,
+                Const.Emoji.EURO_BANKNOTE,
                 currencyEurKrw.get().getUrl(),
                 "1€(EUR)",
                 currencyEurKrw.get().getPrice(),
@@ -279,7 +285,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.YEN,
+                Const.Emoji.YEN_BANKNOTE,
                 currencyJpyKrw.get().getUrl(),
                 "100¥(JPY)",
                 currencyJpyKrw.get().getPrice(),
@@ -296,7 +302,7 @@ public class TelegramService {
         }
 
         return this.generateCurrencyMessage(
-                Const.Emoji.DOLLAR,
+                Const.Emoji.DOLLAR_BANKNOTE,
                 currencyJpyKrw.get().getUrl(),
                 "1$(USD)",
                 currencyJpyKrw.get().getPrice(),

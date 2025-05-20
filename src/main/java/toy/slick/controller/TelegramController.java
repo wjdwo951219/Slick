@@ -37,8 +37,8 @@ public class TelegramController {
         }
 
         switch (channel) {
-            case Const.Country.KR -> telegramScheduler_KR.sendEconomicEventList();
-            case Const.Country.US -> telegramScheduler_US.sendEconomicEventList();
+            case Const.ChannelSuffix.KR -> telegramScheduler_KR.sendEconomicEventList();
+            case Const.ChannelSuffix.US -> telegramScheduler_US.sendEconomicEventList();
         }
 
         return HttpStatus.OK.toString();
@@ -53,8 +53,8 @@ public class TelegramController {
         }
 
         switch (channel) {
-            case Const.Country.KR -> telegramScheduler_KR.sendIndices();
-            case Const.Country.US -> telegramScheduler_US.sendIndices();
+            case Const.ChannelSuffix.KR -> telegramScheduler_KR.sendIndices();
+            case Const.ChannelSuffix.US -> telegramScheduler_US.sendIndices();
         }
 
         return HttpStatus.OK.toString();
@@ -81,7 +81,7 @@ public class TelegramController {
         }
 
         switch (channel) {
-            case Const.Country.KR -> telegramScheduler_KR.sendCurrencies();
+            case Const.ChannelSuffix.KR -> telegramScheduler_KR.sendCurrencies();
             // TODO : add other countries
         }
 

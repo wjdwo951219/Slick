@@ -26,9 +26,9 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>slick_prod</code>.
+     * The schema <code>786b676a8e45</code>.
      */
-    public final JSlickProd SLICK_PROD = JSlickProd.SLICK_PROD;
+    public final J_786b676a8e45 _786B676A8E45 = J_786b676a8e45._786B676A8E45;
 
     /**
      * No further instances allowed
@@ -40,7 +40,7 @@ public class DefaultCatalog extends CatalogImpl {
     @Override
     public final List<Schema> getSchemas() {
         return Arrays.asList(
-            JSlickProd.SLICK_PROD
+            J_786b676a8e45._786B676A8E45
         );
     }
 
