@@ -54,19 +54,12 @@ management:
         exclude: "*"
     web:
       exposure:
-        include: info, health
+        include: health
     access:
       default: read_only
   endpoint:
-    info:
-      access: read_only
     health:
+      probes:
+        enabled: true
+      show-details: never
       access: read_only
-  info:
-    env:
-      enabled: true
-
-info:
-  contact:
-    email: wjdwo951219@gmail.com
-    github: https://github.com/wjdwo951219/Slick
