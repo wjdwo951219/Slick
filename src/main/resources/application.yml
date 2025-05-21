@@ -20,6 +20,8 @@ spring:
         config:
           default:
             logger-level: headers
+  jooq:
+    sql-dialect: MYSQL
   task:
     scheduling:
       pool:
