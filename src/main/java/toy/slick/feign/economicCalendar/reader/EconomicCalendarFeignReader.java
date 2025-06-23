@@ -12,11 +12,10 @@ import toy.slick.feign.economicCalendar.vo.response.EconomicEvent;
 import toy.slick.feign.inheritable.FeignResponseReader;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -34,9 +33,12 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
                 .filter(row -> !StringUtils.isBlank(row.firstElementChild().getElementsByTag("span").first().text()))
                 .map(row -> {
                     String date = row.firstElementChild().attr("class").trim();
-                    String time = row.firstElementChild().getElementsByTag("span").first().text().trim().substring(0, 5);
+                    String time = row.firstElementChild().getElementsByTag("span").first().text().trim().toUpperCase();
 
-                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.parse(date + time, DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm")), ZoneId.of(Const.ZoneId.UTC));
+                    ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(
+                            LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                            LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH))
+                    ), ZoneId.of(Const.ZoneId.UTC));
                     String country = row.getElementsByTag("table").first().getElementsByTag("div").first().attr("title");
                     String importanceStr = row.firstElementChild().getElementsByTag("span").first().attr("class");
                     String importance = importanceStr.substring(importanceStr.length() - 1);
