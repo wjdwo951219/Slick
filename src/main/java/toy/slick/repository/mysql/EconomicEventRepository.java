@@ -49,6 +49,7 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
                                 LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
 
                                 return new EconomicEventRecord(
+                                        economicEvent.getId(),
                                         economicEvent.getUrl(),
                                         economicEvent.getDatetime(),
                                         economicEvent.getName(),
@@ -78,10 +79,10 @@ public class EconomicEventRepository extends QueryCRUD<EconomicEventRecord> {
         return query.execute();
     }
 
-    public int delete(@NonNull Set<String> urlSet) {
+    public int delete(@NonNull Set<String> idSet) {
         DeleteConditionStep<EconomicEventRecord> query = this.queryDelete(
                 tEconomicEvent,
-                tEconomicEvent.URL.in(urlSet));
+                tEconomicEvent.ID.in(idSet));
 
         return query.execute();
     }

@@ -54,6 +54,11 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
     }
 
     /**
+     * The column <code>786b676a8e45.ECONOMIC_EVENT.ID</code>.
+     */
+    public final TableField<EconomicEventRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(10).nullable(false), this, "");
+
+    /**
      * The column <code>786b676a8e45.ECONOMIC_EVENT.URL</code>.
      */
     public final TableField<EconomicEventRecord, String> URL = createField(DSL.name("URL"), SQLDataType.VARCHAR(200).nullable(false), this, "");

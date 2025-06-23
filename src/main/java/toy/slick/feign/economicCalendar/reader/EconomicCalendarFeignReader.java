@@ -29,9 +29,11 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
         Elements rows = table.select("tbody tr");
 
         return rows.stream()
+                .filter(row -> row.hasAttr("data-id"))
                 .filter(row -> !row.getElementsByClass("calendar-event").isEmpty())
-                .filter(row -> !StringUtils.isBlank(row.firstElementChild().getElementsByTag("span").first().text()))
+                .filter(row -> StringUtils.isNotBlank(row.firstElementChild().getElementsByTag("span").first().text()))
                 .map(row -> {
+                    String dataId = row.attr("data-id");
                     String date = row.firstElementChild().attr("class").trim();
                     String time = row.firstElementChild().getElementsByTag("span").first().text().trim().toUpperCase();
 
@@ -54,6 +56,7 @@ public class EconomicCalendarFeignReader implements FeignResponseReader {
                     String previous = previousElement != null ? previousElement.text() : StringUtils.EMPTY;
 
                     return EconomicEvent.builder()
+                            .id(dataId)
                             .url(url)
                             .name(name)
                             .zonedDateTime(zonedDateTime)

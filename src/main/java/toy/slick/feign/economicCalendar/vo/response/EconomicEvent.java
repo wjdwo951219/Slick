@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 @Getter
 @Builder
 public class EconomicEvent {
+    private String id;
     private ZonedDateTime zonedDateTime;
     private String url;
     private String name;
