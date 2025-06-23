@@ -125,7 +125,7 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "8 8/10 * * * *")
     public void saveEconomicEventList() throws Exception {
         try (Response response = economicCalendarFeign.getEconomicCalendar()) {
             Map<String, EconomicEvent> economicEventMap = economicCalendarFeignReader.getEconomicEventList(response)
