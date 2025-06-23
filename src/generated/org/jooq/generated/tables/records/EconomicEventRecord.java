@@ -24,10 +24,26 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     private static final long serialVersionUID = 1L;
 
     /**
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.ID</code>.
+     */
+    public void setId(String value) {
+        set(0, value);
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.ID</code>.
+     */
+    @NotNull
+    @Size(max = 10)
+    public String getId() {
+        return (String) get(0);
+    }
+
+    /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.URL</code>.
      */
     public void setUrl(String value) {
-        set(0, value);
+        set(1, value);
     }
 
     /**
@@ -36,14 +52,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 200)
     public String getUrl() {
-        return (String) get(0);
+        return (String) get(1);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.DATETIME</code>.
      */
     public void setDatetime(LocalDateTime value) {
-        set(1, value);
+        set(2, value);
     }
 
     /**
@@ -51,14 +67,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
      */
     @NotNull
     public LocalDateTime getDatetime() {
-        return (LocalDateTime) get(1);
+        return (LocalDateTime) get(2);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.NAME</code>.
      */
     public void setName(String value) {
-        set(2, value);
+        set(3, value);
     }
 
     /**
@@ -67,14 +83,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 100)
     public String getName() {
-        return (String) get(2);
+        return (String) get(3);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.COUNTRY</code>.
      */
     public void setCountry(String value) {
-        set(3, value);
+        set(4, value);
     }
 
     /**
@@ -83,14 +99,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 20)
     public String getCountry() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.IMPORTANCE</code>.
      */
     public void setImportance(String value) {
-        set(4, value);
+        set(5, value);
     }
 
     /**
@@ -99,14 +115,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 10)
     public String getImportance() {
-        return (String) get(4);
+        return (String) get(5);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.ACTUAL</code>.
      */
     public void setActual(String value) {
-        set(5, value);
+        set(6, value);
     }
 
     /**
@@ -115,14 +131,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 20)
     public String getActual() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.FORECAST</code>.
      */
     public void setForecast(String value) {
-        set(6, value);
+        set(7, value);
     }
 
     /**
@@ -131,14 +147,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 20)
     public String getForecast() {
-        return (String) get(6);
+        return (String) get(7);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.PREVIOUS</code>.
      */
     public void setPrevious(String value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
@@ -147,14 +163,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 20)
     public String getPrevious() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
-        set(8, value);
+        set(9, value);
     }
 
     /**
@@ -162,14 +178,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
-        return (LocalDateTime) get(8);
+        return (LocalDateTime) get(9);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.REG_ID</code>.
      */
     public void setRegId(String value) {
-        set(9, value);
+        set(10, value);
     }
 
     /**
@@ -178,14 +194,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 200)
     public String getRegId() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
-        set(10, value);
+        set(11, value);
     }
 
     /**
@@ -193,14 +209,14 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
-        return (LocalDateTime) get(10);
+        return (LocalDateTime) get(11);
     }
 
     /**
      * Setter for <code>786b676a8e45.ECONOMIC_EVENT.UPT_ID</code>.
      */
     public void setUptId(String value) {
-        set(11, value);
+        set(12, value);
     }
 
     /**
@@ -209,7 +225,7 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     @NotNull
     @Size(max = 200)
     public String getUptId() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     // -------------------------------------------------------------------------
@@ -235,9 +251,10 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
     /**
      * Create a detached, initialised EconomicEventRecord
      */
-    public EconomicEventRecord(String url, LocalDateTime datetime, String name, String country, String importance, String actual, String forecast, String previous, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
+    public EconomicEventRecord(String id, String url, LocalDateTime datetime, String name, String country, String importance, String actual, String forecast, String previous, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
         super(JEconomicEvent.ECONOMIC_EVENT);
 
+        setId(id);
         setUrl(url);
         setDatetime(datetime);
         setName(name);
@@ -260,6 +277,7 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
         super(JEconomicEvent.ECONOMIC_EVENT);
 
         if (value != null) {
+            setId(value.getId());
             setUrl(value.getUrl());
             setDatetime(value.getDatetime());
             setName(value.getName());
