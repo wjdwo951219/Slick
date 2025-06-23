@@ -20,6 +20,7 @@ public class EconomicEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String id;
     private String url;
     private LocalDateTime datetime;
     private String name;
@@ -36,6 +37,7 @@ public class EconomicEvent implements Serializable {
     public EconomicEvent() {}
 
     public EconomicEvent(EconomicEvent value) {
+        this.id = value.id;
         this.url = value.url;
         this.datetime = value.datetime;
         this.name = value.name;
@@ -51,6 +53,7 @@ public class EconomicEvent implements Serializable {
     }
 
     public EconomicEvent(
+        String id,
         String url,
         LocalDateTime datetime,
         String name,
@@ -64,6 +67,7 @@ public class EconomicEvent implements Serializable {
         LocalDateTime uptDatetime,
         String uptId
     ) {
+        this.id = id;
         this.url = url;
         this.datetime = datetime;
         this.name = name;
@@ -76,6 +80,22 @@ public class EconomicEvent implements Serializable {
         this.regId = regId;
         this.uptDatetime = uptDatetime;
         this.uptId = uptId;
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.ECONOMIC_EVENT.ID</code>.
+     */
+    @NotNull
+    @Size(max = 10)
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Setter for <code>786b676a8e45.ECONOMIC_EVENT.ID</code>.
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -276,6 +296,12 @@ public class EconomicEvent implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final EconomicEvent other = (EconomicEvent) obj;
+        if (this.id == null) {
+            if (other.id != null)
+                return false;
+        }
+        else if (!this.id.equals(other.id))
+            return false;
         if (this.url == null) {
             if (other.url != null)
                 return false;
@@ -355,6 +381,7 @@ public class EconomicEvent implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.url == null) ? 0 : this.url.hashCode());
         result = prime * result + ((this.datetime == null) ? 0 : this.datetime.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
@@ -374,7 +401,8 @@ public class EconomicEvent implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("EconomicEvent (");
 
-        sb.append(url);
+        sb.append(id);
+        sb.append(", ").append(url);
         sb.append(", ").append(datetime);
         sb.append(", ").append(name);
         sb.append(", ").append(country);

@@ -125,14 +125,14 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "8 8/10 * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void saveEconomicEventList() throws Exception {
         try (Response response = economicCalendarFeign.getEconomicCalendar()) {
             Map<String, EconomicEvent> economicEventMap = economicCalendarFeignReader.getEconomicEventList(response)
                     .stream()
                     .filter(o -> StringUtils.isNotBlank(o.getActual()))
                     .sorted(Comparator.comparing(EconomicEvent::getZonedDateTime))
-                    .collect(Collectors.toMap(EconomicEvent::getUrl, Function.identity(), (o1, o2) -> o2));
+                    .collect(Collectors.toMap(EconomicEvent::getId, Function.identity(), (o1, o2) -> o2));
 
             if (CollectionUtils.isEmpty(economicEventMap.keySet())) {
                 return;
@@ -146,6 +146,7 @@ public class DataSaveScheduler {
                     economicEventMap.values()
                             .stream()
                             .map(o -> org.jooq.generated.tables.pojos.EconomicEvent.builder()
+                                    .id(o.getId())
                                     .url(o.getUrl())
                                     .name(o.getName())
                                     .datetime(o.getZonedDateTime().toLocalDateTime())
