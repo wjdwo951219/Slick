@@ -203,11 +203,14 @@ public class TelegramService {
         return messageBuilder.toString();
     }
 
-    public String getEconomicEventListMessage(Const.Country country, ZonedDateTime startDateTime, ZonedDateTime endDateTime) {
+    public String getEconomicEventListMessage(Const.Country country, String minImportance, ZonedDateTime startDateTime, ZonedDateTime endDateTime) {
         List<EconomicEvent> economicEventList = economicEventRepository
                 .select(country.getCountryName(),
                         startDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime(),
-                        endDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime());
+                        endDateTime.withZoneSameInstant(ZoneId.of(Const.ZoneId.UTC)).toLocalDateTime())
+                .stream()
+                .filter(economicEvent -> economicEvent.getImportance().compareTo(minImportance) >= 0)
+                .toList();
 
         String languagePrefix = Const.Country.UNITED_STATES.equals(country)
                 ? StringUtils.EMPTY
@@ -251,7 +254,10 @@ public class TelegramService {
                     .append(economicEventListEntry.getKey())
                     .append("</b>")
                     .append("\n")
-                    .append(String.join("\n", economicEventListEntry.getValue()))
+                    .append(economicEventListEntry.getValue()
+                            .stream()
+                            .sorted()
+                            .collect(Collectors.joining("\n")))
                     .append("\n")
                     .append("————————")
                     .append("\n");

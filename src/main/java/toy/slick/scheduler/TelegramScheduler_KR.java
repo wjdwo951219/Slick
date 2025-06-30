@@ -60,7 +60,7 @@ public class TelegramScheduler_KR {
                 .withMinute(49)
                 .withSecond(0);
 
-        String message = telegramService.getEconomicEventListMessage(Const.Country.KOREA, searchDateTime, searchDateTime.plusDays(1));
+        String message = telegramService.getEconomicEventListMessage(Const.Country.KOREA, "1", searchDateTime, searchDateTime.plusDays(1));
 
         if (StringUtils.isBlank(message)) {
             throw new Exception(MsgUtils.blankMsg(message));
