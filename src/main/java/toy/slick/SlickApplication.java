@@ -15,6 +15,7 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class SlickApplication {
     public static void main(String[] args) {
+        // TODO : https://www.tradinghours.com/status.json parsing -> holiday 수정 (일찍 장 닫는 날도 휴일로 저장되고 있음)
         SpringApplication.run(SlickApplication.class, args);
     }
 
