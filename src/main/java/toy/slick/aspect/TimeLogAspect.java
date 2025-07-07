@@ -28,12 +28,12 @@ public class TimeLogAspect {
 
     @Before("@annotation(toy.slick.aspect.TimeLogAspect.TimeLog)")
     public void logStartTime(JoinPoint joinPoint) {
-        log.info(joinPoint.getSignature() + " start : " + ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL)));
+        log.info("{} start : {}", joinPoint.getSignature(), ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL)));
     }
 
     @After("@annotation(toy.slick.aspect.TimeLogAspect.TimeLog)")
     public void logEndTime(JoinPoint joinPoint) {
-        log.info(joinPoint.getSignature() + " end : " + ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL)));
+        log.info("{} end : {}", joinPoint.getSignature(), ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL)));
     }
 
     @Around("@annotation(toy.slick.aspect.TimeLogAspect.TimeLog)")
@@ -44,7 +44,7 @@ public class TimeLogAspect {
 
         long end = System.currentTimeMillis();
 
-        log.info(joinPoint.getSignature() + " execution time : " + (end - start) + "ms");
+        log.info("{} execution time : {}ms", joinPoint.getSignature(), end - start);
 
         return proceed;
     }

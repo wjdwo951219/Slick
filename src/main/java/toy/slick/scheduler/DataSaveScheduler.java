@@ -25,7 +25,6 @@ import toy.slick.feign.investing.vo.response.EconomicIndex;
 import toy.slick.repository.mysql.*;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -130,8 +129,8 @@ public class DataSaveScheduler {
                     10,
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
-            if (insertCnt != economicEventMap.values().size()) {
-                throw new Exception(MsgUtils.insertCntMsg(insertCnt, economicEventMap.values().size()));
+            if (insertCnt != economicEventMap.size()) {
+                throw new Exception(MsgUtils.insertCntMsg(insertCnt, economicEventMap.size()));
             }
         }
     }

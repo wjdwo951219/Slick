@@ -8,7 +8,6 @@ import toy.slick.common.Const;
 import toy.slick.common.MsgUtils;
 import toy.slick.repository.mysql.*;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -54,86 +53,70 @@ public class TelegramService {
     public String getDjiMessage() {
         Optional<Dji> dji = djiRepository.selectRecentOneIn12Hours();
 
-        if (dji.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
-
-        return this.generateIndexMessage(
-                dji.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
-                dji.get().getUrl(),
-                dji.get().getTitle(),
-                dji.get().getPrice(),
-                dji.get().getPriceChange(),
-                dji.get().getPriceChangePercent()
-        );
+        return dji.map(value -> this.generateIndexMessage(
+                        value.getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
+                        value.getUrl(),
+                        value.getTitle(),
+                        value.getPrice(),
+                        value.getPriceChange(),
+                        value.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
     }
 
     public String getSpxMessage() {
         Optional<Spx> spx = spxRepository.selectRecentOneIn12Hours();
 
-        if (spx.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return spx.map(value -> this.generateIndexMessage(
+                        value.getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
+                        value.getUrl(),
+                        value.getTitle(),
+                        value.getPrice(),
+                        value.getPriceChange(),
+                        value.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateIndexMessage(
-                spx.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
-                spx.get().getUrl(),
-                spx.get().getTitle(),
-                spx.get().getPrice(),
-                spx.get().getPriceChange(),
-                spx.get().getPriceChangePercent()
-        );
     }
 
     public String getIxicMessage() {
         Optional<Ixic> ixic = ixicRepository.selectRecentOneIn12Hours();
 
-        if (ixic.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return ixic.map(value -> this.generateIndexMessage(
+                        value.getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
+                        value.getUrl(),
+                        value.getTitle(),
+                        value.getPrice(),
+                        value.getPriceChange(),
+                        value.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateIndexMessage(
-                ixic.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
-                ixic.get().getUrl(),
-                ixic.get().getTitle(),
-                ixic.get().getPrice(),
-                ixic.get().getPriceChange(),
-                ixic.get().getPriceChangePercent()
-        );
     }
 
     public String getKosdaqMessage() {
         Optional<Kosdaq> kosdaq = kosdaqRepository.selectRecentOneIn12Hours();
 
-        if (kosdaq.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return kosdaq.map(value -> this.generateIndexMessage(
+                        value.getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
+                        value.getUrl(),
+                        value.getTitle(),
+                        value.getPrice(),
+                        value.getPriceChange(),
+                        value.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateIndexMessage(
-                kosdaq.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
-                kosdaq.get().getUrl(),
-                kosdaq.get().getTitle(),
-                kosdaq.get().getPrice(),
-                kosdaq.get().getPriceChange(),
-                kosdaq.get().getPriceChangePercent()
-        );
     }
 
     public String getKospiMessage() {
         Optional<Kospi> kospi = kospiRepository.selectRecentOneIn12Hours();
 
-        if (kospi.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return kospi.map(value -> this.generateIndexMessage(
+                        value.getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
+                        value.getUrl(),
+                        value.getTitle(),
+                        value.getPrice(),
+                        value.getPriceChange(),
+                        value.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateIndexMessage(
-                kospi.get().getPriceChange().startsWith("-") ? Const.Emoji.DOWN_CHART : Const.Emoji.UP_CHART,
-                kospi.get().getUrl(),
-                kospi.get().getTitle(),
-                kospi.get().getPrice(),
-                kospi.get().getPriceChange(),
-                kospi.get().getPriceChangePercent()
-        );
     }
 
     private String generateIndexMessage(String titleIcon, String url, String title, String price, String priceChange, String priceChangePercent) {
@@ -243,52 +226,43 @@ public class TelegramService {
     public String getCurrencyEurKrwMessage() {
         Optional<CurrencyEurKrw> currencyEurKrw = currencyEurKrwRepository.selectRecentOneIn12Hours();
 
-        if (currencyEurKrw.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return currencyEurKrw.map(eurKrw -> this.generateCurrencyMessage(
+                        Const.Emoji.EURO_BANKNOTE,
+                        eurKrw.getUrl(),
+                        "1€(EUR)",
+                        eurKrw.getPrice(),
+                        eurKrw.getPriceChange(),
+                        eurKrw.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateCurrencyMessage(
-                Const.Emoji.EURO_BANKNOTE,
-                currencyEurKrw.get().getUrl(),
-                "1€(EUR)",
-                currencyEurKrw.get().getPrice(),
-                currencyEurKrw.get().getPriceChange(),
-                currencyEurKrw.get().getPriceChangePercent()
-        );
     }
 
     public String getCurrencyJpyKrwMessage() {
         Optional<CurrencyJpyKrw> currencyJpyKrw = currencyJpyKrwRepository.selectRecentOneIn12Hours();
 
-        if (currencyJpyKrw.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return currencyJpyKrw.map(jpyKrw -> this.generateCurrencyMessage(
+                        Const.Emoji.YEN_BANKNOTE,
+                        jpyKrw.getUrl(),
+                        "100¥(JPY)",
+                        jpyKrw.getPrice(),
+                        jpyKrw.getPriceChange(),
+                        jpyKrw.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateCurrencyMessage(
-                Const.Emoji.YEN_BANKNOTE,
-                currencyJpyKrw.get().getUrl(),
-                "100¥(JPY)",
-                currencyJpyKrw.get().getPrice(),
-                currencyJpyKrw.get().getPriceChange(),
-                currencyJpyKrw.get().getPriceChangePercent()
-        );
     }
 
     public String getCurrencyUsdKrwMessage() {
         Optional<CurrencyUsdKrw> currencyJpyKrw = currencyUsdKrwRepository.selectRecentOneIn12Hours();
 
-        if (currencyJpyKrw.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
+        return currencyJpyKrw.map(currencyUsdKrw -> this.generateCurrencyMessage(
+                        Const.Emoji.DOLLAR_BANKNOTE,
+                        currencyUsdKrw.getUrl(),
+                        "1$(USD)",
+                        currencyUsdKrw.getPrice(),
+                        currencyUsdKrw.getPriceChange(),
+                        currencyUsdKrw.getPriceChangePercent()))
+                .orElse(StringUtils.EMPTY);
 
-        return this.generateCurrencyMessage(
-                Const.Emoji.DOLLAR_BANKNOTE,
-                currencyJpyKrw.get().getUrl(),
-                "1$(USD)",
-                currencyJpyKrw.get().getPrice(),
-                currencyJpyKrw.get().getPriceChange(),
-                currencyJpyKrw.get().getPriceChangePercent()
-        );
     }
 
     private String generateCurrencyMessage(String titleIcon, String url, String title, String price, String priceChange, String priceChangePercent) {
