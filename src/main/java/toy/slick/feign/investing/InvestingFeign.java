@@ -14,25 +14,25 @@ public interface InvestingFeign {
     })
     Response getDowJonesIndustrialAverage();
 
-    @GetMapping(value = "/indices/us-spx-500", headers = {
+    @GetMapping(value = "/indices/us-spx-500-technical", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
     })
     Response getStandardAndPoor500();
 
-    @GetMapping(value = "/indices/nasdaq-composite", headers = {
+    @GetMapping(value = "/indices/nasdaq-composite-technical", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
     })
     Response getNasdaqComposite();
 
-    @GetMapping(value = "/indices/kospi", headers = {
+    @GetMapping(value = "/indices/kospi-technical", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
     })
     Response getKospi();
 
-    @GetMapping(value = "/indices/kosdaq", headers = {
+    @GetMapping(value = "/indices/kosdaq-technical", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
     })
