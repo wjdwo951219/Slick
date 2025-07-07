@@ -309,7 +309,7 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "10/30 4/10 * * * *")
+    @Scheduled(cron = "45 4/5 * * * *")
     public void saveCurrencyUsdKrw() throws Exception {
         try (Response response = investingFeign.getCurrenciesUsdKrw()) {
             Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
@@ -337,7 +337,7 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "15/30 4/10 * * * *")
+    @Scheduled(cron = "40 4/5 * * * *")
     public void saveCurrencyJpyKrw() throws Exception {
         try (Response response = investingFeign.getCurrenciesJpyKrw()) {
             Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
@@ -365,7 +365,7 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "20/30 4/10 * * * *")
+    @Scheduled(cron = "35 4/5 * * * *")
     public void saveCurrencyEurKrw() throws Exception {
         try (Response response = investingFeign.getCurrenciesEurKrw()) {
             Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
