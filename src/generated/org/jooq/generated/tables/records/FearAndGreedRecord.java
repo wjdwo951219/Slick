@@ -55,10 +55,25 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     }
 
     /**
+     * Setter for <code>786b676a8e45.FEAR_AND_GREED.DATETIME</code>.
+     */
+    public void setDatetime(LocalDateTime value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.FEAR_AND_GREED.DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getDatetime() {
+        return (LocalDateTime) get(2);
+    }
+
+    /**
      * Setter for <code>786b676a8e45.FEAR_AND_GREED.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
-        set(2, value);
+        set(3, value);
     }
 
     /**
@@ -66,14 +81,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
-        return (LocalDateTime) get(2);
+        return (LocalDateTime) get(3);
     }
 
     /**
      * Setter for <code>786b676a8e45.FEAR_AND_GREED.REG_ID</code>.
      */
     public void setRegId(String value) {
-        set(3, value);
+        set(4, value);
     }
 
     /**
@@ -82,14 +97,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     @NotNull
     @Size(max = 200)
     public String getRegId() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     /**
      * Setter for <code>786b676a8e45.FEAR_AND_GREED.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
-        set(4, value);
+        set(5, value);
     }
 
     /**
@@ -97,14 +112,14 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
-        return (LocalDateTime) get(4);
+        return (LocalDateTime) get(5);
     }
 
     /**
      * Setter for <code>786b676a8e45.FEAR_AND_GREED.UPT_ID</code>.
      */
     public void setUptId(String value) {
-        set(5, value);
+        set(6, value);
     }
 
     /**
@@ -113,7 +128,7 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     @NotNull
     @Size(max = 200)
     public String getUptId() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     // -------------------------------------------------------------------------
@@ -139,11 +154,12 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
     /**
      * Create a detached, initialised FearAndGreedRecord
      */
-    public FearAndGreedRecord(String rating, Double score, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
+    public FearAndGreedRecord(String rating, Double score, LocalDateTime datetime, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
         super(JFearAndGreed.FEAR_AND_GREED);
 
         setRating(rating);
         setScore(score);
+        setDatetime(datetime);
         setRegDatetime(regDatetime);
         setRegId(regId);
         setUptDatetime(uptDatetime);
@@ -160,6 +176,7 @@ public class FearAndGreedRecord extends UpdatableRecordImpl<FearAndGreedRecord> 
         if (value != null) {
             setRating(value.getRating());
             setScore(value.getScore());
+            setDatetime(value.getDatetime());
             setRegDatetime(value.getRegDatetime());
             setRegId(value.getRegId());
             setUptDatetime(value.getUptDatetime());

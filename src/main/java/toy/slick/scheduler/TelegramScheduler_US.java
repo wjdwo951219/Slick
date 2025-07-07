@@ -52,26 +52,24 @@ public class TelegramScheduler_US {
 
     @TimeLogAspect.TimeLog
     @Async
-    @Scheduled(cron = "0 0 8 * * *", zone = Const.ZoneId.NEW_YORK)
+    @Scheduled(cron = "0 10 8 * * *", zone = Const.ZoneId.NEW_YORK)
     public void sendEconomicEventList() throws Exception {
         ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.NEW_YORK))
                 .minusDays(1)
                 .withHour(7)
-                .withMinute(49)
+                .withMinute(59)
                 .withSecond(0);
 
         String message = telegramService.getEconomicEventListMessage(Const.Country.UNITED_STATES, "2", searchDateTime, searchDateTime.plusDays(1));
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
-                message)) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
+                    message)) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }
@@ -80,23 +78,17 @@ public class TelegramScheduler_US {
     @Async
     @Scheduled(cron = "0 15 18 * * 1-5", zone = Const.ZoneId.NEW_YORK)
     public void sendFearAndGreed() throws Exception {
-        if (telegramService.isHoliday(Const.Country.UNITED_STATES.getCountryName(), LocalDate.now(ZoneId.of(Const.ZoneId.NEW_YORK)))) {
-            return;
-        }
-
         String message = telegramService.getFearAndGreedMessage();
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
-                message)
-        ) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
+                    message)
+            ) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }
@@ -109,17 +101,15 @@ public class TelegramScheduler_US {
                 + telegramService.getIxicMessage()
                 + telegramService.getSpxMessage();
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
-                message)
-        ) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_US_ID : CHAT_SLICK_DEV_ID,
+                    message)
+            ) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }

@@ -4,14 +4,7 @@ import feign.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jooq.generated.tables.pojos.CurrencyEurKrw;
-import org.jooq.generated.tables.pojos.CurrencyJpyKrw;
-import org.jooq.generated.tables.pojos.CurrencyUsdKrw;
-import org.jooq.generated.tables.pojos.Dji;
-import org.jooq.generated.tables.pojos.Ixic;
-import org.jooq.generated.tables.pojos.Kosdaq;
-import org.jooq.generated.tables.pojos.Kospi;
-import org.jooq.generated.tables.pojos.Spx;
+import org.jooq.generated.tables.pojos.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -29,21 +22,7 @@ import toy.slick.feign.economicCalendar.vo.response.EconomicEvent;
 import toy.slick.feign.investing.InvestingFeign;
 import toy.slick.feign.investing.reader.InvestingFeignReader;
 import toy.slick.feign.investing.vo.response.EconomicIndex;
-import toy.slick.feign.investing.vo.response.Holiday;
-import toy.slick.feign.naver.NaverFeign;
-import toy.slick.feign.naver.reader.NaverFeignReader;
-import toy.slick.feign.naver.vo.response.Currency;
-import toy.slick.repository.mysql.CurrencyEurKrwRepository;
-import toy.slick.repository.mysql.CurrencyJpyKrwRepository;
-import toy.slick.repository.mysql.CurrencyUsdKrwRepository;
-import toy.slick.repository.mysql.DjiRepository;
-import toy.slick.repository.mysql.EconomicEventRepository;
-import toy.slick.repository.mysql.FearAndGreedRepository;
-import toy.slick.repository.mysql.HolidayRepository;
-import toy.slick.repository.mysql.IxicRepository;
-import toy.slick.repository.mysql.KosdaqRepository;
-import toy.slick.repository.mysql.KospiRepository;
-import toy.slick.repository.mysql.SpxRepository;
+import toy.slick.repository.mysql.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -61,16 +40,13 @@ public class DataSaveScheduler {
     private final CnnFeign cnnFeign;
     private final EconomicCalendarFeign economicCalendarFeign;
     private final InvestingFeign investingFeign;
-    private final NaverFeign naverFeign;
 
     /* FeignReader */
     private final CnnFeignReader cnnFeignReader;
     private final EconomicCalendarFeignReader economicCalendarFeignReader;
     private final InvestingFeignReader investingFeignReader;
-    private final NaverFeignReader naverFeignReader;
 
     /* Repository */
-    private final HolidayRepository holidayRepository;
     private final EconomicEventRepository economicEventRepository;
     private final FearAndGreedRepository fearAndGreedRepository;
     private final DjiRepository djiRepository;
@@ -85,17 +61,14 @@ public class DataSaveScheduler {
     public DataSaveScheduler(CnnFeign cnnFeign,
                              EconomicCalendarFeign economicCalendarFeign,
                              InvestingFeign investingFeign,
-                             NaverFeign naverFeign,
                              CnnFeignReader cnnFeignReader,
                              EconomicCalendarFeignReader economicCalendarFeignReader,
                              InvestingFeignReader investingFeignReader,
-                             NaverFeignReader naverFeignReader,
                              EconomicEventRepository economicEventRepository,
                              FearAndGreedRepository fearAndGreedRepository,
                              DjiRepository djiRepository,
                              IxicRepository ixicRepository,
                              SpxRepository spxRepository,
-                             HolidayRepository holidayRepository,
                              KospiRepository kospiRepository,
                              KosdaqRepository kosdaqRepository,
                              CurrencyUsdKrwRepository currencyUsdKrwRepository,
@@ -104,17 +77,14 @@ public class DataSaveScheduler {
         this.cnnFeign = cnnFeign;
         this.economicCalendarFeign = economicCalendarFeign;
         this.investingFeign = investingFeign;
-        this.naverFeign = naverFeign;
         this.cnnFeignReader = cnnFeignReader;
         this.economicCalendarFeignReader = economicCalendarFeignReader;
         this.investingFeignReader = investingFeignReader;
-        this.naverFeignReader = naverFeignReader;
         this.economicEventRepository = economicEventRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
         this.djiRepository = djiRepository;
         this.ixicRepository = ixicRepository;
         this.spxRepository = spxRepository;
-        this.holidayRepository = holidayRepository;
         this.kospiRepository = kospiRepository;
         this.kosdaqRepository = kosdaqRepository;
         this.currencyUsdKrwRepository = currencyUsdKrwRepository;
@@ -182,6 +152,7 @@ public class DataSaveScheduler {
                     org.jooq.generated.tables.pojos.FearAndGreed.builder()
                             .rating(fearAndGreed.get().getRating())
                             .score(fearAndGreed.get().getScore())
+                            .datetime(fearAndGreed.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -210,6 +181,7 @@ public class DataSaveScheduler {
                             .price(dji.get().getPrice())
                             .priceChange(dji.get().getPriceChange())
                             .priceChangePercent(dji.get().getPriceChangePercent())
+                            .datetime(dji.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -238,6 +210,7 @@ public class DataSaveScheduler {
                             .price(spx.get().getPrice())
                             .priceChange(spx.get().getPriceChange())
                             .priceChangePercent(spx.get().getPriceChangePercent())
+                            .datetime(spx.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -266,6 +239,7 @@ public class DataSaveScheduler {
                             .price(ixic.get().getPrice())
                             .priceChange(ixic.get().getPriceChange())
                             .priceChangePercent(ixic.get().getPriceChangePercent())
+                            .datetime(ixic.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -294,6 +268,7 @@ public class DataSaveScheduler {
                             .price(kospi.get().getPrice())
                             .priceChange(kospi.get().getPriceChange())
                             .priceChangePercent(kospi.get().getPriceChangePercent())
+                            .datetime(kospi.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -322,6 +297,7 @@ public class DataSaveScheduler {
                             .price(kosdaq.get().getPrice())
                             .priceChange(kosdaq.get().getPriceChange())
                             .priceChangePercent(kosdaq.get().getPriceChangePercent())
+                            .datetime(kosdaq.get().getUtcDateTime())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
 
@@ -334,39 +310,10 @@ public class DataSaveScheduler {
     @TimeLogAspect.TimeLog
     @Async
     @Transactional
-    @Scheduled(cron = "7 7 7 * * *")
-    public void saveHoliday() throws Exception {
-        try (Response response = investingFeign.getHolidayCalendar()) {
-            int deleteCnt = holidayRepository.deleteAll();
-
-            log.info(MsgUtils.deleteCntMsg(deleteCnt));
-
-            List<Holiday> holidayList = investingFeignReader.getHolidayList(response);
-
-            int insertCnt = holidayRepository.insertBatch(
-                    holidayList
-                            .stream()
-                            .map(holiday -> org.jooq.generated.tables.pojos.Holiday.builder()
-                                    .date(holiday.getDate())
-                                    .country(holiday.getCountry())
-                                    .build())
-                            .toList(),
-                    10,
-                    Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            if (insertCnt != holidayList.size()) {
-                throw new Exception(MsgUtils.insertCntMsg(insertCnt, holidayList.size()));
-            }
-        }
-    }
-
-    @TimeLogAspect.TimeLog
-    @Async
-    @Transactional
     @Scheduled(cron = "10/30 4/10 * * * *")
     public void saveCurrencyUsdKrw() throws Exception {
-        try (Response response = naverFeign.getCurrencyUsdKrw()) {
-            Optional<Currency> currency = naverFeignReader.getCurrency(response);
+        try (Response response = investingFeign.getCurrenciesUsdKrw()) {
+            Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
 
             if (currency.isEmpty()) {
                 throw new Exception(MsgUtils.emptyMsg(currency));
@@ -377,6 +324,7 @@ public class DataSaveScheduler {
                             .price(currency.get().getPrice())
                             .priceChange(currency.get().getPriceChange())
                             .priceChangePercent(currency.get().getPriceChangePercent())
+                            .datetime(currency.get().getUtcDateTime())
                             .url(currency.get().getUrl())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -392,8 +340,8 @@ public class DataSaveScheduler {
     @Transactional
     @Scheduled(cron = "15/30 4/10 * * * *")
     public void saveCurrencyJpyKrw() throws Exception {
-        try (Response response = naverFeign.getCurrencyJpyKrw()) {
-            Optional<Currency> currency = naverFeignReader.getCurrency(response);
+        try (Response response = investingFeign.getCurrenciesJpyKrw()) {
+            Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
 
             if (currency.isEmpty()) {
                 throw new Exception(MsgUtils.emptyMsg(currency));
@@ -404,6 +352,7 @@ public class DataSaveScheduler {
                             .price(currency.get().getPrice())
                             .priceChange(currency.get().getPriceChange())
                             .priceChangePercent(currency.get().getPriceChangePercent())
+                            .datetime(currency.get().getUtcDateTime())
                             .url(currency.get().getUrl())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -419,8 +368,8 @@ public class DataSaveScheduler {
     @Transactional
     @Scheduled(cron = "20/30 4/10 * * * *")
     public void saveCurrencyEurKrw() throws Exception {
-        try (Response response = naverFeign.getCurrencyEurKrw()) {
-            Optional<Currency> currency = naverFeignReader.getCurrency(response);
+        try (Response response = investingFeign.getCurrenciesEurKrw()) {
+            Optional<EconomicIndex> currency = investingFeignReader.getEconomicIndex(response);
 
             if (currency.isEmpty()) {
                 throw new Exception(MsgUtils.emptyMsg(currency));
@@ -431,6 +380,7 @@ public class DataSaveScheduler {
                             .price(currency.get().getPrice())
                             .priceChange(currency.get().getPriceChange())
                             .priceChangePercent(currency.get().getPriceChangePercent())
+                            .datetime(currency.get().getUtcDateTime())
                             .url(currency.get().getUrl())
                             .build(),
                     Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName());

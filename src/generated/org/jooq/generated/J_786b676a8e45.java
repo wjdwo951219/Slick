@@ -15,7 +15,6 @@ import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
-import org.jooq.generated.tables.JHoliday;
 import org.jooq.generated.tables.JIxic;
 import org.jooq.generated.tables.JKosdaq;
 import org.jooq.generated.tables.JKospi;
@@ -67,11 +66,6 @@ public class J_786b676a8e45 extends SchemaImpl {
     public final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
 
     /**
-     * The table <code>786b676a8e45.HOLIDAY</code>.
-     */
-    public final JHoliday HOLIDAY = JHoliday.HOLIDAY;
-
-    /**
      * The table <code>786b676a8e45.IXIC</code>.
      */
     public final JIxic IXIC = JIxic.IXIC;
@@ -113,7 +107,6 @@ public class J_786b676a8e45 extends SchemaImpl {
             JDji.DJI,
             JEconomicEvent.ECONOMIC_EVENT,
             JFearAndGreed.FEAR_AND_GREED,
-            JHoliday.HOLIDAY,
             JIxic.IXIC,
             JKosdaq.KOSDAQ,
             JKospi.KOSPI,

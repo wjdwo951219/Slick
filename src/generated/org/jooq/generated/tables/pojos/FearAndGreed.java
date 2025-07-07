@@ -22,6 +22,7 @@ public class FearAndGreed implements Serializable {
 
     private String rating;
     private Double score;
+    private LocalDateTime datetime;
     private LocalDateTime regDatetime;
     private String regId;
     private LocalDateTime uptDatetime;
@@ -32,6 +33,7 @@ public class FearAndGreed implements Serializable {
     public FearAndGreed(FearAndGreed value) {
         this.rating = value.rating;
         this.score = value.score;
+        this.datetime = value.datetime;
         this.regDatetime = value.regDatetime;
         this.regId = value.regId;
         this.uptDatetime = value.uptDatetime;
@@ -41,6 +43,7 @@ public class FearAndGreed implements Serializable {
     public FearAndGreed(
         String rating,
         Double score,
+        LocalDateTime datetime,
         LocalDateTime regDatetime,
         String regId,
         LocalDateTime uptDatetime,
@@ -48,6 +51,7 @@ public class FearAndGreed implements Serializable {
     ) {
         this.rating = rating;
         this.score = score;
+        this.datetime = datetime;
         this.regDatetime = regDatetime;
         this.regId = regId;
         this.uptDatetime = uptDatetime;
@@ -83,6 +87,21 @@ public class FearAndGreed implements Serializable {
      */
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.FEAR_AND_GREED.DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getDatetime() {
+        return this.datetime;
+    }
+
+    /**
+     * Setter for <code>786b676a8e45.FEAR_AND_GREED.DATETIME</code>.
+     */
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
     }
 
     /**
@@ -168,6 +187,12 @@ public class FearAndGreed implements Serializable {
         }
         else if (!this.score.equals(other.score))
             return false;
+        if (this.datetime == null) {
+            if (other.datetime != null)
+                return false;
+        }
+        else if (!this.datetime.equals(other.datetime))
+            return false;
         if (this.regDatetime == null) {
             if (other.regDatetime != null)
                 return false;
@@ -201,6 +226,7 @@ public class FearAndGreed implements Serializable {
         int result = 1;
         result = prime * result + ((this.rating == null) ? 0 : this.rating.hashCode());
         result = prime * result + ((this.score == null) ? 0 : this.score.hashCode());
+        result = prime * result + ((this.datetime == null) ? 0 : this.datetime.hashCode());
         result = prime * result + ((this.regDatetime == null) ? 0 : this.regDatetime.hashCode());
         result = prime * result + ((this.regId == null) ? 0 : this.regId.hashCode());
         result = prime * result + ((this.uptDatetime == null) ? 0 : this.uptDatetime.hashCode());
@@ -214,6 +240,7 @@ public class FearAndGreed implements Serializable {
 
         sb.append(rating);
         sb.append(", ").append(score);
+        sb.append(", ").append(datetime);
         sb.append(", ").append(regDatetime);
         sb.append(", ").append(regId);
         sb.append(", ").append(uptDatetime);

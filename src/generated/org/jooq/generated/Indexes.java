@@ -6,7 +6,16 @@ package org.jooq.generated;
 
 import org.jooq.Index;
 import org.jooq.OrderField;
+import org.jooq.generated.tables.JCurrencyEurKrw;
+import org.jooq.generated.tables.JCurrencyJpyKrw;
+import org.jooq.generated.tables.JCurrencyUsdKrw;
+import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
+import org.jooq.generated.tables.JFearAndGreed;
+import org.jooq.generated.tables.JIxic;
+import org.jooq.generated.tables.JKosdaq;
+import org.jooq.generated.tables.JKospi;
+import org.jooq.generated.tables.JSpx;
 import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 
@@ -21,5 +30,14 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index CURRENCY_EUR_KRW_CURRENCY_EUR_KRW_DATETIME_IDX = Internal.createIndex(DSL.name("CURRENCY_EUR_KRW_DATETIME_IDX"), JCurrencyEurKrw.CURRENCY_EUR_KRW, new OrderField[] { JCurrencyEurKrw.CURRENCY_EUR_KRW.DATETIME }, false);
+    public static final Index CURRENCY_JPY_KRW_CURRENCY_JPY_KRW_DATETIME_IDX = Internal.createIndex(DSL.name("CURRENCY_JPY_KRW_DATETIME_IDX"), JCurrencyJpyKrw.CURRENCY_JPY_KRW, new OrderField[] { JCurrencyJpyKrw.CURRENCY_JPY_KRW.DATETIME }, false);
+    public static final Index CURRENCY_USD_KRW_CURRENCY_USD_KRW_DATETIME_IDX = Internal.createIndex(DSL.name("CURRENCY_USD_KRW_DATETIME_IDX"), JCurrencyUsdKrw.CURRENCY_USD_KRW, new OrderField[] { JCurrencyUsdKrw.CURRENCY_USD_KRW.DATETIME }, false);
+    public static final Index DJI_DJI_DATETIME_IDX = Internal.createIndex(DSL.name("DJI_DATETIME_IDX"), JDji.DJI, new OrderField[] { JDji.DJI.DATETIME }, false);
     public static final Index ECONOMIC_EVENT_ECONOMIC_EVENT_DATE_UTC_IDX = Internal.createIndex(DSL.name("ECONOMIC_EVENT_DATE_UTC_IDX"), JEconomicEvent.ECONOMIC_EVENT, new OrderField[] { JEconomicEvent.ECONOMIC_EVENT.DATETIME }, false);
+    public static final Index FEAR_AND_GREED_FEAR_AND_GREED_DATETIME_IDX = Internal.createIndex(DSL.name("FEAR_AND_GREED_DATETIME_IDX"), JFearAndGreed.FEAR_AND_GREED, new OrderField[] { JFearAndGreed.FEAR_AND_GREED.DATETIME }, false);
+    public static final Index IXIC_IXIC_DATETIME_IDX = Internal.createIndex(DSL.name("IXIC_DATETIME_IDX"), JIxic.IXIC, new OrderField[] { JIxic.IXIC.DATETIME }, false);
+    public static final Index KOSDAQ_KOSDAQ_DATETIME_IDX = Internal.createIndex(DSL.name("KOSDAQ_DATETIME_IDX"), JKosdaq.KOSDAQ, new OrderField[] { JKosdaq.KOSDAQ.DATETIME }, false);
+    public static final Index KOSPI_KOSPI_DATETIME_IDX = Internal.createIndex(DSL.name("KOSPI_DATETIME_IDX"), JKospi.KOSPI, new OrderField[] { JKospi.KOSPI.DATETIME }, false);
+    public static final Index SPX_SPX_DATETIME_IDX = Internal.createIndex(DSL.name("SPX_DATETIME_IDX"), JSpx.SPX, new OrderField[] { JSpx.SPX.DATETIME }, false);
 }

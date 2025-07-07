@@ -74,10 +74,25 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     }
 
     /**
+     * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.DATETIME</code>.
+     */
+    public void setDatetime(LocalDateTime value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.CURRENCY_USD_KRW.DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getDatetime() {
+        return (LocalDateTime) get(3);
+    }
+
+    /**
      * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.URL</code>.
      */
     public void setUrl(String value) {
-        set(3, value);
+        set(4, value);
     }
 
     /**
@@ -86,14 +101,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     @NotNull
     @Size(max = 500)
     public String getUrl() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     /**
      * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
-        set(4, value);
+        set(5, value);
     }
 
     /**
@@ -101,14 +116,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
-        return (LocalDateTime) get(4);
+        return (LocalDateTime) get(5);
     }
 
     /**
      * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.REG_ID</code>.
      */
     public void setRegId(String value) {
-        set(5, value);
+        set(6, value);
     }
 
     /**
@@ -117,14 +132,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     @NotNull
     @Size(max = 200)
     public String getRegId() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     /**
      * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
-        set(6, value);
+        set(7, value);
     }
 
     /**
@@ -132,14 +147,14 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
-        return (LocalDateTime) get(6);
+        return (LocalDateTime) get(7);
     }
 
     /**
      * Setter for <code>786b676a8e45.CURRENCY_USD_KRW.UPT_ID</code>.
      */
     public void setUptId(String value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
@@ -148,7 +163,7 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     @NotNull
     @Size(max = 200)
     public String getUptId() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     // -------------------------------------------------------------------------
@@ -174,12 +189,13 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
     /**
      * Create a detached, initialised CurrencyUsdKrwRecord
      */
-    public CurrencyUsdKrwRecord(String price, String priceChange, String priceChangePercent, String url, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
+    public CurrencyUsdKrwRecord(String price, String priceChange, String priceChangePercent, LocalDateTime datetime, String url, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
         super(JCurrencyUsdKrw.CURRENCY_USD_KRW);
 
         setPrice(price);
         setPriceChange(priceChange);
         setPriceChangePercent(priceChangePercent);
+        setDatetime(datetime);
         setUrl(url);
         setRegDatetime(regDatetime);
         setRegId(regId);
@@ -198,6 +214,7 @@ public class CurrencyUsdKrwRecord extends UpdatableRecordImpl<CurrencyUsdKrwReco
             setPrice(value.getPrice());
             setPriceChange(value.getPriceChange());
             setPriceChangePercent(value.getPriceChangePercent());
+            setDatetime(value.getDatetime());
             setUrl(value.getUrl());
             setRegDatetime(value.getRegDatetime());
             setRegId(value.getRegId());

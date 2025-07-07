@@ -5,10 +5,13 @@ package org.jooq.generated.tables;
 
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.jooq.Condition;
 import org.jooq.Field;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
@@ -20,6 +23,7 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
 import org.jooq.UniqueKey;
+import org.jooq.generated.Indexes;
 import org.jooq.generated.J_786b676a8e45;
 import org.jooq.generated.Keys;
 import org.jooq.generated.tables.records.IxicRecord;
@@ -68,6 +72,11 @@ public class JIxic extends TableImpl<IxicRecord> {
      * The column <code>786b676a8e45.IXIC.PRICE_CHANGE_PERCENT</code>.
      */
     public final TableField<IxicRecord, String> PRICE_CHANGE_PERCENT = createField(DSL.name("PRICE_CHANGE_PERCENT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>786b676a8e45.IXIC.DATETIME</code>.
+     */
+    public final TableField<IxicRecord, LocalDateTime> DATETIME = createField(DSL.name("DATETIME"), SQLDataType.LOCALDATETIME(0).nullable(false), this, "");
 
     /**
      * The column <code>786b676a8e45.IXIC.URL</code>.
@@ -126,6 +135,11 @@ public class JIxic extends TableImpl<IxicRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : J_786b676a8e45._786B676A8E45;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IXIC_IXIC_DATETIME_IDX);
     }
 
     @Override

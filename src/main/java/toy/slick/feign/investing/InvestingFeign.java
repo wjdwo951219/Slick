@@ -26,12 +26,6 @@ public interface InvestingFeign {
     })
     Response getNasdaqComposite();
 
-    @GetMapping(value = "/holiday-calendar", headers = {
-            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
-            Const.HttpRequestHeader.USER_AGENT
-    })
-    Response getHolidayCalendar();
-
     @GetMapping(value = "/indices/kospi", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
@@ -43,4 +37,22 @@ public interface InvestingFeign {
             Const.HttpRequestHeader.USER_AGENT
     })
     Response getKosdaq();
+
+    @GetMapping(value = "/currencies/eur-krw-technical", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
+    Response getCurrenciesEurKrw();
+
+    @GetMapping(value = "/currencies/jpy-krw-technical", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
+    Response getCurrenciesJpyKrw();
+
+    @GetMapping(value = "/currencies/usd-krw-technical", headers = {
+            Const.HttpRequestHeader.ACCEPT_LANGUAGE,
+            Const.HttpRequestHeader.USER_AGENT
+    })
+    Response getCurrenciesUsdKrw();
 }

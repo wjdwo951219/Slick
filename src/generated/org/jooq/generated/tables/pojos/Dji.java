@@ -24,6 +24,7 @@ public class Dji implements Serializable {
     private String price;
     private String priceChange;
     private String priceChangePercent;
+    private LocalDateTime datetime;
     private String url;
     private LocalDateTime regDatetime;
     private String regId;
@@ -37,6 +38,7 @@ public class Dji implements Serializable {
         this.price = value.price;
         this.priceChange = value.priceChange;
         this.priceChangePercent = value.priceChangePercent;
+        this.datetime = value.datetime;
         this.url = value.url;
         this.regDatetime = value.regDatetime;
         this.regId = value.regId;
@@ -49,6 +51,7 @@ public class Dji implements Serializable {
         String price,
         String priceChange,
         String priceChangePercent,
+        LocalDateTime datetime,
         String url,
         LocalDateTime regDatetime,
         String regId,
@@ -59,6 +62,7 @@ public class Dji implements Serializable {
         this.price = price;
         this.priceChange = priceChange;
         this.priceChangePercent = priceChangePercent;
+        this.datetime = datetime;
         this.url = url;
         this.regDatetime = regDatetime;
         this.regId = regId;
@@ -128,6 +132,21 @@ public class Dji implements Serializable {
      */
     public void setPriceChangePercent(String priceChangePercent) {
         this.priceChangePercent = priceChangePercent;
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.DJI.DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getDatetime() {
+        return this.datetime;
+    }
+
+    /**
+     * Setter for <code>786b676a8e45.DJI.DATETIME</code>.
+     */
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
     }
 
     /**
@@ -241,6 +260,12 @@ public class Dji implements Serializable {
         }
         else if (!this.priceChangePercent.equals(other.priceChangePercent))
             return false;
+        if (this.datetime == null) {
+            if (other.datetime != null)
+                return false;
+        }
+        else if (!this.datetime.equals(other.datetime))
+            return false;
         if (this.url == null) {
             if (other.url != null)
                 return false;
@@ -282,6 +307,7 @@ public class Dji implements Serializable {
         result = prime * result + ((this.price == null) ? 0 : this.price.hashCode());
         result = prime * result + ((this.priceChange == null) ? 0 : this.priceChange.hashCode());
         result = prime * result + ((this.priceChangePercent == null) ? 0 : this.priceChangePercent.hashCode());
+        result = prime * result + ((this.datetime == null) ? 0 : this.datetime.hashCode());
         result = prime * result + ((this.url == null) ? 0 : this.url.hashCode());
         result = prime * result + ((this.regDatetime == null) ? 0 : this.regDatetime.hashCode());
         result = prime * result + ((this.regId == null) ? 0 : this.regId.hashCode());
@@ -298,6 +324,7 @@ public class Dji implements Serializable {
         sb.append(", ").append(price);
         sb.append(", ").append(priceChange);
         sb.append(", ").append(priceChangePercent);
+        sb.append(", ").append(datetime);
         sb.append(", ").append(url);
         sb.append(", ").append(regDatetime);
         sb.append(", ").append(regId);

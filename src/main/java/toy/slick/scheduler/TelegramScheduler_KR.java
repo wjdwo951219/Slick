@@ -16,9 +16,7 @@ import toy.slick.common.MsgUtils;
 import toy.slick.feign.telegram.TelegramFeign;
 import toy.slick.service.TelegramService;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 @Slf4j
 @Component
@@ -52,27 +50,25 @@ public class TelegramScheduler_KR {
 
     @TimeLogAspect.TimeLog
     @Async
-    @Scheduled(cron = "0 0 8 * * *", zone = Const.ZoneId.SEOUL)
+    @Scheduled(cron = "0 10 8 * * *", zone = Const.ZoneId.SEOUL)
     public void sendEconomicEventList() throws Exception {
         ZonedDateTime searchDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.SEOUL))
                 .minusDays(1)
                 .withHour(7)
-                .withMinute(49)
+                .withMinute(59)
                 .withSecond(0);
 
         String message = telegramService.getEconomicEventListMessage(Const.Country.KOREA, "1", searchDateTime, searchDateTime.plusDays(1));
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
-                message)
-        ) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
+                    message)
+            ) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }
@@ -81,26 +77,20 @@ public class TelegramScheduler_KR {
     @Async
     @Scheduled(cron = "0 20 18 * * 1-5", zone = Const.ZoneId.SEOUL)
     public void sendIndices() throws Exception {
-        if (telegramService.isHoliday(Const.Country.KOREA.getCountryName(), LocalDate.now(ZoneId.of(Const.ZoneId.SEOUL)))) {
-            return;
-        }
-
         String kospiMessage = telegramService.getKospiMessage();
         String kosdaqMessage = telegramService.getKosdaqMessage();
 
         String message = kospiMessage + kosdaqMessage;
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
-                message)
-        ) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
+                    message)
+            ) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }
@@ -109,24 +99,18 @@ public class TelegramScheduler_KR {
     @Async
     @Scheduled(cron = "0 15 9 * * 1-5", zone = Const.ZoneId.SEOUL)
     public void sendCurrencies() throws Exception {
-        if (telegramService.isHoliday(Const.Country.KOREA.getCountryName(), LocalDate.now(ZoneId.of(Const.ZoneId.SEOUL)))) {
-            return;
-        }
-
         String message = telegramService.getCurrencyUsdKrwMessage()
                 + telegramService.getCurrencyJpyKrwMessage()
                 + telegramService.getCurrencyEurKrwMessage();
 
-        if (StringUtils.isBlank(message)) {
-            throw new Exception(MsgUtils.blankMsg(message));
-        }
-
-        try (Response response = telegramFeign.sendHtmlWithoutPreview(
-                BOT_SLICK_TOKEN,
-                EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
-                message)) {
-            if (response.status() >= 400) {
-                throw new Exception(response.toString());
+        if (StringUtils.isNotBlank(message)) {
+            try (Response response = telegramFeign.sendHtmlWithoutPreview(
+                    BOT_SLICK_TOKEN,
+                    EnvUtils.isProd(SPRING_PROFILES_ACTIVE) ? CHAT_SLICK_KR_ID : CHAT_SLICK_DEV_ID,
+                    message)) {
+                if (response.status() >= 400) {
+                    throw new Exception(response.toString());
+                }
             }
         }
     }

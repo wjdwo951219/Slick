@@ -2,30 +2,11 @@ package toy.slick.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jooq.generated.tables.pojos.CurrencyEurKrw;
-import org.jooq.generated.tables.pojos.CurrencyJpyKrw;
-import org.jooq.generated.tables.pojos.CurrencyUsdKrw;
-import org.jooq.generated.tables.pojos.Dji;
-import org.jooq.generated.tables.pojos.EconomicEvent;
-import org.jooq.generated.tables.pojos.FearAndGreed;
-import org.jooq.generated.tables.pojos.Ixic;
-import org.jooq.generated.tables.pojos.Kosdaq;
-import org.jooq.generated.tables.pojos.Kospi;
-import org.jooq.generated.tables.pojos.Spx;
+import org.jooq.generated.tables.pojos.*;
 import org.springframework.stereotype.Service;
 import toy.slick.common.Const;
 import toy.slick.common.MsgUtils;
-import toy.slick.repository.mysql.CurrencyEurKrwRepository;
-import toy.slick.repository.mysql.CurrencyJpyKrwRepository;
-import toy.slick.repository.mysql.CurrencyUsdKrwRepository;
-import toy.slick.repository.mysql.DjiRepository;
-import toy.slick.repository.mysql.EconomicEventRepository;
-import toy.slick.repository.mysql.FearAndGreedRepository;
-import toy.slick.repository.mysql.HolidayRepository;
-import toy.slick.repository.mysql.IxicRepository;
-import toy.slick.repository.mysql.KosdaqRepository;
-import toy.slick.repository.mysql.KospiRepository;
-import toy.slick.repository.mysql.SpxRepository;
+import toy.slick.repository.mysql.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -37,7 +18,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class TelegramService {
-    private final HolidayRepository holidayRepository;
     private final FearAndGreedRepository fearAndGreedRepository;
     private final EconomicEventRepository economicEventRepository;
     private final DjiRepository djiRepository;
@@ -49,8 +29,7 @@ public class TelegramService {
     private final CurrencyJpyKrwRepository currencyJpyKrwRepository;
     private final CurrencyUsdKrwRepository currencyUsdKrwRepository;
 
-    public TelegramService(HolidayRepository holidayRepository,
-                           FearAndGreedRepository fearAndGreedRepository,
+    public TelegramService(FearAndGreedRepository fearAndGreedRepository,
                            EconomicEventRepository economicEventRepository,
                            DjiRepository djiRepository,
                            IxicRepository ixicRepository,
@@ -60,7 +39,6 @@ public class TelegramService {
                            CurrencyEurKrwRepository currencyEurKrwRepository,
                            CurrencyJpyKrwRepository currencyJpyKrwRepository,
                            CurrencyUsdKrwRepository currencyUsdKrwRepository) {
-        this.holidayRepository = holidayRepository;
         this.fearAndGreedRepository = fearAndGreedRepository;
         this.economicEventRepository = economicEventRepository;
         this.djiRepository = djiRepository;
@@ -73,12 +51,8 @@ public class TelegramService {
         this.currencyUsdKrwRepository = currencyUsdKrwRepository;
     }
 
-    public boolean isHoliday(String country, LocalDate date) {
-        return holidayRepository.select(country, date).isPresent();
-    }
-
     public String getDjiMessage() {
-        Optional<Dji> dji = djiRepository.selectRecentOne();
+        Optional<Dji> dji = djiRepository.selectRecentOneIn12Hours();
 
         if (dji.isEmpty()) {
             return StringUtils.EMPTY;
@@ -95,7 +69,7 @@ public class TelegramService {
     }
 
     public String getSpxMessage() {
-        Optional<Spx> spx = spxRepository.selectRecentOne();
+        Optional<Spx> spx = spxRepository.selectRecentOneIn12Hours();
 
         if (spx.isEmpty()) {
             return StringUtils.EMPTY;
@@ -112,7 +86,7 @@ public class TelegramService {
     }
 
     public String getIxicMessage() {
-        Optional<Ixic> ixic = ixicRepository.selectRecentOne();
+        Optional<Ixic> ixic = ixicRepository.selectRecentOneIn12Hours();
 
         if (ixic.isEmpty()) {
             return StringUtils.EMPTY;
@@ -129,7 +103,7 @@ public class TelegramService {
     }
 
     public String getKosdaqMessage() {
-        Optional<Kosdaq> kosdaq = kosdaqRepository.selectRecentOne();
+        Optional<Kosdaq> kosdaq = kosdaqRepository.selectRecentOneIn12Hours();
 
         if (kosdaq.isEmpty()) {
             return StringUtils.EMPTY;
@@ -146,7 +120,7 @@ public class TelegramService {
     }
 
     public String getKospiMessage() {
-        Optional<Kospi> kospi = kospiRepository.selectRecentOne();
+        Optional<Kospi> kospi = kospiRepository.selectRecentOneIn12Hours();
 
         if (kospi.isEmpty()) {
             return StringUtils.EMPTY;
@@ -169,7 +143,7 @@ public class TelegramService {
     }
 
     public String getFearAndGreedMessage() throws Exception {
-        Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOne();
+        Optional<FearAndGreed> fearAndGreed = fearAndGreedRepository.selectRecentOneIn12Hours();
 
         if (fearAndGreed.isEmpty()) {
             throw new Exception(MsgUtils.emptyMsg(fearAndGreed));
@@ -267,7 +241,7 @@ public class TelegramService {
     }
 
     public String getCurrencyEurKrwMessage() {
-        Optional<CurrencyEurKrw> currencyEurKrw = currencyEurKrwRepository.selectRecentOne();
+        Optional<CurrencyEurKrw> currencyEurKrw = currencyEurKrwRepository.selectRecentOneIn12Hours();
 
         if (currencyEurKrw.isEmpty()) {
             return StringUtils.EMPTY;
@@ -284,7 +258,7 @@ public class TelegramService {
     }
 
     public String getCurrencyJpyKrwMessage() {
-        Optional<CurrencyJpyKrw> currencyJpyKrw = currencyJpyKrwRepository.selectRecentOne();
+        Optional<CurrencyJpyKrw> currencyJpyKrw = currencyJpyKrwRepository.selectRecentOneIn12Hours();
 
         if (currencyJpyKrw.isEmpty()) {
             return StringUtils.EMPTY;
@@ -301,7 +275,7 @@ public class TelegramService {
     }
 
     public String getCurrencyUsdKrwMessage() {
-        Optional<CurrencyUsdKrw> currencyJpyKrw = currencyUsdKrwRepository.selectRecentOne();
+        Optional<CurrencyUsdKrw> currencyJpyKrw = currencyUsdKrwRepository.selectRecentOneIn12Hours();
 
         if (currencyJpyKrw.isEmpty()) {
             return StringUtils.EMPTY;

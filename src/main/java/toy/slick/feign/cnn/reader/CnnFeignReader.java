@@ -9,6 +9,8 @@ import toy.slick.feign.cnn.vo.response.FearAndGreed;
 import toy.slick.feign.inheritable.FeignResponseReader;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Slf4j
@@ -25,10 +27,12 @@ public class CnnFeignReader implements FeignResponseReader {
 
         String rating = fearAndGreedJsonObj.get("rating").getAsString();
         double score = Double.parseDouble(fearAndGreedJsonObj.get("score").getAsString());
+        LocalDateTime utcDateTime = ZonedDateTime.parse(fearAndGreedJsonObj.get("timestamp").getAsString()).toLocalDateTime();
 
         return Optional.of(FearAndGreed.builder()
                 .rating(rating)
                 .score(score)
+                .utcDateTime(utcDateTime)
                 .build());
     }
 }

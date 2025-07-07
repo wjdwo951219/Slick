@@ -36,6 +36,7 @@ public class SpxRepository extends QueryCRUD<SpxRecord> {
                         spx.getPrice(),
                         spx.getPriceChange(),
                         spx.getPriceChangePercent(),
+                        spx.getDatetime(),
                         spx.getUrl(),
                         now,
                         regId,
@@ -45,10 +46,13 @@ public class SpxRepository extends QueryCRUD<SpxRecord> {
         return query.execute();
     }
 
-    public Optional<Spx> selectRecentOne() {
+    public Optional<Spx> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tSpx,
-                DSL.noCondition());
+                tSpx.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tSpx.REG_DATETIME.desc())
