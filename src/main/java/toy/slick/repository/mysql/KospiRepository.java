@@ -1,15 +1,11 @@
 package toy.slick.repository.mysql;
 
 import lombok.NonNull;
-import org.jooq.DSLContext;
-import org.jooq.DeleteConditionStep;
-import org.jooq.InsertSetMoreStep;
+import org.jooq.*;
 import org.jooq.Record;
-import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JKospi;
 import org.jooq.generated.tables.pojos.Kospi;
 import org.jooq.generated.tables.records.KospiRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -36,6 +32,7 @@ public class KospiRepository extends QueryCRUD<KospiRecord> {
                         kospi.getPrice(),
                         kospi.getPriceChange(),
                         kospi.getPriceChangePercent(),
+                        kospi.getDatetime(),
                         kospi.getUrl(),
                         now,
                         regId,
@@ -45,13 +42,16 @@ public class KospiRepository extends QueryCRUD<KospiRecord> {
         return query.execute();
     }
 
-    public Optional<Kospi> selectRecentOne() {
+    public Optional<Kospi> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tKospi,
-                DSL.noCondition());
+                tKospi.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
-                .orderBy(tKospi.REG_DATETIME.desc())
+                .orderBy(tKospi.DATETIME.desc())
                 .limit(1)
                 .fetchOneInto(Kospi.class));
     }

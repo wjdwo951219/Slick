@@ -9,7 +9,6 @@ import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.pojos.Dji;
 import org.jooq.generated.tables.records.DjiRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -36,6 +35,7 @@ public class DjiRepository extends QueryCRUD<DjiRecord> {
                         dji.getPrice(),
                         dji.getPriceChange(),
                         dji.getPriceChangePercent(),
+                        dji.getDatetime(),
                         dji.getUrl(),
                         now,
                         regId,
@@ -45,10 +45,13 @@ public class DjiRepository extends QueryCRUD<DjiRecord> {
         return query.execute();
     }
 
-    public Optional<Dji> selectRecentOne() {
+    public Optional<Dji> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tDji,
-                DSL.noCondition());
+                tDji.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tDji.REG_DATETIME.desc())

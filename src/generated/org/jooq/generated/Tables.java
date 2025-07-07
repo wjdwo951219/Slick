@@ -10,7 +10,6 @@ import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.JDji;
 import org.jooq.generated.tables.JEconomicEvent;
 import org.jooq.generated.tables.JFearAndGreed;
-import org.jooq.generated.tables.JHoliday;
 import org.jooq.generated.tables.JIxic;
 import org.jooq.generated.tables.JKosdaq;
 import org.jooq.generated.tables.JKospi;
@@ -52,11 +51,6 @@ public class Tables {
      * The table <code>786b676a8e45.FEAR_AND_GREED</code>.
      */
     public static final JFearAndGreed FEAR_AND_GREED = JFearAndGreed.FEAR_AND_GREED;
-
-    /**
-     * The table <code>786b676a8e45.HOLIDAY</code>.
-     */
-    public static final JHoliday HOLIDAY = JHoliday.HOLIDAY;
 
     /**
      * The table <code>786b676a8e45.IXIC</code>.

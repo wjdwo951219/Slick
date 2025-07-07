@@ -9,7 +9,6 @@ import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JCurrencyUsdKrw;
 import org.jooq.generated.tables.pojos.CurrencyUsdKrw;
 import org.jooq.generated.tables.records.CurrencyUsdKrwRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -35,6 +34,7 @@ public class CurrencyUsdKrwRepository extends QueryCRUD<CurrencyUsdKrwRecord> {
                         currencyUsdKrw.getPrice(),
                         currencyUsdKrw.getPriceChange(),
                         currencyUsdKrw.getPriceChangePercent(),
+                        currencyUsdKrw.getDatetime(),
                         currencyUsdKrw.getUrl(),
                         now,
                         regId,
@@ -44,10 +44,13 @@ public class CurrencyUsdKrwRepository extends QueryCRUD<CurrencyUsdKrwRecord> {
         return query.execute();
     }
 
-    public Optional<CurrencyUsdKrw> selectRecentOne() {
+    public Optional<CurrencyUsdKrw> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tCurrencyUsdKrw,
-                DSL.noCondition());
+                tCurrencyUsdKrw.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tCurrencyUsdKrw.REG_DATETIME.desc())

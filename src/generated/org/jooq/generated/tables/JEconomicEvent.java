@@ -76,7 +76,7 @@ public class JEconomicEvent extends TableImpl<EconomicEventRecord> {
     /**
      * The column <code>786b676a8e45.ECONOMIC_EVENT.COUNTRY</code>.
      */
-    public final TableField<EconomicEventRecord, String> COUNTRY = createField(DSL.name("COUNTRY"), SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<EconomicEventRecord, String> COUNTRY = createField(DSL.name("COUNTRY"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
      * The column <code>786b676a8e45.ECONOMIC_EVENT.IMPORTANCE</code>.

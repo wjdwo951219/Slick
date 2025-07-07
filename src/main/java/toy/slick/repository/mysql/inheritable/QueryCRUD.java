@@ -33,7 +33,7 @@ public abstract class QueryCRUD<R extends UpdatableRecordImpl<R>> {
                 .from(table)
                 .where(condition)
                 .fetch()
-                .get(0)
+                .getFirst()
                 .value1();
     }
 

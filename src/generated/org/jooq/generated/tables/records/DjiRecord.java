@@ -88,10 +88,25 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
     }
 
     /**
+     * Setter for <code>786b676a8e45.DJI.DATETIME</code>.
+     */
+    public void setDatetime(LocalDateTime value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>786b676a8e45.DJI.DATETIME</code>.
+     */
+    @NotNull
+    public LocalDateTime getDatetime() {
+        return (LocalDateTime) get(4);
+    }
+
+    /**
      * Setter for <code>786b676a8e45.DJI.URL</code>.
      */
     public void setUrl(String value) {
-        set(4, value);
+        set(5, value);
     }
 
     /**
@@ -100,14 +115,14 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
     @NotNull
     @Size(max = 500)
     public String getUrl() {
-        return (String) get(4);
+        return (String) get(5);
     }
 
     /**
      * Setter for <code>786b676a8e45.DJI.REG_DATETIME</code>.
      */
     public void setRegDatetime(LocalDateTime value) {
-        set(5, value);
+        set(6, value);
     }
 
     /**
@@ -115,14 +130,14 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
      */
     @NotNull
     public LocalDateTime getRegDatetime() {
-        return (LocalDateTime) get(5);
+        return (LocalDateTime) get(6);
     }
 
     /**
      * Setter for <code>786b676a8e45.DJI.REG_ID</code>.
      */
     public void setRegId(String value) {
-        set(6, value);
+        set(7, value);
     }
 
     /**
@@ -131,14 +146,14 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
     @NotNull
     @Size(max = 200)
     public String getRegId() {
-        return (String) get(6);
+        return (String) get(7);
     }
 
     /**
      * Setter for <code>786b676a8e45.DJI.UPT_DATETIME</code>.
      */
     public void setUptDatetime(LocalDateTime value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
@@ -146,14 +161,14 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
      */
     @NotNull
     public LocalDateTime getUptDatetime() {
-        return (LocalDateTime) get(7);
+        return (LocalDateTime) get(8);
     }
 
     /**
      * Setter for <code>786b676a8e45.DJI.UPT_ID</code>.
      */
     public void setUptId(String value) {
-        set(8, value);
+        set(9, value);
     }
 
     /**
@@ -162,7 +177,7 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
     @NotNull
     @Size(max = 200)
     public String getUptId() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     // -------------------------------------------------------------------------
@@ -188,13 +203,14 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
     /**
      * Create a detached, initialised DjiRecord
      */
-    public DjiRecord(String title, String price, String priceChange, String priceChangePercent, String url, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
+    public DjiRecord(String title, String price, String priceChange, String priceChangePercent, LocalDateTime datetime, String url, LocalDateTime regDatetime, String regId, LocalDateTime uptDatetime, String uptId) {
         super(JDji.DJI);
 
         setTitle(title);
         setPrice(price);
         setPriceChange(priceChange);
         setPriceChangePercent(priceChangePercent);
+        setDatetime(datetime);
         setUrl(url);
         setRegDatetime(regDatetime);
         setRegId(regId);
@@ -214,6 +230,7 @@ public class DjiRecord extends UpdatableRecordImpl<DjiRecord> {
             setPrice(value.getPrice());
             setPriceChange(value.getPriceChange());
             setPriceChangePercent(value.getPriceChangePercent());
+            setDatetime(value.getDatetime());
             setUrl(value.getUrl());
             setRegDatetime(value.getRegDatetime());
             setRegId(value.getRegId());

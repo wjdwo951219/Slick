@@ -97,7 +97,7 @@ public class EconomicEventRecord extends UpdatableRecordImpl<EconomicEventRecord
      * Getter for <code>786b676a8e45.ECONOMIC_EVENT.COUNTRY</code>.
      */
     @NotNull
-    @Size(max = 20)
+    @Size(max = 50)
     public String getCountry() {
         return (String) get(4);
     }

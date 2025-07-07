@@ -9,7 +9,6 @@ import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JIxic;
 import org.jooq.generated.tables.pojos.Ixic;
 import org.jooq.generated.tables.records.IxicRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -36,6 +35,7 @@ public class IxicRepository extends QueryCRUD<IxicRecord> {
                         ixic.getPrice(),
                         ixic.getPriceChange(),
                         ixic.getPriceChangePercent(),
+                        ixic.getDatetime(),
                         ixic.getUrl(),
                         now,
                         regId,
@@ -45,10 +45,13 @@ public class IxicRepository extends QueryCRUD<IxicRecord> {
         return query.execute();
     }
 
-    public Optional<Ixic> selectRecentOne() {
+    public Optional<Ixic> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tIxic,
-                DSL.noCondition());
+                tIxic.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tIxic.REG_DATETIME.desc())

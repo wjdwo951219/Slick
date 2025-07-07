@@ -9,7 +9,6 @@ import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JFearAndGreed;
 import org.jooq.generated.tables.pojos.FearAndGreed;
 import org.jooq.generated.tables.records.FearAndGreedRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -34,6 +33,7 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
                 new FearAndGreedRecord(
                         fearAndGreed.getRating(),
                         fearAndGreed.getScore(),
+                        fearAndGreed.getDatetime(),
                         now,
                         regId,
                         now,
@@ -42,10 +42,13 @@ public class FearAndGreedRepository extends QueryCRUD<FearAndGreedRecord> {
         return query.execute();
     }
 
-    public Optional<FearAndGreed> selectRecentOne() {
+    public Optional<FearAndGreed> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tFearAndGreed,
-                DSL.noCondition());
+                tFearAndGreed.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tFearAndGreed.REG_DATETIME.desc())

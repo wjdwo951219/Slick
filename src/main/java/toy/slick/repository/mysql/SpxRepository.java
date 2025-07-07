@@ -1,15 +1,11 @@
 package toy.slick.repository.mysql;
 
 import lombok.NonNull;
-import org.jooq.DSLContext;
-import org.jooq.DeleteConditionStep;
-import org.jooq.InsertSetMoreStep;
+import org.jooq.*;
 import org.jooq.Record;
-import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JSpx;
 import org.jooq.generated.tables.pojos.Spx;
 import org.jooq.generated.tables.records.SpxRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -36,6 +32,7 @@ public class SpxRepository extends QueryCRUD<SpxRecord> {
                         spx.getPrice(),
                         spx.getPriceChange(),
                         spx.getPriceChangePercent(),
+                        spx.getDatetime(),
                         spx.getUrl(),
                         now,
                         regId,
@@ -45,10 +42,13 @@ public class SpxRepository extends QueryCRUD<SpxRecord> {
         return query.execute();
     }
 
-    public Optional<Spx> selectRecentOne() {
+    public Optional<Spx> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tSpx,
-                DSL.noCondition());
+                tSpx.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tSpx.REG_DATETIME.desc())

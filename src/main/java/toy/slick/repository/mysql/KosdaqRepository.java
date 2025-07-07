@@ -9,7 +9,6 @@ import org.jooq.SelectConditionStep;
 import org.jooq.generated.tables.JKosdaq;
 import org.jooq.generated.tables.pojos.Kosdaq;
 import org.jooq.generated.tables.records.KosdaqRecord;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 import toy.slick.common.Const;
 import toy.slick.repository.mysql.inheritable.QueryCRUD;
@@ -36,6 +35,7 @@ public class KosdaqRepository extends QueryCRUD<KosdaqRecord> {
                         kosdaq.getPrice(),
                         kosdaq.getPriceChange(),
                         kosdaq.getPriceChangePercent(),
+                        kosdaq.getDatetime(),
                         kosdaq.getUrl(),
                         now,
                         regId,
@@ -45,10 +45,13 @@ public class KosdaqRepository extends QueryCRUD<KosdaqRecord> {
         return query.execute();
     }
 
-    public Optional<Kosdaq> selectRecentOne() {
+    public Optional<Kosdaq> selectRecentOneIn12Hours() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of(Const.ZoneId.UTC));
+        LocalDateTime from = now.minusHours(12);
+
         SelectConditionStep<Record> query = this.querySelect(
                 tKosdaq,
-                DSL.noCondition());
+                tKosdaq.DATETIME.between(from, now));
 
         return Optional.ofNullable(query
                 .orderBy(tKosdaq.REG_DATETIME.desc())

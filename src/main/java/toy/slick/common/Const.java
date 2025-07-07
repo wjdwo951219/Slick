@@ -10,7 +10,7 @@ public interface Const {
         String GRINNING_SQUINTING_FACE = "\uD83D\uDE06"; // 😆
         String ZANY_FACE = "\uD83E\uDD2A"; // 🤪
         String FLAG = "\ud83d\udea9"; // 🚩
-        String CHECK_MARK = "\u2705"; // ✅
+        String CHECK_MARK = "✅"; // ✅
         String DOWN_CHART = "\uD83D\uDCC9"; // 📉
         String UP_CHART = "\uD83D\uDCC8"; // 📈
         String YEN_BANKNOTE = "\uD83D\uDCB4"; // 💴
@@ -41,7 +41,6 @@ public interface Const {
     }
 
     interface ChannelSuffix {
-        String DEV = "DEV";
         String US = "US";
         String KR = "KR";
     }
