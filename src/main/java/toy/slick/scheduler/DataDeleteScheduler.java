@@ -68,7 +68,7 @@ public class DataDeleteScheduler {
     @Scheduled(cron = "4 44 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteEconomicIndices() {
         LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
+                .minusDays(14)
                 .toLocalDateTime();
 
         log.info(MsgUtils.deleteCntMsg(kosdaqRepository.delete(untilDateTime)));
@@ -89,7 +89,7 @@ public class DataDeleteScheduler {
     @Scheduled(cron = "4 5 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteEconomicEvent() {
         LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(7)
+                .minusDays(14)
                 .toLocalDateTime();
 
         int deleteCnt = economicEventRepository.delete(untilDateTime);
@@ -102,7 +102,7 @@ public class DataDeleteScheduler {
     @Scheduled(cron = "4 14 4 * * *", zone = Const.ZoneId.SEOUL)
     public void deleteCurrencies() {
         LocalDateTime untilDateTime = ZonedDateTime.now(ZoneId.of(Const.ZoneId.UTC))
-                .minusDays(2)
+                .minusDays(14)
                 .withHour(0)
                 .toLocalDateTime();
 
