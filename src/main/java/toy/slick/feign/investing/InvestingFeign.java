@@ -8,7 +8,7 @@ import toy.slick.common.Const;
 @FeignClient(name = "InvestingFeign", url = "https://investing.com")
 public interface InvestingFeign {
 
-    @GetMapping(value = "/indices/us-30", headers = {
+    @GetMapping(value = "/indices/us-30-technical", headers = {
             Const.HttpRequestHeader.ACCEPT_LANGUAGE,
             Const.HttpRequestHeader.USER_AGENT
     })
