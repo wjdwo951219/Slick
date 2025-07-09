@@ -99,9 +99,9 @@ public class TelegramScheduler_KR {
     @Async
     @Scheduled(cron = "0 15 9 * * 1-5", zone = Const.ZoneId.SEOUL)
     public void sendCurrencies() throws Exception {
-        String message = telegramService.getCurrencyUsdKrwMessage(Const.Country.KOREA)
-                + telegramService.getCurrencyJpyKrwMessage(Const.Country.KOREA)
-                + telegramService.getCurrencyEurKrwMessage(Const.Country.KOREA);
+        String message = telegramService.getCurrencyUsdKrwMessage()
+                + telegramService.getCurrencyJpyKrwMessage()
+                + telegramService.getCurrencyEurKrwMessage();
 
         if (StringUtils.isNotBlank(message)) {
             try (Response response = telegramFeign.sendHtmlWithoutPreview(

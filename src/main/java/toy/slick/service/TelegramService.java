@@ -169,13 +169,9 @@ public class TelegramService {
                 .filter(economicEvent -> economicEvent.getImportance().compareTo(minImportance) >= 0)
                 .toList();
 
-        String languagePrefix = Const.Country.UNITED_STATES.equals(country)
-                ? StringUtils.EMPTY
-                : country.getLanguageCode() + ".";
-
         if (CollectionUtils.isEmpty(economicEventList)) {
             return Const.Emoji.CHECK_MARK
-                    + "<b><a href='https://" + languagePrefix + "tradingeconomics.com/calendar'>Economic Event List</a> is Empty</b>";
+                    + "<b><a href='https://tradingeconomics.com/calendar'>Economic Event List</a> is Empty</b>";
         }
 
         Map<String, List<String>> economicEventListMap = economicEventList
@@ -188,7 +184,7 @@ public class TelegramService {
                             String forecastValue = StringUtils.defaultIfBlank(economicEvent.getForecast(), "-");
                             String previousValue = economicEvent.getPrevious();
 
-                            return "<a href='" + url.replace("https://", "https://" + languagePrefix) + "'>" + eventName + "</a>" + "\n"
+                            return "<a href='" + url + "'>" + eventName + "</a>" + "\n"
                                     + " : " + actualValue + " | " + forecastValue + " | " + previousValue;
                         }, Collectors.toList())));
 
@@ -196,9 +192,7 @@ public class TelegramService {
 
         messageBuilder
                 .append(Const.Emoji.CHECK_MARK)
-                .append("<b><a href='https://")
-                .append(languagePrefix)
-                .append("tradingeconomics.com/calendar'>Economic Event List</a></b>")
+                .append("<b><a href='https://tradingeconomics.com/calendar'>Economic Event List</a></b>")
                 .append("\n")
                 .append(" : Actual | Forecast | Previous")
                 .append("\n")
@@ -223,16 +217,12 @@ public class TelegramService {
         return messageBuilder.toString();
     }
 
-    public String getCurrencyEurKrwMessage(Const.Country country) {
+    public String getCurrencyEurKrwMessage() {
         Optional<CurrencyEurKrw> currencyEurKrw = currencyEurKrwRepository.selectRecentOneIn12Hours();
-
-        String languagePrefix = Const.Country.UNITED_STATES.equals(country)
-                ? StringUtils.EMPTY
-                : country.getLanguageCode() + ".";
 
         return currencyEurKrw.map(eurKrw -> this.generateCurrencyMessage(
                         Const.Emoji.EURO_BANKNOTE,
-                        eurKrw.getUrl().replace("https://", "https://" + languagePrefix),
+                        eurKrw.getUrl(),
                         "1€(EUR)",
                         eurKrw.getPrice(),
                         eurKrw.getPriceChange(),
@@ -241,16 +231,12 @@ public class TelegramService {
 
     }
 
-    public String getCurrencyJpyKrwMessage(Const.Country country) {
+    public String getCurrencyJpyKrwMessage() {
         Optional<CurrencyJpyKrw> currencyJpyKrw = currencyJpyKrwRepository.selectRecentOneIn12Hours();
-
-        String languagePrefix = Const.Country.UNITED_STATES.equals(country)
-                ? StringUtils.EMPTY
-                : country.getLanguageCode() + ".";
 
         return currencyJpyKrw.map(jpyKrw -> this.generateCurrencyMessage(
                         Const.Emoji.YEN_BANKNOTE,
-                        jpyKrw.getUrl().replace("https://", "https://" + languagePrefix),
+                        jpyKrw.getUrl(),
                         "100¥(JPY)",
                         jpyKrw.getPrice(),
                         jpyKrw.getPriceChange(),
@@ -259,16 +245,12 @@ public class TelegramService {
 
     }
 
-    public String getCurrencyUsdKrwMessage(Const.Country country) {
+    public String getCurrencyUsdKrwMessage() {
         Optional<CurrencyUsdKrw> currencyJpyKrw = currencyUsdKrwRepository.selectRecentOneIn12Hours();
-
-        String languagePrefix = Const.Country.UNITED_STATES.equals(country)
-                ? StringUtils.EMPTY
-                : country.getLanguageCode() + ".";
 
         return currencyJpyKrw.map(currencyUsdKrw -> this.generateCurrencyMessage(
                         Const.Emoji.DOLLAR_BANKNOTE,
-                        currencyUsdKrw.getUrl().replace("https://", "https://" + languagePrefix),
+                        currencyUsdKrw.getUrl(),
                         "1$(USD)",
                         currencyUsdKrw.getPrice(),
                         currencyUsdKrw.getPriceChange(),
