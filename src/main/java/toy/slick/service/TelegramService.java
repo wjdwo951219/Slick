@@ -237,7 +237,7 @@ public class TelegramService {
         return currencyJpyKrw.map(jpyKrw -> this.generateCurrencyMessage(
                         Const.Emoji.YEN_BANKNOTE,
                         jpyKrw.getUrl(),
-                        "100¥(JPY)",
+                        "1¥(JPY)",
                         jpyKrw.getPrice(),
                         jpyKrw.getPriceChange(),
                         jpyKrw.getPriceChangePercent()))
