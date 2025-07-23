@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: debug
+    org.jooq.Constants: off
+    org.jooq.tools.LoggerListener: debug
+    toy.slick.feign: debug
