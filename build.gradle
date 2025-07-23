@@ -67,12 +67,6 @@ dependencies {
     testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
-bootJar {
-    from(configurations.runtimeClasspath.filter { it.name.contains('newrelic') }) {
-        into 'BOOT-INF/lib/'
-    }
-}
-
 tasks.named("test") {
     useJUnitPlatform()
 }
