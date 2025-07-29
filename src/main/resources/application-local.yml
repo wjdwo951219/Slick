@@ -1,0 +1,7 @@
+logging:
+  level:
+    root: info
+    sql: debug
+    org.jooq.Constants: off
+    toy.slick.feign: debug
+    toy.slick: debug
