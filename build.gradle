@@ -8,9 +8,12 @@ plugins {
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
+def systemProperties = new Properties().tap { file('system.properties').withInputStream { load(it) } }
+def javaLanguageVersion = systemProperties.getProperty('java.runtime.version')
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(javaLanguageVersion)
     }
 }
 
