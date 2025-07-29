@@ -149,8 +149,10 @@ public class TelegramService {
             messageBuilder.append(Const.Emoji.FACE_SCREAMING_IN_FEAR);
         } else if (score < 30) {
             messageBuilder.append(Const.Emoji.FEARFUL_FACE);
-        } else if (score < 70) {
+        } else if (score < 50) {
             messageBuilder.append(Const.Emoji.THINKING_FACE);
+        } else if (score < 70) {
+            messageBuilder.append(Const.Emoji.SLIGHTLY_SMILING_FACE);
         } else if (score < 75) {
             messageBuilder.append(Const.Emoji.GRINNING_SQUINTING_FACE);
         } else {
