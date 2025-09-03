@@ -5,8 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import toy.slick.config.feign.FeignConfig;
 
-@FeignClient(name = "TelegramFeign", url = "https://api.telegram.org")
+@FeignClient(name = "TelegramFeign", url = "https://api.telegram.org", configuration = FeignConfig.Slow.class)
 public interface TelegramFeign {
 
     @GetMapping("/{apiToken}/sendMessage")
