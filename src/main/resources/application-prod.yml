@@ -5,3 +5,9 @@ logging:
     org.jooq.Constants: off
     toy.slick.feign: warn
     toy.slick: info
+
+spring:
+  datasource:
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 5
